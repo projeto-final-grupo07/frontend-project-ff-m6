@@ -1,11 +1,14 @@
-import Footer from '../../components/Footer'
+import Footer from "../../components/Footer";
+import { StyledParagraph, StyledTitle } from "../../styles/typography";
 
 export const Home = () => {
-	return (
-		<>
-			<h1>Olá! essa e a Home</h1>
-			<p>Bem-vindo</p>
-			<Footer />
-		</>
-	)
-}
+  return (
+    <>
+      <StyledTitle fontSize="Heading-1-700" tag="h1">
+        Olá! essa e a Home
+      </StyledTitle>
+      <StyledParagraph>Bem-vindo</StyledParagraph>
+      <Footer />
+    </>
+  );
+};
