@@ -8,6 +8,7 @@ export default createGlobalStyle`
     outline: 0;
     list-style: none;
     text-decoration:none;
+	font-family: 'Inter', sans-serif;
   }
 
   :root {
