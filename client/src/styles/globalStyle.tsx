@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
   * {
@@ -10,7 +10,6 @@ export default createGlobalStyle`
     text-decoration:none;
 	font-family: 'Inter', sans-serif;
   }
-
   :root {
 	--brand1: #4529E6;
 	--brand2: #5126EA;
@@ -56,4 +55,9 @@ export default createGlobalStyle`
   body {
     background-color: var(--grey10);
   }
-`
+  button{
+    cursor: pointer;
+    border: none;
+    background: transparent;
+}
+`;
