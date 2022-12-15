@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-interface iStyledButtonProps {
+export interface iStyledButtonProps {
   buttonSize?: "big" | "medium";
   buttonStyle:
     | "grey1"
