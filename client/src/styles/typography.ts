@@ -103,14 +103,6 @@ export const StyledTitle = styled(Typograph)`
             font-size: 9px;
           }
         `;
-      case "Heading-6-500":
-        return css`
-          font-size: 14px;
-          font-weight: 500;
-          @media (max-width: 800px) {
-            font-size: 9px;
-          }
-        `;
       case "body-1-400":
         return css`
           font-size: 16px;
