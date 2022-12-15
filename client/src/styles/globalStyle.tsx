@@ -9,6 +9,10 @@ export default createGlobalStyle`
     list-style: none;
     text-decoration:none;
 	font-family: 'Inter', sans-serif;
+
+	img{
+		max-width: 100%;
+	}
   }
 
   :root {
