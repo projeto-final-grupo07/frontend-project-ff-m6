@@ -103,6 +103,59 @@ export const StyledTitle = styled(Typograph)`
             font-size: 9px;
           }
         `;
+      case "Heading-6-500":
+        return css`
+          font-size: 14px;
+          font-weight: 500;
+          @media (max-width: 800px) {
+            font-size: 9px;
+          }
+        `;
+      case "body-1-400":
+        return css`
+          font-size: 16px;
+          font-weight: 500;
+        `;
+      case "body-1-600":
+        return css`
+          font-size: 16px;
+          font-weight: 600;
+        `;
+      case "body-2-400":
+        return css`
+          font-size: 14px;
+          font-weight: 400;
+        `;
+      case "body-2-400":
+        return css`
+          font-size: 14px;
+          font-weight: 400;
+        `;
+      case "body-2-400":
+        return css`
+          font-size: 14px;
+          font-weight: 400;
+        `;
+      case "button-big-text":
+        return css`
+          font-size: 16px;
+          font-weight: 600;
+        `;
+      case "button-medium-text":
+        return css`
+          font-size: 14px;
+          font-weight: 600;
+        `;
+      case "input-placeholder":
+        return css`
+          font-size: 16px;
+          font-weight: 400;
+        `;
+      case "input-placeholder":
+        return css`
+          font-size: 14px;
+          font-weight: 500;
+        `;
     }
   }}
 `;
