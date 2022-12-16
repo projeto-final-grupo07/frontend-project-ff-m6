@@ -1,4 +1,6 @@
+import {StyledParagraph, StyledTitle} from "../../styles/typography";
 import Logo from "../Logo";
+
 import {
     ThemeDescriptionProductCard,
     ThemeDivAuthor,
@@ -31,12 +33,16 @@ const ProductCard = ({
     const randomColor = "random" + (1 + Math.floor(Math.random() * 12));
     return (
         <ThemeProductCard>
-            
-            <img src={img} alt="Image of the vehicle" />
+            <Logo></Logo>
+            <div className="divImage">
+                <img className="image" src={img} alt="Image of the vehicle" />
+            </div>
             <ThemeTitleProductCard>{title}</ThemeTitleProductCard>
-            <ThemeDescriptionProductCard>
-                {description}
-            </ThemeDescriptionProductCard>
+            <StyledParagraph>
+                {description.length > 50
+                    ? description.substring(0, 50) + " ..."
+                    : description}
+            </StyledParagraph>
             <ThemeDivAuthor color={randomColor}>
                 <span className="initial">{initial}</span>
                 <span>{name}</span>

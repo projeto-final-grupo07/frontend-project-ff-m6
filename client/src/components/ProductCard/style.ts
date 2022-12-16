@@ -5,12 +5,29 @@ interface ColorRandomProps {
 }
 
 export const ThemeProductCard = styled.div`
-    width: 250px;
+    width: 312px;
 
     display: flex;
     flex-direction: column;
 
     padding: 10px;
+
+    .divImage {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--grey7);
+    }
+
+    .image {
+        width: 262px;
+
+        height: 150px;
+    }
+    .image:hover {
+        border: 2px solid var(--brand1);
+        cursor: pointer;
+    }
 `;
 
 export const ThemeTitleProductCard = styled.h3``;
@@ -22,7 +39,6 @@ export const ThemeDivAuthor = styled.div<ColorRandomProps>`
     align-items: center;
     margin-top: 10px;
     margin-bottom: 10px;
-    
 
     .initial {
         background-color: var(--${({color}) => color});
@@ -34,7 +50,7 @@ export const ThemeDivAuthor = styled.div<ColorRandomProps>`
 
         color: var(--brand4);
 
-        font-size: .8rem;
+        font-size: 0.8rem;
     }
 `;
 
