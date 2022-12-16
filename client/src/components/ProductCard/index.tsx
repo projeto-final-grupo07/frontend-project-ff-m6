@@ -2,7 +2,6 @@ import {StyledParagraph, StyledTitle} from "../../styles/typography";
 import Logo from "../Logo";
 
 import {
-    ThemeDescriptionProductCard,
     ThemeDivAuthor,
     ThemeDivInfoVehicle,
     ThemeProductCard,
@@ -37,27 +36,43 @@ const ProductCard = ({
             <div className="divImage">
                 <img className="image" src={img} alt="Image of the vehicle" />
             </div>
-            <ThemeTitleProductCard>{title}</ThemeTitleProductCard>
-            <StyledParagraph>
+            <ThemeTitleProductCard>
+                {title.length > 20 ? title.substring(0, 20) + " ..." : title}
+            </ThemeTitleProductCard>
+            <StyledTitle className="title" fontSize="body-2-400" tag="p">
                 {description.length > 50
                     ? description.substring(0, 50) + " ..."
                     : description}
-            </StyledParagraph>
+            </StyledTitle>
             <ThemeDivAuthor color={randomColor}>
                 <span className="initial">{initial}</span>
-                <span>{name}</span>
+                <StyledTitle
+                    className="nameAuthor"
+                    fontSize="body-2-500"
+                    tag="p"
+                >
+                    {name}
+                </StyledTitle>
             </ThemeDivAuthor>
             <ThemeDivInfoVehicle>
                 <div>
-                    <span className="km">{km} KM</span>
-                    <span className="year">{year}</span>
+                    <StyledTitle fontSize="body-2-500" tag="p" className="km">
+                        {km} KM
+                    </StyledTitle>
+                    <StyledTitle fontSize="body-2-500" tag="p" className="year">
+                        {year}
+                    </StyledTitle>
                 </div>
-                <span>
+                <StyledTitle
+                    className="productPrice"
+                    fontSize="Heading-7-500"
+                    tag="h3"
+                >
                     {price.toLocaleString("pt-br", {
                         style: "currency",
                         currency: "BRL",
                     })}
-                </span>
+                </StyledTitle>
             </ThemeDivInfoVehicle>
         </ThemeProductCard>
     );

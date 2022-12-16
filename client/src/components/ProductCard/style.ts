@@ -20,19 +20,29 @@ export const ThemeProductCard = styled.div`
     }
 
     .image {
-        width: 262px;
-
-        height: 150px;
+        margin: 1px 0;
+        padding: 0 25px;
+        border: 2px solid transparent;
     }
     .image:hover {
         border: 2px solid var(--brand1);
         cursor: pointer;
     }
+
+    .nameAuthor {
+        color: var(--grey2);
+    }
+    .productPrice {
+        font-size: 16px;
+        color: var(--grey1);
+        font-family: "Lexend", sans-serif;
+    }
 `;
 
-export const ThemeTitleProductCard = styled.h3``;
-
-export const ThemeDescriptionProductCard = styled.p``;
+export const ThemeTitleProductCard = styled.h3`
+    font-family: "Lexend", sans-serif;
+    text-align: left;
+`;
 
 export const ThemeDivAuthor = styled.div<ColorRandomProps>`
     display: flex;
@@ -41,16 +51,24 @@ export const ThemeDivAuthor = styled.div<ColorRandomProps>`
     margin-bottom: 10px;
 
     .initial {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 32px;
+        height: 32px;
+
         background-color: var(--${({color}) => color});
 
-        padding: 4px 6px;
-        margin-right: 5px;
+        padding: 16px 7.5px;
+        margin-right: 8px;
 
         border-radius: 50%;
 
         color: var(--brand4);
 
-        font-size: 0.8rem;
+        font-size: 0.875rem;
+        font-weight: 500;
     }
 `;
 
@@ -70,9 +88,9 @@ export const ThemeDivInfoVehicle = styled.div`
     }
 
     div .km {
-        margin-right: 5px;
+        margin-right: 12px;
         color: var(--brand1);
-        padding: 5px;
+        padding: 4px 8px;
 
         border-radius: 5px;
 
@@ -81,7 +99,7 @@ export const ThemeDivInfoVehicle = styled.div`
 
     div .year {
         color: var(--brand1);
-        padding: 5px;
+        padding: 4px 8px;
 
         border-radius: 5px;
 
