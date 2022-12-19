@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom'
-import { StyledLogo } from './style'
+import { Link } from 'react-router-dom';
+import { StyledLogo } from './style';
 
 function Logo(white: any) {
   return (
@@ -8,7 +8,7 @@ function Logo(white: any) {
         Motors <span>shop</span>
       </StyledLogo>
     </Link>
-  )
+  );
 }
 
-export default Logo
+export default Logo;

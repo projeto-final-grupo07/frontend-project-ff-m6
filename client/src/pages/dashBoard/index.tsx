@@ -1,6 +1,6 @@
-import Footer from '../../components/Footer'
-import Navbar from '../../components/Navbar'
-import { StyledParagraph, StyledTitle } from '../../styles/typography'
+import Footer from '../../components/Footer';
+import Navbar from '../../components/Navbar';
+import { StyledParagraph, StyledTitle } from '../../styles/typography';
 
 export const Dashboard = () => {
   return (
@@ -13,5 +13,5 @@ export const Dashboard = () => {
       <StyledParagraph>Bem-vindo!</StyledParagraph>
       <Footer />
     </>
-  )
-}
+  );
+};

@@ -1,7 +1,7 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 
 export interface iStyledButtonProps {
-  buttonSize?: 'big' | 'medium'
+  buttonSize?: 'big' | 'medium';
   buttonStyle:
     | 'grey1'
     | 'outlined'
@@ -11,8 +11,8 @@ export interface iStyledButtonProps {
     | 'alert'
     | 'sucess'
     | 'disabled'
-    | 'negative'
-  color?: string
+    | 'negative';
+  color?: string;
 }
 
 export const StyledButton = styled.button<iStyledButtonProps>`
@@ -35,17 +35,17 @@ export const StyledButton = styled.button<iStyledButtonProps>`
         return css`
           padding: 12px 28px;
           height: 48px;
-        `
+        `;
       case 'medium':
         return css`
           padding: 12px 20px;
           height: 38px;
-        `
+        `;
       default:
         return css`
           padding: 12 20px;
           height: 30px;
-        `
+        `;
     }
   }}
   ${({ buttonStyle }) => {
@@ -59,7 +59,7 @@ export const StyledButton = styled.button<iStyledButtonProps>`
             background: var(--grey1);
             border-color: var(--grey1);
           }
-        `
+        `;
       case 'negative':
         return css`
           background: var(--grey6);
@@ -69,7 +69,7 @@ export const StyledButton = styled.button<iStyledButtonProps>`
             background: var(--grey5);
             border-color: var(--grey5);
           }
-        `
+        `;
       case 'outlined':
         return css`
           background: var(--whiteFixed);
@@ -80,7 +80,7 @@ export const StyledButton = styled.button<iStyledButtonProps>`
             border-color: var(--grey1);
             color: var(--grey10);
           }
-        `
+        `;
       case 'outlined2':
         return css`
           background: var(--whiteFixed);
@@ -91,7 +91,7 @@ export const StyledButton = styled.button<iStyledButtonProps>`
             border-color: var(--grey1);
             color: var(--grey10);
           }
-        `
+        `;
       case 'brand':
         return css`
           background: var(--brand1);
@@ -101,7 +101,7 @@ export const StyledButton = styled.button<iStyledButtonProps>`
             background: var(--brand2);
             border-color: var(--brand2);
           }
-        `
+        `;
       case 'outlinedBrand1':
         return css`
           background: var(--whiteFixed);
@@ -112,7 +112,7 @@ export const StyledButton = styled.button<iStyledButtonProps>`
             border-color: var(--brand1);
             color: var(--brand1);
           }
-        `
+        `;
       case 'alert':
         return css`
           background: var(--alert3);
@@ -122,7 +122,7 @@ export const StyledButton = styled.button<iStyledButtonProps>`
             background: var(--alert2);
             border-color: var(--alert2);
           }
-        `
+        `;
       case 'sucess':
         return css`
           background: var(--sucess3);
@@ -132,7 +132,7 @@ export const StyledButton = styled.button<iStyledButtonProps>`
             background: var(--sucess2);
             border-color: var(--sucess2);
           }
-        `
+        `;
       case 'disabled':
         return css`
           background: var(--brand3);
@@ -141,10 +141,10 @@ export const StyledButton = styled.button<iStyledButtonProps>`
           &:hover {
             filter: brightness(0);
           }
-        `
+        `;
     }
   }}
   &:disabled {
     cursor: not-allowed;
   }
-`
+`;

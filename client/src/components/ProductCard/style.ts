@@ -1,7 +1,7 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 interface ColorRandomProps {
-  color: string
+  color: string;
 }
 
 export const ThemeProductCard = styled.div`
@@ -37,12 +37,12 @@ export const ThemeProductCard = styled.div`
     color: var(--grey1);
     font-family: 'Lexend', sans-serif;
   }
-`
+`;
 
 export const ThemeTitleProductCard = styled.h3`
   font-family: 'Lexend', sans-serif;
   text-align: left;
-`
+`;
 
 export const ThemeDivAuthor = styled.div<ColorRandomProps>`
   display: flex;
@@ -70,7 +70,7 @@ export const ThemeDivAuthor = styled.div<ColorRandomProps>`
     font-size: 0.875rem;
     font-weight: 500;
   }
-`
+`;
 
 export const ThemeDivInfoVehicle = styled.div`
   width: 100%;
@@ -105,4 +105,4 @@ export const ThemeDivInfoVehicle = styled.div`
 
     background-color: var(--brand4);
   }
-`
+`;

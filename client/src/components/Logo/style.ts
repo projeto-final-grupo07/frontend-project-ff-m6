@@ -1,7 +1,7 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 interface LogoProps {
-  white: string
+  white: string;
 }
 
 export const StyledLogo = styled.h3<LogoProps>`
@@ -19,4 +19,4 @@ export const StyledLogo = styled.h3<LogoProps>`
   span {
     font-size: 16px;
   }
-`
+`;

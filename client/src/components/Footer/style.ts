@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const FooterContainer = styled.section`
   display: flex;
@@ -35,4 +35,4 @@ export const FooterContainer = styled.section`
   @media (max-width: 700px) {
     flex-direction: column;
   }
-`
+`;

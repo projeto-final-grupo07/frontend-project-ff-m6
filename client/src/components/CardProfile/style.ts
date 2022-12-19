@@ -1,7 +1,7 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 interface ColorRandomProps {
-  color: string
+  color: string;
 }
 
 export const ThemeCardProfile = styled.div<ColorRandomProps>`
@@ -30,4 +30,4 @@ export const ThemeCardProfile = styled.div<ColorRandomProps>`
     font-size: 0.875rem;
     font-weight: 500;
   }
-`
+`;

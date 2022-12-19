@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const NavbarContainer = styled.section`
   display: flex;
@@ -55,7 +55,7 @@ export const NavbarContainer = styled.section`
   @media (max-width: 700px) {
     padding: 15px;
   }
-`
+`;
 
 export const NotWide = styled.section`
   background: var(--whiteFixed);
@@ -82,4 +82,4 @@ export const NotWide = styled.section`
     width: 100%;
     height: 2px;
   }
-`
+`;

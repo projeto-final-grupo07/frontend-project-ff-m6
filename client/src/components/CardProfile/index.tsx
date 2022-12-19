@@ -1,14 +1,14 @@
-import { StyledTitle } from '../../styles/typography'
-import { ThemeCardProfile } from './style'
+import { StyledTitle } from '../../styles/typography';
+import { ThemeCardProfile } from './style';
 
 interface CardProfileProps {
-  name: string
+  name: string;
 }
 
 const CardProfile = ({ name }: CardProfileProps) => {
-  const initial = name.split('')[0].toUpperCase()
+  const initial = name.split('')[0].toUpperCase();
 
-  const randomColor = 'random' + (1 + Math.floor(Math.random() * 12))
+  const randomColor = 'random' + (1 + Math.floor(Math.random() * 12));
   return (
     <ThemeCardProfile color={randomColor}>
       <span className='initial'>{initial}</span>
@@ -16,7 +16,7 @@ const CardProfile = ({ name }: CardProfileProps) => {
         {name}
       </StyledTitle>
     </ThemeCardProfile>
-  )
-}
+  );
+};
 
-export default CardProfile
+export default CardProfile;

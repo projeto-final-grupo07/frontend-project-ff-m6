@@ -1,26 +1,26 @@
-import Logo from '../Logo'
-import { NavbarContainer, NotWide } from './style'
-import { Link } from 'react-router-dom'
-import { StyledTitle } from '../../styles/typography'
-import { useEffect, useState } from 'react'
-import { FaBars } from 'react-icons/fa'
-import { IoClose } from 'react-icons/io5'
+import Logo from '../Logo';
+import { NavbarContainer, NotWide } from './style';
+import { Link } from 'react-router-dom';
+import { StyledTitle } from '../../styles/typography';
+import { useEffect, useState } from 'react';
+import { FaBars } from 'react-icons/fa';
+import { IoClose } from 'react-icons/io5';
 
 function Navbar() {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
-  const [open, setOpen] = useState(false)
-  const [isWide, setIsWide] = useState(true)
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [open, setOpen] = useState(false);
+  const [isWide, setIsWide] = useState(true);
 
   useEffect(() => {
     window.addEventListener('resize', () => {
-      setWindowWidth(window.innerWidth)
-    })
+      setWindowWidth(window.innerWidth);
+    });
     if (windowWidth > 1000) {
-      setIsWide(true)
+      setIsWide(true);
     } else {
-      setIsWide(false)
+      setIsWide(false);
     }
-  }, [windowWidth])
+  }, [windowWidth]);
 
   return (
     <>
@@ -47,7 +47,7 @@ function Navbar() {
         <></>
       )}
     </>
-  )
+  );
 }
 
 const NavButtons = (): JSX.Element => {
@@ -80,7 +80,7 @@ const NavButtons = (): JSX.Element => {
         </StyledTitle>
       </Link>
     </>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

@@ -1,9 +1,9 @@
-import Footer from '../../components/Footer'
-import Modal from '../../components/Modal'
-import { StyledParagraph, StyledTitle } from '../../styles/typography'
-import imgCarro from '../../assets/images/unsplash_3ZUsNJhi_Ik.png'
-import ProductCard from '../../components/ProductCard'
-import Navbar from '../../components/Navbar'
+import Footer from '../../components/Footer';
+import Modal from '../../components/Modal';
+import { StyledParagraph, StyledTitle } from '../../styles/typography';
+import imgCarro from '../../assets/images/unsplash_3ZUsNJhi_Ik.png';
+import ProductCard from '../../components/ProductCard';
+import Navbar from '../../components/Navbar';
 
 export const Home = () => {
   return (
@@ -34,5 +34,5 @@ export const Home = () => {
       <StyledParagraph>Bem-vindo</StyledParagraph>
       <Footer />
     </>
-  )
-}
+  );
+};

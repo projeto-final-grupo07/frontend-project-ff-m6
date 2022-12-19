@@ -3,5 +3,5 @@ export const PageError = () => {
     <>
       <h1>Error</h1>
     </>
-  )
-}
+  );
+};

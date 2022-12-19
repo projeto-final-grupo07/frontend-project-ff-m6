@@ -1,28 +1,28 @@
-import { StyledParagraph, StyledTitle } from '../../styles/typography'
-import CardProfile from '../CardProfile'
-import Logo from '../Logo'
+import { StyledParagraph, StyledTitle } from '../../styles/typography';
+import CardProfile from '../CardProfile';
+import Logo from '../Logo';
 
 import {
   ThemeDivAuthor,
   ThemeDivInfoVehicle,
   ThemeProductCard,
   ThemeTitleProductCard,
-} from './style'
+} from './style';
 
 interface ProductCardProps {
-  title: string
-  description: string
-  img: string
-  name: string
-  km: number
-  year: number
-  price: number
+  title: string;
+  description: string;
+  img: string;
+  name: string;
+  km: number;
+  year: number;
+  price: number;
 }
 
 const ProductCard = ({ title, description, img, name, km, year, price }: ProductCardProps) => {
-  const initial = name.split('')[0].toUpperCase()
+  const initial = name.split('')[0].toUpperCase();
 
-  const randomColor = 'random' + (1 + Math.floor(Math.random() * 12))
+  const randomColor = 'random' + (1 + Math.floor(Math.random() * 12));
   return (
     <ThemeProductCard>
       <Logo></Logo>
@@ -53,7 +53,7 @@ const ProductCard = ({ title, description, img, name, km, year, price }: Product
         </StyledTitle>
       </ThemeDivInfoVehicle>
     </ThemeProductCard>
-  )
-}
+  );
+};
 
-export default ProductCard
+export default ProductCard;

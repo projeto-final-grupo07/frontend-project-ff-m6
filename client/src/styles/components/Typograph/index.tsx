@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
 export interface iBaseTypographProps {
-  className?: string
-  children: React.ReactNode
-  tag: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p'
-  fontWeight?: number
-  fontColor?: string
+  className?: string;
+  children: React.ReactNode;
+  tag: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
+  fontWeight?: number;
+  fontColor?: string;
   fontSize:
     | 'Heading-1-700'
     | 'Heading-2-600'
@@ -25,7 +25,7 @@ export interface iBaseTypographProps {
     | 'button-big-text'
     | 'button-medium-text'
     | 'input-placeholder'
-    | 'input-label'
+    | 'input-label';
 }
 
 const Typograph = ({ className, children, tag }: iBaseTypographProps) => {
@@ -39,6 +39,6 @@ const Typograph = ({ className, children, tag }: iBaseTypographProps) => {
       {tag === 'h6' && <h6 className={className}>{children}</h6>}
       {tag === 'p' && <p className={className}>{children}</p>}
     </>
-  )
-}
-export default Typograph
+  );
+};
+export default Typograph;

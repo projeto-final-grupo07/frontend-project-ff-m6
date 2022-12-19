@@ -1,11 +1,11 @@
-import Logo from '../Logo'
-import { FooterContainer } from './style'
-import { FaAngleUp } from 'react-icons/fa'
+import Logo from '../Logo';
+import { FooterContainer } from './style';
+import { FaAngleUp } from 'react-icons/fa';
 
 function Footer() {
   const scrollToTop = () => {
-    window.scrollTo({ top: 0 })
-  }
+    window.scrollTo({ top: 0 });
+  };
 
   return (
     <FooterContainer>
@@ -15,7 +15,7 @@ function Footer() {
         <FaAngleUp size='1.5em' />
       </button>
     </FooterContainer>
-  )
+  );
 }
 
-export default Footer
+export default Footer;
