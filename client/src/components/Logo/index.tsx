@@ -1,10 +1,13 @@
+import { Link } from 'react-router-dom'
 import { StyledLogo } from './style'
 
 function Logo(white: any) {
 	return (
-		<StyledLogo white={white.white}>
-			Motors <span>shop</span>
-		</StyledLogo>
+		<Link to="/">
+			<StyledLogo white={white.white}>
+				Motors <span>shop</span>
+			</StyledLogo>
+		</Link>
 	)
 }
 
