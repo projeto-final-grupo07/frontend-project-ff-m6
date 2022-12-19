@@ -23,10 +23,11 @@ module.exports = {
     'spaced-comment': 'error',
     quotes: ['error', 'single'],
     'no-duplicate-imports': 'error',
+    semi: ['error', 'always'],
   },
   settings: {
     'import/resolver': {
       typescript: {},
     },
   },
-}
+};
