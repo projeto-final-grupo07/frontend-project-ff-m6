@@ -1,4 +1,5 @@
 import {StyledParagraph, StyledTitle} from "../../styles/typography";
+import CardProfile from "../CardProfile";
 import Logo from "../Logo";
 
 import {
@@ -44,16 +45,7 @@ const ProductCard = ({
                     ? description.substring(0, 50) + " ..."
                     : description}
             </StyledTitle>
-            <ThemeDivAuthor color={randomColor}>
-                <span className="initial">{initial}</span>
-                <StyledTitle
-                    className="nameAuthor"
-                    fontSize="body-2-500"
-                    tag="p"
-                >
-                    {name}
-                </StyledTitle>
-            </ThemeDivAuthor>
+            <CardProfile name={name} />
             <ThemeDivInfoVehicle>
                 <div>
                     <StyledTitle fontSize="body-2-500" tag="p" className="km">
