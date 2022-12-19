@@ -16,18 +16,11 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
+  rules: {},
   plugins: ['react', 'react-hooks', '@typescript-eslint', 'prettier'],
-  rules: {
-    'react/react-in-jsx-scope': 'off',
-    camelcase: 'error',
-    'spaced-comment': 'error',
-    quotes: ['error', 'single'],
-    'no-duplicate-imports': 'error',
-    semi: ['error', 'always'],
-  },
   settings: {
     'import/resolver': {
       typescript: {},
     },
   },
-};
+}
