@@ -1,22 +1,22 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components'
 
 export interface iStyledButtonProps {
-  buttonSize?: "big" | "medium";
+  buttonSize?: 'big' | 'medium'
   buttonStyle:
-    | "grey1"
-    | "outlined"
-    | "outlined2"
-    | "outlinedBrand1"
-    | "brand"
-    | "alert"
-    | "sucess"
-    | "disabled"
-    | "negative";
-  color?: string;
+    | 'grey1'
+    | 'outlined'
+    | 'outlined2'
+    | 'outlinedBrand1'
+    | 'brand'
+    | 'alert'
+    | 'sucess'
+    | 'disabled'
+    | 'negative'
+  color?: string
 }
 
 export const StyledButton = styled.button<iStyledButtonProps>`
-  font-family: "Inter";
+  font-family: 'Inter';
   font-size: 16px;
   font-weight: 600;
 
@@ -31,26 +31,26 @@ export const StyledButton = styled.button<iStyledButtonProps>`
 
   ${({ buttonSize }) => {
     switch (buttonSize) {
-      case "big":
+      case 'big':
         return css`
           padding: 12px 28px;
           height: 48px;
-        `;
-      case "medium":
+        `
+      case 'medium':
         return css`
           padding: 12px 20px;
           height: 38px;
-        `;
+        `
       default:
         return css`
           padding: 12 20px;
           height: 30px;
-        `;
+        `
     }
   }}
   ${({ buttonStyle }) => {
     switch (buttonStyle) {
-      case "grey1":
+      case 'grey1':
         return css`
           background: var(--grey0);
           border-color: var(--grey0);
@@ -59,8 +59,8 @@ export const StyledButton = styled.button<iStyledButtonProps>`
             background: var(--grey1);
             border-color: var(--grey1);
           }
-        `;
-      case "negative":
+        `
+      case 'negative':
         return css`
           background: var(--grey6);
           border-color: var(--grey6);
@@ -69,8 +69,8 @@ export const StyledButton = styled.button<iStyledButtonProps>`
             background: var(--grey5);
             border-color: var(--grey5);
           }
-        `;
-      case "outlined":
+        `
+      case 'outlined':
         return css`
           background: var(--whiteFixed);
           border-color: var(--grey0);
@@ -80,8 +80,8 @@ export const StyledButton = styled.button<iStyledButtonProps>`
             border-color: var(--grey1);
             color: var(--grey10);
           }
-        `;
-      case "outlined2":
+        `
+      case 'outlined2':
         return css`
           background: var(--whiteFixed);
           border-color: var(--grey4);
@@ -91,8 +91,8 @@ export const StyledButton = styled.button<iStyledButtonProps>`
             border-color: var(--grey1);
             color: var(--grey10);
           }
-        `;
-      case "brand":
+        `
+      case 'brand':
         return css`
           background: var(--brand1);
           border-color: var(--brand1);
@@ -101,8 +101,8 @@ export const StyledButton = styled.button<iStyledButtonProps>`
             background: var(--brand2);
             border-color: var(--brand2);
           }
-        `;
-      case "outlinedBrand1":
+        `
+      case 'outlinedBrand1':
         return css`
           background: var(--whiteFixed);
           border-color: var(--brand1);
@@ -112,8 +112,8 @@ export const StyledButton = styled.button<iStyledButtonProps>`
             border-color: var(--brand1);
             color: var(--brand1);
           }
-        `;
-      case "alert":
+        `
+      case 'alert':
         return css`
           background: var(--alert3);
           border-color: var(--alert3);
@@ -122,8 +122,8 @@ export const StyledButton = styled.button<iStyledButtonProps>`
             background: var(--alert2);
             border-color: var(--alert2);
           }
-        `;
-      case "sucess":
+        `
+      case 'sucess':
         return css`
           background: var(--sucess3);
           border-color: var(--sucess3);
@@ -132,8 +132,8 @@ export const StyledButton = styled.button<iStyledButtonProps>`
             background: var(--sucess2);
             border-color: var(--sucess2);
           }
-        `;
-      case "disabled":
+        `
+      case 'disabled':
         return css`
           background: var(--brand3);
           border-color: var(--brand3);
@@ -141,10 +141,10 @@ export const StyledButton = styled.button<iStyledButtonProps>`
           &:hover {
             filter: brightness(0);
           }
-        `;
+        `
     }
   }}
   &:disabled {
     cursor: not-allowed;
   }
-`;
+`

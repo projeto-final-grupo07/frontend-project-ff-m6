@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const StyledCreateModal = styled.div`
   position: absolute;
@@ -24,4 +24,4 @@ export const StyledCreateModal = styled.div`
     justify-content: space-between;
     margin-bottom: 25px;
   }
-`;
+`

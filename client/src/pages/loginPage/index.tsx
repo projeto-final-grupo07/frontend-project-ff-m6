@@ -3,15 +3,15 @@ import Navbar from '../../components/Navbar'
 import { StyledParagraph, StyledTitle } from '../../styles/typography'
 
 export const Login = () => {
-	return (
-		<>
-			<Navbar />
+  return (
+    <>
+      <Navbar />
 
-			<StyledTitle fontSize="Heading-1-700" tag="h1">
-				Olá! essa e a pagina de Login
-			</StyledTitle>
-			<StyledParagraph>Bem-vindo!</StyledParagraph>
-			<Footer />
-		</>
-	)
+      <StyledTitle fontSize='Heading-1-700' tag='h1'>
+        Olá! essa e a pagina de Login
+      </StyledTitle>
+      <StyledParagraph>Bem-vindo!</StyledParagraph>
+      <Footer />
+    </>
+  )
 }
