@@ -1,13 +1,8 @@
-import { StyledParagraph, StyledTitle } from '../../styles/typography';
+/* eslint-disable no-alert */
+import { StyledTitle } from '../../styles/typography';
 import CardProfile from '../CardProfile';
-import Logo from '../Logo';
 
-import {
-  ThemeDivAuthor,
-  ThemeDivInfoVehicle,
-  ThemeProductCard,
-  ThemeTitleProductCard,
-} from './style';
+import { ThemeDivInfoVehicle, ThemeProductCard, ThemeTitleProductCard } from './style';
 
 interface ProductCardProps {
   title: string;
@@ -20,12 +15,8 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ title, description, img, name, km, year, price }: ProductCardProps) => {
-  const initial = name.split('')[0].toUpperCase();
-
-  const randomColor = 'random' + (1 + Math.floor(Math.random() * 12));
   return (
     <ThemeProductCard>
-      <Logo></Logo>
       <div className='divImage'>
         <img className='image' src={img} alt='Image of the vehicle' />
       </div>
