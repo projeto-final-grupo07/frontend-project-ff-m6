@@ -3,21 +3,13 @@ import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
 import ProductCard from '../../components/ProductCard';
 import { StyledTitle } from '../../styles/typography';
-import { ProfileTop } from './style';
-import imgCarro from '../../assets/images/unsplash_3ZUsNJhi_Ik.png';
+import { ProfileTop, VehiclesSection } from './style';
 import { fakeUser } from '../../fakeData';
 
 export const Profile = () => {
   return (
     <>
       <Navbar />
-      {/* <StyledTitle fontSize='Heading-1-700' tag='h1'>
-        Olá! essa e a pagina de PROFILE
-      </StyledTitle>
-      <StyledParagraph>Bem-vindo!</StyledParagraph> */}
-
-      {/* <CardProfile name='Robert' /> */}
-
       <ProfileTop>
         <div className='containerProfileTop'>
           <section>
@@ -30,35 +22,57 @@ export const Profile = () => {
           </section>
 
           <StyledTitle fontSize='body-1-400' tag='p'>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-            has been the industry&apos;s standard dummy text ever since the 1500s
+            {fakeUser.describe}
           </StyledTitle>
         </div>
       </ProfileTop>
 
-      <StyledTitle fontSize='Heading-5-600' tag='h5'>
-        Carros
-      </StyledTitle>
+      <VehiclesSection>
+        <StyledTitle fontSize='Heading-5-600' tag='h5'>
+          Carros
+        </StyledTitle>
+        <section className='vehicleCards'>
+          {fakeUser.vehicles.map((vehicle) => {
+            if (vehicle.typeVehicles == false)
+              return (
+                <ProductCard
+                  key={vehicle.id}
+                  title={vehicle.title}
+                  description={vehicle.describe}
+                  img={vehicle.coverImg}
+                  name={fakeUser.name}
+                  km={vehicle.mileage}
+                  year={vehicle.year}
+                  price={vehicle.price}
+                />
+              );
+          })}
+        </section>
+      </VehiclesSection>
 
-      <p>dasda</p>
-      {fakeUser.vehicles.map((vehicle) => {
-        return (
-          <ProductCard
-            key={vehicle.id}
-            title={vehicle.title}
-            description={vehicle.describe}
-            img={vehicle.coverImg}
-            name={fakeUser.name}
-            km={vehicle.mileage}
-            year={vehicle.year}
-            price={vehicle.price}
-          />
-        );
-      })}
+      <VehiclesSection>
+        <StyledTitle fontSize='Heading-5-600' tag='h5'>
+          Motos
+        </StyledTitle>
+        <section className='vehicleCards'>
+          {fakeUser.vehicles.map((vehicle) => {
+            if (vehicle.typeVehicles == true)
+              return (
+                <ProductCard
+                  key={vehicle.id}
+                  title={vehicle.title}
+                  description={vehicle.describe}
+                  img={vehicle.coverImg}
+                  name={fakeUser.name}
+                  km={vehicle.mileage}
+                  year={vehicle.year}
+                  price={vehicle.price}
+                />
+              );
+          })}
+        </section>
+      </VehiclesSection>
 
-      <StyledTitle fontSize='Heading-5-600' tag='h5'>
-        Motos
-      </StyledTitle>
       <Footer />
     </>
   );
