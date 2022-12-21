@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 interface ColorRandomProps {
   color: string;
-  size: string;
+  size?: string;
 }
 
 export const ThemeCardProfile = styled.div<ColorRandomProps>`
