@@ -6,6 +6,7 @@ interface ColorRandomProps {
 
 export const ThemeProductCard = styled.div`
   width: 312px;
+  min-width: 312px;
 
   display: flex;
   flex-direction: column;

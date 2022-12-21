@@ -1,4 +1,3 @@
-/* eslint-disable no-alert */
 import { StyledTitle } from '../../styles/typography';
 import CardProfile from '../CardProfile';
 

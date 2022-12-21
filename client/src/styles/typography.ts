@@ -90,7 +90,7 @@ export const StyledTitle = styled(Typograph)`
       case 'body-1-400':
         return css`
           font-size: 16px;
-          font-weight: 500;
+          font-weight: 400;
         `;
       case 'body-1-600':
         return css`
@@ -101,6 +101,11 @@ export const StyledTitle = styled(Typograph)`
         return css`
           font-size: 14px;
           font-weight: 400;
+        `;
+      case 'body-2-500':
+        return css`
+          font-size: 14px;
+          font-weight: 500;
         `;
       case 'button-big-text':
         return css`
