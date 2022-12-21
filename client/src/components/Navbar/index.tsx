@@ -34,12 +34,12 @@ function Navbar() {
             </div>
           ) : (
             <button onClick={() => setOpen(!open)} aria-label={open ? 'Abrir Menu' : 'Fechar Menu'}>
-              {open ? <FaBars size={'1.5em'} /> : <IoClose size={'1.7em'} />}
+              {open ? <IoClose size={'1.7em'} /> : <FaBars size={'1.5em'} />}
             </button>
           )}
         </section>
       </NavbarContainer>
-      {!isWide && !open ? (
+      {!isWide && open ? (
         <NotWide>
           <NavButtons />
         </NotWide>
