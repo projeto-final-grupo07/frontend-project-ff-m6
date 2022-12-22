@@ -5,6 +5,7 @@ export const ProductCardAuctionContainer = styled.div`
   min-width: 328px;
   border-radius: 10px;
   margin: 10px;
+  max-width: 735px;
 `;
 
 export const ThemeProductCard = styled.div`
@@ -23,7 +24,6 @@ export const ThemeProductCard = styled.div`
     background-color: rgba(0, 0, 0, 0.6);
   }
 
-  max-width: 735px;
   height: 330px;
   padding: 20px 30px;
 
