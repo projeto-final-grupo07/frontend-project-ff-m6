@@ -9,9 +9,17 @@ export interface ICreateModalProps {
   nameModal: string;
   nameButtonOpen: string;
   propsButton: iStyledButtonProps;
+  closeButton?: iStyledButtonProps;
 }
 
-function Modal({ children, className, nameModal, nameButtonOpen, propsButton }: ICreateModalProps) {
+function Modal({
+  children,
+  className,
+  nameModal,
+  nameButtonOpen,
+  propsButton,
+  closeButton,
+}: ICreateModalProps) {
   const [modalState, setModalState] = useState(false);
   return (
     <>
@@ -34,6 +42,17 @@ function Modal({ children, className, nameModal, nameButtonOpen, propsButton }: 
               </button>
             </div>
             {children}
+            {closeButton && (
+              <StyledButton
+                buttonStyle={closeButton.buttonStyle}
+                buttonSize={closeButton.buttonSize}
+                color={closeButton.color}
+                onClick={() => setModalState(!modalState)}
+                className='Close'
+              >
+                Cancelar
+              </StyledButton>
+            )}
           </div>
         </StyledCreateModal>
       )}
