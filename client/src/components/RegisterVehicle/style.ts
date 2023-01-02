@@ -7,6 +7,12 @@ export const StyledForm = styled.form`
   gap: 1rem;
   width: 100%;
 
+  .errorValue {
+    color: red;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
   .TypeAnnounce {
     display: flex;
     flex-direction: column;
