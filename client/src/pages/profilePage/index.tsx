@@ -50,7 +50,7 @@ export const Profile = () => {
         </section>
       </VehiclesSection>
 
-      <VehiclesSection>
+      <VehiclesSection id='moto'>
         <StyledTitle fontSize='Heading-5-600' tag='h5'>
           Motos
         </StyledTitle>
