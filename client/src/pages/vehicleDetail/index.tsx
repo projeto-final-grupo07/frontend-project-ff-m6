@@ -2,7 +2,13 @@ import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
 import { StyledButton } from '../../styles/button';
 import { useParams } from 'react-router-dom';
-import { StyledVehicleDetail, StyledSection, StyledSectionFixed, StyledPhotoDetail } from './style';
+import {
+  StyledVehicleDetail,
+  StyledSection,
+  StyledSectionFixed,
+  StyledPhotoDetail,
+  StyledBox,
+} from './style';
 import img from '../../assets/images/unsplash_3ZUsNJhi_Ik.png';
 
 export const VehicleDetail = () => {
@@ -12,24 +18,24 @@ export const VehicleDetail = () => {
       <Navbar />
       <div className='mainContainer'>
         <StyledSection>
-          <div>
+          <StyledBox>
             <img src={img} alt='x' />
-          </div>
-          <div>
+          </StyledBox>
+          <StyledBox>
             <h2>MERCEDES-BENZ ML 350</h2>
             <span>2013/2014</span>
             <span>120.024 KM</span>
             <span>R$ 192.900,00</span>
-          </div>
-          <div>
+          </StyledBox>
+          <StyledBox>
             <h1>Descrição</h1>
             <p>
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore nihil sunt,
               expedita dolorum dicta sint ullam aliquam quisquam magni perspiciatis ex esse cumque
               nam pariatur, sit consequuntur ut totam. Dicta!
             </p>
-          </div>
-          <div>dasdadsdsds</div>
+          </StyledBox>
+          <StyledBox>dasdadsdsds</StyledBox>
         </StyledSection>
         <StyledSectionFixed>
           <StyledPhotoDetail>
@@ -43,13 +49,13 @@ export const VehicleDetail = () => {
               <img src={img} alt='1' />
             </div>
           </StyledPhotoDetail>
-          <div>
+          <StyledBox>
             <h1>Lorem ipsum</h1>
             <p>descrição</p>
             <StyledButton buttonStyle='grey1' buttonSize='medium'>
               Ver todos os anuncios
             </StyledButton>
-          </div>
+          </StyledBox>
         </StyledSectionFixed>
       </div>
       <Footer />
