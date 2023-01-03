@@ -4,8 +4,10 @@ import { StyledParagraph, StyledTitle } from '../../styles/typography';
 import imgCarro from '../../assets/images/unsplash_3ZUsNJhi_Ik.png';
 import ProductCard from '../../components/ProductCard';
 import Navbar from '../../components/Navbar';
+import RegisterVehicle from '../../components/RegisterVehicle';
 import ProductCardAuction from '../../components/ProductCardAuction';
 import { fakeUser } from '../../fakeData';
+
 
 export const Home = () => {
   return (
@@ -34,6 +36,8 @@ export const Home = () => {
         price={40000}
       />
       <StyledParagraph>Bem-vindo</StyledParagraph>
+
+      <RegisterVehicle />
 
       <ProductCardAuction
         title={'Mercedes Benz A 200 CGI ADVANCE SEDAN Mercedes Benz A 200 '}
