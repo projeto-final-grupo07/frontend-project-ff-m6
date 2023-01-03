@@ -14,12 +14,15 @@ interface IPropsImageGallery {
 }
 
 const ImageGallery = ({ indexImage, register, errors }: IPropsImageGallery) => {
-  // const imgs = `img${indexImage}`;
   return (
     <>
       <label>{indexImage}º Imagem de galeria</label>
       <input placeholder='Inserir URL da imagem' {...register(`img${indexImage}`)} />
-      {errors.img1?.message && <p className='errorValue'>{errors.img1.message as ReactNode}</p>}
+      {indexImage == '1' ? (
+        errors.img1?.message && <p className='errorValue'>{errors.img1.message as ReactNode}</p>
+      ) : (
+        <></>
+      )}
     </>
   );
 };
