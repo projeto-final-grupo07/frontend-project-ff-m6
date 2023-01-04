@@ -5,6 +5,7 @@ export const FooterContainer = styled.section`
   justify-content: space-between;
   align-items: center;
 
+  margin-top: 50px;
   bottom: 0;
   padding: 25px 10%;
   gap: 60px;
