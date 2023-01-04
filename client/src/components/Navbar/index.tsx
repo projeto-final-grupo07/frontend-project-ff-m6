@@ -110,7 +110,13 @@ const NavButtons = (): JSX.Element => {
                 ... Conteudo ...
               </Modal>
 
-              <Link to={'/'} onClick={() => localStorage.clear()}>
+              <Link
+                to={'/'}
+                onClick={() => {
+                  localStorage.clear();
+                  window.location.reload();
+                }}
+              >
                 <StyledTitle fontSize='body-1-400' tag='p'>
                   Sair
                 </StyledTitle>
