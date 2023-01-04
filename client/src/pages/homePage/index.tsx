@@ -50,15 +50,6 @@ export const Home = () => {
         time={'01:52:00'}
       />
 
-      <button
-        onClick={() => {
-          localStorage.setItem('token', '111111');
-          window.location.reload();
-        }}
-      >
-        Login falso
-      </button>
-
       <Footer />
     </>
   );
