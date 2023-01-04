@@ -6,8 +6,6 @@ import ProductCard from '../../components/ProductCard';
 import Navbar from '../../components/Navbar';
 import RegisterVehicle from '../../components/RegisterVehicle';
 import ProductCardAuction from '../../components/ProductCardAuction';
-import { fakeUser } from '../../fakeData';
-
 
 export const Home = () => {
   return (
@@ -52,7 +50,14 @@ export const Home = () => {
         time={'01:52:00'}
       />
 
-      <button onClick={() => localStorage.setItem('token', '111111')}>Login falso</button>
+      <button
+        onClick={() => {
+          localStorage.setItem('token', '111111');
+          window.location.reload();
+        }}
+      >
+        Login falso
+      </button>
 
       <Footer />
     </>
