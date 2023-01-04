@@ -130,6 +130,12 @@ export const StyledTitle = styled(Typograph)`
           font-size: 16px;
           font-weight: 400;
         `;
+      case 'input-label':
+        return css`
+          color: var(--grey1);
+          font-size: 14px;
+          font-weight: 500;
+        `;
     }
   }}
 `;
