@@ -102,6 +102,7 @@ export const NotWide = styled.section`
   position: fixed;
   width: 100%;
   height: fit-content;
+  top: 80px;
 
   background: var(--grey10);
   color: var(--grey2);
