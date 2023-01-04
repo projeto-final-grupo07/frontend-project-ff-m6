@@ -8,13 +8,19 @@ import {
   StyledSectionFixed,
   StyledPhotoDetail,
   StyledBox,
+  StyledDivGap,
 } from './style';
 import img from '../../assets/images/unsplash_3ZUsNJhi_Ik.png';
+import { ThemeDivInfoVehicle } from '../../components/ProductCardAuction/style';
+import { StyledTitle } from '../../styles/typography';
 
 export const VehicleDetail = () => {
+  const handleScroll = (event: any): void => console.log(event.target);
+
+  const price = 192900;
   const { id } = useParams();
   return (
-    <StyledVehicleDetail>
+    <StyledVehicleDetail onWheel={handleScroll}>
       <Navbar />
       <div className='mainContainer'>
         <StyledSection>
@@ -22,10 +28,30 @@ export const VehicleDetail = () => {
             <img src={img} alt='x' />
           </StyledBox>
           <StyledBox>
-            <h2>MERCEDES-BENZ ML 350</h2>
-            <span>2013/2014</span>
-            <span>120.024 KM</span>
-            <span>R$ 192.900,00</span>
+            <StyledDivGap>
+              <StyledTitle fontSize='Heading-6-600' tag='h6'>
+                Mercedes Benz A 200 CGI ADVANCE SEDAN
+              </StyledTitle>
+              <ThemeDivInfoVehicle>
+                <div>
+                  <StyledTitle fontSize='body-2-500' tag='p' className='year'>
+                    2013/2014
+                  </StyledTitle>
+                  <StyledTitle fontSize='body-2-500' tag='p' className='km'>
+                    120.024 KM
+                  </StyledTitle>
+                </div>
+                <StyledTitle fontSize='Heading-7-500' tag='h3'>
+                  {price.toLocaleString('pt-br', {
+                    style: 'currency',
+                    currency: 'BRL',
+                  })}
+                </StyledTitle>
+              </ThemeDivInfoVehicle>
+            </StyledDivGap>
+            <StyledButton buttonStyle='brand' buttonSize='medium'>
+              Comprar
+            </StyledButton>
           </StyledBox>
           <StyledBox>
             <h1>Descrição</h1>
@@ -50,8 +76,10 @@ export const VehicleDetail = () => {
             </div>
           </StyledPhotoDetail>
           <StyledBox>
-            <h1>Lorem ipsum</h1>
-            <p>descrição</p>
+            <StyledDivGap>
+              <h1>Lorem ipsum</h1>
+              <p>descrição</p>
+            </StyledDivGap>
             <StyledButton buttonStyle='grey1' buttonSize='medium'>
               Ver todos os anuncios
             </StyledButton>

@@ -46,6 +46,14 @@ export const StyledSectionFixed = styled.div`
 export const StyledBox = styled.div`
   background: var(--whiteFixed);
   width: 100%;
+  border-radius: 4px;
+  padding: 0.5rem 1.5rem;
+`;
+export const StyledDivGap = styled.div`
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  margin: 1rem 0;
 `;
 export const StyledPhotoDetail = styled.div`
   display: flex;
@@ -55,7 +63,9 @@ export const StyledPhotoDetail = styled.div`
   padding: 2rem;
   gap: 1rem;
   object-fit: center;
+
   background: var(--whiteFixed);
+  border-radius: 4px;
   .photoGalery {
     width: 100%;
     img {
