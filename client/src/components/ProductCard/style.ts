@@ -13,12 +13,17 @@ export const ThemeProductCard = styled.div`
 
   .divImage {
     height: 152px;
+
     display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    /* margin: 0 auto; */
     background-color: var(--grey7);
     border: 2px solid transparent;
+    z-index: -1;
+    position: relative;
   }
 
   .image {
@@ -31,6 +36,8 @@ export const ThemeProductCard = styled.div`
 
     margin: 1px 0;
     padding: 0 25px;
+
+    z-index: -1;
   }
   .divImage:hover {
     border: 2px solid var(--brand1);
@@ -54,6 +61,25 @@ export const ThemeProductCard = styled.div`
 
   .description {
     line-height: 24px;
+  }
+
+  .active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    /* top: 110px;
+    left: 160px; */
+
+    background-color: var(--brand1);
+    color: var(--whiteFixed);
+
+    padding: 4px 8px;
+
+    margin: 11px 0 0 16px;
+
+    height: 24px;
+    width: 51px;
   }
 `;
 

@@ -7,6 +7,7 @@ import { MainContainer } from './style';
 import VehicleList from '../../components/VehicleList';
 import RegisterVehicle from '../../components/RegisterVehicle';
 import ProductCardAuction from '../../components/ProductCardAuction';
+import { Link } from 'react-router-dom';
 
 export const Home = () => {
   return (
@@ -38,6 +39,10 @@ export const Home = () => {
           Motos
         </StyledTitle>
         <VehicleList typeVehicle={true} />
+        <Link to={"/profile/e2a01b35-03ee-46db-a9cd-54adeb085e20"}>
+          ausgdiuas
+        </Link>
+
         <ProductCardAuction
           title={'Mercedes Benz A 200 CGI ADVANCE SEDAN Mercedes Benz A 200 '}
           name={'Steve Jobs'}
