@@ -10,6 +10,7 @@ export const ThemeCardProfile = styled.div<ColorRandomProps>`
   align-items: center;
   margin-top: 10px;
   margin-bottom: 10px;
+  font-size: 14px;
 
   .initial {
     display: flex;
