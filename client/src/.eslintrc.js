@@ -16,7 +16,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  rules: { 'react/react-in-jsx-scope': 'off' },
+  rules: { 'react/react-in-jsx-scope': 'off', '@typescript-eslint/no-explicit-any': 'off' },
   plugins: ['react', 'react-hooks', '@typescript-eslint', 'prettier'],
   settings: {
     'import/resolver': {

@@ -24,4 +24,17 @@ export const StyledCreateModal = styled.div`
     justify-content: space-between;
     margin-bottom: 25px;
   }
+
+  .Close {
+    margin: 0 auto;
+    margin-top: -30px;
+    padding: 0.8rem;
+    width: 30%;
+
+    @media (max-width: 600px) {
+      margin: 0;
+      margin-top: -30px;
+      width: 40%;
+    }
+  }
 `;

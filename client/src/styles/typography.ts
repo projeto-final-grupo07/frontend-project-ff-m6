@@ -73,7 +73,7 @@ export const StyledTitle = styled(Typograph)`
         `;
       case 'Heading-6-600':
         return css`
-          font-size: 25px;
+          font-size: 20px;
           font-weight: 600;
           @media (max-width: 800px) {
             font-size: 15px;
@@ -81,16 +81,24 @@ export const StyledTitle = styled(Typograph)`
         `;
       case 'Heading-6-500':
         return css`
-          font-size: 25px;
+          font-size: 20px;
           font-weight: 500;
           @media (max-width: 800px) {
             font-size: 15px;
           }
         `;
-      case 'body-1-400':
+      case 'Heading-7-500':
         return css`
           font-size: 16px;
           font-weight: 500;
+          @media (max-width: 800px) {
+            font-size: 13px;
+          }
+        `;
+      case 'body-1-400':
+        return css`
+          font-size: 16px;
+          font-weight: 400;
         `;
       case 'body-1-600':
         return css`
@@ -101,6 +109,11 @@ export const StyledTitle = styled(Typograph)`
         return css`
           font-size: 14px;
           font-weight: 400;
+        `;
+      case 'body-2-500':
+        return css`
+          font-size: 14px;
+          font-weight: 500;
         `;
       case 'button-big-text':
         return css`
@@ -116,6 +129,12 @@ export const StyledTitle = styled(Typograph)`
         return css`
           font-size: 16px;
           font-weight: 400;
+        `;
+      case 'input-label':
+        return css`
+          color: var(--grey1);
+          font-size: 14px;
+          font-weight: 500;
         `;
     }
   }}

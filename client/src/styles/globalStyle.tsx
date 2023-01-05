@@ -58,7 +58,7 @@ export default createGlobalStyle`
   }
 
   body {
-    background-color: var(--grey10);
+    background-color: var(--grey8);
   }
   button{
     cursor: pointer;

@@ -11,7 +11,8 @@ export interface iStyledButtonProps {
     | 'alert'
     | 'sucess'
     | 'disabled'
-    | 'negative';
+    | 'negative'
+    | 'link';
   color?: string;
 }
 
@@ -140,6 +141,15 @@ export const StyledButton = styled.button<iStyledButtonProps>`
           color: var(--brand4);
           &:hover {
             filter: brightness(0);
+          }
+        `;
+      case 'link':
+        return css`
+          background: none;
+          border: none;
+          color: var(--grey0);
+          &:hover {
+            background-color: var(--grey8);
           }
         `;
     }

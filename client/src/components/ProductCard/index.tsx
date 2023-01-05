@@ -1,6 +1,5 @@
-import { StyledParagraph, StyledTitle } from '../../styles/typography';
+import { StyledTitle } from '../../styles/typography';
 import CardProfile from '../CardProfile';
-import Logo from '../Logo';
 
 import { ThemeDivAuthor, ThemeDivInfoVehicle, ThemeProductCard } from './style';
 
