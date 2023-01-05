@@ -9,7 +9,7 @@ export const StyledVehicleDetail = styled.div`
     justify-content: flex-start;
     width: 100%;
   }
-  @media (max-width: 700px) {
+  @media (max-width: 900px) {
     .mainContainer {
       flex-direction: column;
       padding: 1rem;
@@ -21,7 +21,7 @@ export const StyledSection = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  @media (max-width: 700px) {
+  @media (max-width: 900px) {
     padding: 0;
     width: 100%;
   }
@@ -35,7 +35,7 @@ export const StyledSectionFixed = styled.div`
 
   padding: 0px 60px;
 
-  @media (max-width: 700px) {
+  @media (max-width: 900px) {
     position: static;
     padding: 0;
     width: 100%;
@@ -76,5 +76,30 @@ export const StyledPhotoDetail = styled.div`
       width: calc((100% - 2rem) / 3);
       cursor: pointer;
     }
+  }
+`;
+
+export const SytledDivInfoVehicle = styled.div`
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  div {
+    display: flex;
+    gap: 12px;
+  }
+  @media (max-width: 900px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .tag {
+    color: var(--brand1);
+    padding: 4px 8px;
+    border-radius: 5px;
+    background-color: var(--brand4);
   }
 `;

@@ -9,21 +9,19 @@ import {
   StyledPhotoDetail,
   StyledBox,
   StyledDivGap,
+  SytledDivInfoVehicle,
 } from './style';
 import img from '../../assets/images/unsplash_3ZUsNJhi_Ik.png';
-import { ThemeDivInfoVehicle } from '../../components/ProductCardAuction/style';
 import { StyledTitle } from '../../styles/typography';
 import CardProfile from '../../components/CardProfile';
 import CommentCard from '../../components/CommentCard';
+import { Link } from 'react-router-dom';
 
-const handleOnWheel = (e: any) => {
-  // console.log(e);
-};
 export const VehicleDetail = () => {
   const price = 192900;
   const { id } = useParams();
   return (
-    <StyledVehicleDetail onWheel={handleOnWheel}>
+    <StyledVehicleDetail>
       <Navbar />
       <div className='mainContainer'>
         <StyledSection>
@@ -35,12 +33,12 @@ export const VehicleDetail = () => {
               <StyledTitle fontSize='Heading-6-600' tag='h6'>
                 Mercedes Benz A 200 CGI ADVANCE SEDAN
               </StyledTitle>
-              <ThemeDivInfoVehicle>
+              <SytledDivInfoVehicle>
                 <div>
-                  <StyledTitle fontSize='body-2-500' tag='p' className='year'>
+                  <StyledTitle fontSize='body-2-500' tag='p' className='tag'>
                     2013/2014
                   </StyledTitle>
-                  <StyledTitle fontSize='body-2-500' tag='p' className='km'>
+                  <StyledTitle fontSize='body-2-500' tag='p' className='tag'>
                     120.024 KM
                   </StyledTitle>
                 </div>
@@ -50,7 +48,7 @@ export const VehicleDetail = () => {
                     currency: 'BRL',
                   })}
                 </StyledTitle>
-              </ThemeDivInfoVehicle>
+              </SytledDivInfoVehicle>
             </StyledDivGap>
             <StyledButton buttonStyle='brand' buttonSize='medium'>
               Comprar
@@ -74,6 +72,8 @@ export const VehicleDetail = () => {
                 Comentários
               </StyledTitle>
               <CommentCard />
+              <CommentCard />
+              <CommentCard />
             </StyledDivGap>
           </StyledBox>
         </StyledSection>
@@ -92,15 +92,16 @@ export const VehicleDetail = () => {
           <StyledBox center flex columnFlex>
             <StyledDivGap center>
               <CardProfile name='Ronado' />
-
               <StyledTitle fontSize='body-1-400' tag='p' fontColor='var(--grey2)'>
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
                 Ipsum has been the industrys
               </StyledTitle>
             </StyledDivGap>
-            <StyledButton buttonStyle='grey1' buttonSize='medium'>
-              Ver todos os anuncios
-            </StyledButton>
+            <Link to={'/'}>
+              <StyledButton buttonStyle='grey1' buttonSize='medium'>
+                Ver todos os anuncios
+              </StyledButton>
+            </Link>
           </StyledBox>
         </StyledSectionFixed>
       </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import { StyledBox, StyledDivGap } from '../../pages/vehicleDetail/style';
 import CardProfile from '../CardProfile';
 import { StyledTitle } from '../../styles/typography';
+
 const CommentCard = () => {
   return (
     <StyledBox paddingC='0'>
