@@ -14,6 +14,7 @@ import img from '../../assets/images/unsplash_3ZUsNJhi_Ik.png';
 import { ThemeDivInfoVehicle } from '../../components/ProductCardAuction/style';
 import { StyledTitle } from '../../styles/typography';
 import CardProfile from '../../components/CardProfile';
+import CommentCard from '../../components/CommentCard';
 
 const handleOnWheel = (e: any) => {
   // console.log(e);
@@ -67,7 +68,14 @@ export const VehicleDetail = () => {
               </StyledTitle>
             </StyledDivGap>
           </StyledBox>
-          <StyledBox>Comentarios</StyledBox>
+          <StyledBox>
+            <StyledDivGap>
+              <StyledTitle fontSize='Heading-6-600' tag='h6'>
+                Comentários
+              </StyledTitle>
+              <CommentCard />
+            </StyledDivGap>
+          </StyledBox>
         </StyledSection>
         <StyledSectionFixed>
           <StyledPhotoDetail>
