@@ -13,14 +13,16 @@ import {
 import img from '../../assets/images/unsplash_3ZUsNJhi_Ik.png';
 import { ThemeDivInfoVehicle } from '../../components/ProductCardAuction/style';
 import { StyledTitle } from '../../styles/typography';
+import CardProfile from '../../components/CardProfile';
 
+const handleOnWheel = (e: any) => {
+  // console.log(e);
+};
 export const VehicleDetail = () => {
-  const handleScroll = (event: any): void => console.log(event.target);
-
   const price = 192900;
   const { id } = useParams();
   return (
-    <StyledVehicleDetail onWheel={handleScroll}>
+    <StyledVehicleDetail onWheel={handleOnWheel}>
       <Navbar />
       <div className='mainContainer'>
         <StyledSection>
@@ -54,14 +56,18 @@ export const VehicleDetail = () => {
             </StyledButton>
           </StyledBox>
           <StyledBox>
-            <h1>Descrição</h1>
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore nihil sunt,
-              expedita dolorum dicta sint ullam aliquam quisquam magni perspiciatis ex esse cumque
-              nam pariatur, sit consequuntur ut totam. Dicta!
-            </p>
+            <StyledDivGap>
+              <StyledTitle fontSize='Heading-6-600' tag='h6'>
+                Descrição
+              </StyledTitle>
+              <StyledTitle fontSize='body-1-400' tag='p' fontColor='var(--grey2)'>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore nihil sunt,
+                expedita dolorum dicta sint ullam aliquam quisquam magni perspiciatis ex esse cumque
+                nam pariatur, sit consequuntur ut totam. Dicta!
+              </StyledTitle>
+            </StyledDivGap>
           </StyledBox>
-          <StyledBox>dasdadsdsds</StyledBox>
+          <StyledBox>Comentarios</StyledBox>
         </StyledSection>
         <StyledSectionFixed>
           <StyledPhotoDetail>
@@ -75,10 +81,14 @@ export const VehicleDetail = () => {
               <img src={img} alt='1' />
             </div>
           </StyledPhotoDetail>
-          <StyledBox>
-            <StyledDivGap>
-              <h1>Lorem ipsum</h1>
-              <p>descrição</p>
+          <StyledBox center flex columnFlex>
+            <StyledDivGap center>
+              <CardProfile name='Ronado' />
+
+              <StyledTitle fontSize='body-1-400' tag='p' fontColor='var(--grey2)'>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                Ipsum has been the industrys
+              </StyledTitle>
             </StyledDivGap>
             <StyledButton buttonStyle='grey1' buttonSize='medium'>
               Ver todos os anuncios

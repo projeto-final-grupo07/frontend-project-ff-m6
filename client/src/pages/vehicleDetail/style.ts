@@ -40,20 +40,24 @@ export const StyledSectionFixed = styled.div`
     padding: 0;
     width: 100%;
   }
-  position: fixed;
+  position: static;
   right: 0;
 `;
-export const StyledBox = styled.div`
+export const StyledBox = styled.div<any>`
   background: var(--whiteFixed);
   width: 100%;
   border-radius: 4px;
   padding: 0.5rem 1.5rem;
+  display: ${({ flex }: any) => (flex ? 'flex' : 'block')};
+  align-items: ${({ center }: any) => (center ? 'center' : 'flex-start')};
+  flex-direction: ${({ columnFlex }: any) => (columnFlex ? 'column' : 'row')};
 `;
-export const StyledDivGap = styled.div`
+export const StyledDivGap = styled.div<any>`
   display: flex;
   gap: 1rem;
   flex-direction: column;
   margin: 1rem 0;
+  align-items: ${({ center }: any) => (center ? 'center' : 'flex-start')};
 `;
 export const StyledPhotoDetail = styled.div`
   display: flex;
