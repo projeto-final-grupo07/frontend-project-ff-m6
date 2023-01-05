@@ -4,6 +4,8 @@ import { RouterProvider } from 'react-router-dom';
 import { router } from './routes';
 import GlobalStyle from './styles/globalStyle';
 
+import 'swiper/css/bundle';
+
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>

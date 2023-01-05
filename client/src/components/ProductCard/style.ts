@@ -5,26 +5,34 @@ interface ColorRandomProps {
 }
 
 export const ThemeProductCard = styled.div`
-  width: 312px;
+  min-width: 312px;
+  max-width: 312px;
 
   display: flex;
   flex-direction: column;
 
-  padding: 10px;
-
   .divImage {
+    height: 152px;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0 auto;
     background-color: var(--grey7);
+    border: 2px solid transparent;
   }
 
   .image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: contain;
+    height: 100%;
+    width: 312px;
+
     margin: 1px 0;
     padding: 0 25px;
-    border: 2px solid transparent;
   }
-  .image:hover {
+  .divImage:hover {
     border: 2px solid var(--brand1);
     cursor: pointer;
   }
@@ -37,11 +45,16 @@ export const ThemeProductCard = styled.div`
     color: var(--grey1);
     font-family: 'Lexend', sans-serif;
   }
-`;
 
-export const ThemeTitleProductCard = styled.h3`
-  font-family: 'Lexend', sans-serif;
-  text-align: left;
+  .title {
+    font-family: 'Lexend', sans-serif;
+    text-align: left;
+    line-height: 20px;
+  }
+
+  .description {
+    line-height: 24px;
+  }
 `;
 
 export const ThemeDivAuthor = styled.div<ColorRandomProps>`
@@ -85,6 +98,7 @@ export const ThemeDivInfoVehicle = styled.div`
     justify-content: space-between;
 
     font-weight: 500;
+    font-size: 14px;
   }
 
   div .km {
