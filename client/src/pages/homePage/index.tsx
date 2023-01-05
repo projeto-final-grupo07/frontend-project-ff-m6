@@ -7,14 +7,17 @@ import { MainContainer } from './style';
 import VehicleList from '../../components/VehicleList';
 import RegisterVehicle from '../../components/RegisterVehicle';
 import ProductCardAuction from '../../components/ProductCardAuction';
+import { useContext } from 'react';
+import { UserContext } from '../../contexts/UserContext/UserContext';
 
 export const Home = () => {
+  const {  home } = useContext(UserContext);
   return (
     <>
       <Navbar />
       <MainContainer>
         <StyledTitle fontSize='Heading-1-700' tag='h1'>
-          Olá! essa e a Home
+          Olá! essa e a {home}
         </StyledTitle>
         <Modal
           propsButton={{
