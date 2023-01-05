@@ -5,8 +5,65 @@ import ProductCard from '../../components/ProductCard';
 import { StyledTitle } from '../../styles/typography';
 import { ProfileTop, VehiclesSection } from './style';
 import { fakeUser } from '../../fakeData';
+import { useEffect, useState } from 'react';
+import api from '../../services';
+import { useParams } from 'react-router-dom';
+
+interface IVehicleListProps {
+  typeVehicle: boolean;
+}
+
+interface IVehicle {
+  id: string;
+  typeOffer: boolean;
+  title: string;
+  year: number;
+  mileage: number;
+  price: number;
+  describe: string;
+  typeVehicles: boolean;
+  coverImg: string;
+  GalleryImg: IGalleryImg[];
+  user: IUser;
+  isActive: boolean;
+}
+
+export interface IUser {
+  name: string;
+  email: string;
+  password: string;
+  cpf: string;
+  phone: string;
+  birthDate: string;
+  describe: string;
+  typeAccount: boolean;
+  is_active: boolean;
+  id: string;
+  Vehicle: IVehicle[];
+}
+
+interface IGalleryImg {
+  id?: string;
+  url: string;
+}
 
 export const Profile = () => {
+  const [data, setData] = useState<IUser>();
+
+  const { userId } = useParams();
+
+  console.log(userId);
+
+  useEffect(() => {
+    api
+      .get(`/user/${userId}`)
+      .then((resp) => {
+        setData(resp.data);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  console.log(data);
   return (
     <>
       <Navbar />
@@ -14,7 +71,7 @@ export const Profile = () => {
         <div className='containerProfileTop'>
           <section>
             <div>
-              <CardProfile name={fakeUser.name} size='100px' />
+              <CardProfile name={data?.name || 'name user'} size='100px' />
             </div>
             <StyledTitle className='profileTag' fontSize='body-2-500' tag='p'>
               Anunciante
@@ -32,47 +89,54 @@ export const Profile = () => {
           Carros
         </StyledTitle>
         <section className='vehicleCards'>
-          {fakeUser.vehicles.map((vehicle) => {
+          {data?.Vehicle.map((vehicle) => {
             if (vehicle.typeVehicles == false)
               return (
                 <ProductCard
+                  userId={data.id}
+                  id={vehicle.id}
+                  appearActive
                   key={vehicle.id}
                   title={vehicle.title}
                   describe={vehicle.describe}
                   coverImg={vehicle.coverImg}
-                  name={fakeUser.name}
+                  name={data.name}
                   mileage={vehicle.mileage}
                   year={vehicle.year}
                   price={vehicle.price}
+                  active={vehicle.isActive}
                 />
               );
-          })}
+          }) || <p>funciona krai</p>}
         </section>
       </VehiclesSection>
 
-      <VehiclesSection id='moto'>
+      <VehiclesSection>
         <StyledTitle fontSize='Heading-5-600' tag='h5'>
           Motos
         </StyledTitle>
         <section className='vehicleCards'>
-          {fakeUser.vehicles.map((vehicle) => {
+          {data?.Vehicle.map((vehicle) => {
             if (vehicle.typeVehicles == true)
               return (
                 <ProductCard
+                  userId={data.id}
+                  id={vehicle.id}
+                  appearActive
                   key={vehicle.id}
                   title={vehicle.title}
                   describe={vehicle.describe}
                   coverImg={vehicle.coverImg}
-                  name={fakeUser.name}
+                  name={data.name}
                   mileage={vehicle.mileage}
                   year={vehicle.year}
                   price={vehicle.price}
+                  active={vehicle.isActive}
                 />
               );
-          })}
+          }) || <p>funciona krai</p>}
         </section>
       </VehiclesSection>
-
       <Footer />
     </>
   );

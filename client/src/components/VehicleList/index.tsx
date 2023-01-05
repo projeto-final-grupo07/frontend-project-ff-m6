@@ -19,6 +19,7 @@ interface IVehicle {
   coverImg: string;
   GalleryImg: IGalleryImg[];
   user: IUser;
+  isActive: boolean;
 }
 
 export interface IUser {
@@ -56,6 +57,9 @@ const VehicleList = ({ typeVehicle }: IVehicleListProps) => {
           if (vehicle.typeVehicles == typeVehicle)
             return (
               <ProductCard
+                userId={vehicle.user.id}
+                id={vehicle.id}
+                appearActive
                 key={vehicle.id}
                 title={vehicle.title}
                 describe={vehicle.describe}
@@ -64,6 +68,7 @@ const VehicleList = ({ typeVehicle }: IVehicleListProps) => {
                 mileage={vehicle.mileage}
                 year={vehicle.year}
                 price={+vehicle.price}
+                active={vehicle.isActive}
               ></ProductCard>
             );
         })}
