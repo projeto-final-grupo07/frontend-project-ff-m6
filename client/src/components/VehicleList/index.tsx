@@ -1,4 +1,4 @@
-import { data } from '../../data/data';
+import { data } from '../../fakeData/data';
 import ProductCard from '../ProductCard';
 import { ThemeCarList } from './style';
 
