@@ -38,10 +38,10 @@ export const Profile = () => {
                 <ProductCard
                   key={vehicle.id}
                   title={vehicle.title}
-                  description={vehicle.describe}
-                  img={vehicle.coverImg}
+                  describe={vehicle.describe}
+                  coverImg={vehicle.coverImg}
                   name={fakeUser.name}
-                  km={vehicle.mileage}
+                  mileage={vehicle.mileage}
                   year={vehicle.year}
                   price={vehicle.price}
                 />
@@ -61,10 +61,10 @@ export const Profile = () => {
                 <ProductCard
                   key={vehicle.id}
                   title={vehicle.title}
-                  description={vehicle.describe}
-                  img={vehicle.coverImg}
+                  describe={vehicle.describe}
+                  coverImg={vehicle.coverImg}
                   name={fakeUser.name}
-                  km={vehicle.mileage}
+                  mileage={vehicle.mileage}
                   year={vehicle.year}
                   price={vehicle.price}
                 />

@@ -1,35 +1,43 @@
 import { StyledTitle } from '../../styles/typography';
 import CardProfile from '../CardProfile';
 
-import { ThemeDivInfoVehicle, ThemeProductCard, ThemeTitleProductCard } from './style';
+import { ThemeDivAuthor, ThemeDivInfoVehicle, ThemeProductCard } from './style';
 
 interface ProductCardProps {
   title: string;
-  description: string;
-  img: string;
+  describe: string;
+  coverImg: string;
   name: string;
-  km: number;
+  mileage: number;
   year: number;
   price: number;
 }
 
-const ProductCard = ({ title, description, img, name, km, year, price }: ProductCardProps) => {
+const ProductCard = ({
+  title,
+  describe,
+  coverImg,
+  name,
+  mileage,
+  year,
+  price,
+}: ProductCardProps) => {
   return (
     <ThemeProductCard>
       <div className='divImage'>
-        <img className='image' src={img} alt='Image of the vehicle' />
+        <img className='image' src={coverImg} alt='Image of the vehicle' />
       </div>
-      <ThemeTitleProductCard>
-        {title.length > 20 ? title.substring(0, 20) + ' ...' : title}
-      </ThemeTitleProductCard>
-      <StyledTitle className='title' fontSize='body-2-400' tag='p'>
-        {description.length > 50 ? description.substring(0, 50) + ' ...' : description}
+      <StyledTitle className='title' tag='h4' fontSize='Heading-7-600'>
+        {title.length > 27 ? title.substring(0, 27) + ' ...' : title}
+      </StyledTitle>
+      <StyledTitle className='description' fontSize='body-2-400' tag='p'>
+        {describe.length > 80 ? describe.substring(0, 80) + ' ...' : describe}
       </StyledTitle>
       <CardProfile name={name} />
       <ThemeDivInfoVehicle>
         <div>
           <StyledTitle fontSize='body-2-500' tag='p' className='km'>
-            {km} KM
+            {mileage} KM
           </StyledTitle>
           <StyledTitle fontSize='body-2-500' tag='p' className='year'>
             {year}
