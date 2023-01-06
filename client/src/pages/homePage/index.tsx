@@ -47,7 +47,7 @@ export const Home = () => {
           Algo aqui
         </Modal> */}
 
-        <AuctionSection>
+        <AuctionSection id='auction'>
           <StyledTitle fontSize='Heading-5-600' tag='h5'>
             Leilão
           </StyledTitle>
