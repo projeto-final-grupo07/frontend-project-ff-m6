@@ -32,7 +32,7 @@ export const NavbarContainer = styled.section`
   .profileButtons {
     position: absolute;
     top: 70px;
-    right: 60px;
+    right: 50px;
     padding: 10px;
 
     display: flex;
@@ -41,13 +41,14 @@ export const NavbarContainer = styled.section`
     border-radius: 6px;
 
     background-color: var(--whiteFixed);
-    filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.1));
+    box-shadow: 0 0 30px 0px rgba(0, 0, 0, 0.2);
   }
 
   .isWide {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 10px;
   }
 
   hr {
@@ -55,13 +56,14 @@ export const NavbarContainer = styled.section`
     width: 2px;
     height: 80px;
     background-color: var(--grey6);
+    margin: 0 20px;
   }
 
   a {
     color: var(--grey2);
     border-radius: 4px;
     padding: 10px;
-    margin: 5px 10px;
+    margin: 5px 15px;
     width: fit-content;
   }
   a:hover {
@@ -69,12 +71,27 @@ export const NavbarContainer = styled.section`
   }
 
   .profile {
-    padding: 0 28px;
     margin: 0px 5px;
+    border-radius: 4px;
+    margin: 5px 10px;
+    padding: 0 15px;
+    position: relative;
+
+    a {
+      margin: 0;
+      padding: 0;
+    }
   }
   .profile:hover {
-    color: var(--grey1);
     background-color: var(--grey8);
+  }
+
+  .barrier {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
   }
 
   button {
@@ -131,6 +148,11 @@ export const NotWide = styled.section`
     font-weight: 400;
   }
 
+  button:hover {
+    color: var(--grey1);
+    background-color: var(--grey6);
+  }
+
   .registerBtn {
     text-align: center;
     border: 2px solid var(--grey4);
@@ -144,17 +166,26 @@ export const NotWide = styled.section`
     padding: 0 10px;
     width: fit-content;
     border-radius: 4px;
+    position: relative;
+
+    a {
+      margin: 0;
+      padding: 0;
+    }
   }
-  .profile:hover {
-    color: var(--grey1);
-    background-color: var(--grey8);
+
+  .barrier {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
   }
 
   .profileButtons {
     border-top: 2px solid var(--grey7);
     top: 70px;
     right: 60px;
-    padding: 10px;
+    padding-top: 10px;
 
     display: flex;
     flex-direction: column;
