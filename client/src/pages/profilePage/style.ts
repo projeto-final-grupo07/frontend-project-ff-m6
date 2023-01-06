@@ -77,5 +77,6 @@ export const VehiclesSection = styled.section`
   .vehicleCards {
     display: flex;
     align-items: center;
+    gap: 50px;
   }
 `;
