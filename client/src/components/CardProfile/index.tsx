@@ -11,8 +11,6 @@ interface CardProfileProps {
 const CardProfile = ({ name, size, userId }: CardProfileProps) => {
   const arrName = name.split(' ');
 
-  // console.log(userId)
-
   const initials =
     arrName.length > 1 ? arrName[0][0] + arrName[arrName.length - 1][0] : arrName[0][0];
 
