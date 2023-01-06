@@ -89,9 +89,9 @@ export const Profile = () => {
             if (vehicle.typeVehicles == false)
               return (
                 <ProductCard
-                  userId={data.id}
-                  id={vehicle.id}
                   appearActive
+                  userId={data.id}
+                  vehicleId={vehicle.id}
                   key={vehicle.id}
                   title={vehicle.title}
                   describe={vehicle.describe}
@@ -116,9 +116,9 @@ export const Profile = () => {
             if (vehicle.typeVehicles == true)
               return (
                 <ProductCard
-                  userId={data.id}
-                  id={vehicle.id}
                   appearActive
+                  userId={data.id}
+                  vehicleId={vehicle.id}
                   key={vehicle.id}
                   title={vehicle.title}
                   describe={vehicle.describe}
