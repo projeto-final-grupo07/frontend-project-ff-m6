@@ -35,9 +35,8 @@ const ProductCardAuction = ({
   return (
     <ProductCardAuctionContainer>
       <ThemeProductCard>
-        <div className='divImage'>
-          <img className='image' src={img} alt='Image of the vehicle' />
-        </div>
+        <div className='backGround'></div>
+        <img className='image' src={img} alt='Image of the vehicle' />
 
         <TimeSection>
           <BiTimeFive color='var(--brand1)' size={'20px'} />
