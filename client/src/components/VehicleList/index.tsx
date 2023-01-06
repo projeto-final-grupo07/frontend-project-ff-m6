@@ -57,9 +57,9 @@ const VehicleList = ({ typeVehicle }: IVehicleListProps) => {
           if (vehicle.typeVehicles == typeVehicle)
             return (
               <ProductCard
+                // appearActive
                 userId={vehicle.user.id}
                 id={vehicle.id}
-                appearActive
                 key={vehicle.id}
                 title={vehicle.title}
                 describe={vehicle.describe}
