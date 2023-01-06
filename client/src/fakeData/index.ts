@@ -2,6 +2,7 @@ import imgCarro from '../assets/images/unsplash_3ZUsNJhi_Ik.png';
 import imgCarro2 from '../assets/images/unsplash_6lSBynPRaAQ.png';
 import imgCarro3 from '../assets/images/unsplash_f_SDCASisgs.png';
 import imgCarro4 from '../assets/images/unsplash_a4S6KUuLeoM.png';
+import imgCarro5 from '../assets/images/unsplash_DkGUn0Y1VzA.png';
 
 export const fakeUser = {
   id: '2s148ae-10e8-407f-a56b-8837463bac22',
@@ -92,6 +93,30 @@ export const fakeUser = {
       describe: 'Claramente uma moto',
       typeVehicles: true,
       coverImg: imgCarro4,
+      GalleryImgs: [
+        {
+          id: '44171562-115b-4d5a-acad-ed2f6075645c',
+          url: 'uma',
+          vehicle_id: '41a148ae-10e8-407f-a56b-8837463bac74',
+        },
+        {
+          id: '448e94b7-1b93-4c61-92a1-b090df88dcec',
+          url: 'duas',
+          vehicle_id: '42a148ae-10e8-407f-a56b-8837463bac74',
+        },
+      ],
+    },
+    {
+      id: '4ea148ae-10e8-407f-a56b-8837463bac74',
+      typeOffer: true,
+      title: 'Motinha 2',
+      year: 1999,
+      mileage: 666,
+      price: 11111,
+      isActive: true,
+      describe: 'Claramente uma moto',
+      typeVehicles: true,
+      coverImg: imgCarro5,
       GalleryImgs: [
         {
           id: '44171562-115b-4d5a-acad-ed2f6075645c',
