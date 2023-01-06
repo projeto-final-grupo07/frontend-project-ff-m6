@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const ThemeCarList = styled.div`
   display: flex;
   justify-content: flex-start;
-
   overflow-x: auto;
 
   ::-webkit-scrollbar {
@@ -17,7 +16,6 @@ export const ThemeCarList = styled.div`
   ::-webkit-scrollbar-thumb:hover {
     background: var(--grey4);
   }
-  padding: 10px 30px;
 
   .divCars {
     display: flex;
