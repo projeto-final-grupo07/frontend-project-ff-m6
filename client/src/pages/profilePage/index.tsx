@@ -9,10 +9,6 @@ import { useEffect, useState } from 'react';
 import api from '../../services';
 import { useParams } from 'react-router-dom';
 
-interface IVehicleListProps {
-  typeVehicle: boolean;
-}
-
 interface IVehicle {
   id: string;
   typeOffer: boolean;
@@ -103,7 +99,7 @@ export const Profile = () => {
                   name={data.name}
                   mileage={vehicle.mileage}
                   year={vehicle.year}
-                  price={vehicle.price}
+                  price={+vehicle.price}
                   active={vehicle.isActive}
                 />
               );
@@ -130,7 +126,7 @@ export const Profile = () => {
                   name={data.name}
                   mileage={vehicle.mileage}
                   year={vehicle.year}
-                  price={vehicle.price}
+                  price={+vehicle.price}
                   active={vehicle.isActive}
                 />
               );
