@@ -7,6 +7,8 @@ import { FaBars } from 'react-icons/fa';
 import { IoClose } from 'react-icons/io5';
 import CardProfile from '../CardProfile';
 import Modal from '../Modal';
+import jwt_decode from 'jwt-decode';
+import api from '../../services';
 
 function Navbar() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -53,8 +55,27 @@ function Navbar() {
   );
 }
 
+export interface IDecodedToken {
+  email: string;
+  id: string;
+}
+
 const NavButtons = (): JSX.Element => {
   const token = localStorage.getItem('token');
+  const [userData, setUserData] = useState({ name: 'User Name', id: '123' });
+
+  if (token) {
+    const decodedToken: IDecodedToken = jwt_decode(token);
+    useEffect(() => {
+      api
+        .get(`/user/${decodedToken.id}`)
+        .then((resp) => {
+          console.log(resp.data);
+          setUserData(resp.data);
+        })
+        .catch((err) => console.error(err));
+    }, []);
+  }
 
   const [open, setOpen] = useState(false);
   return (
@@ -78,7 +99,8 @@ const NavButtons = (): JSX.Element => {
       {token ? (
         <>
           <button className='profile' onClick={() => setOpen(!open)}>
-            <CardProfile name={'Samuel Leão'} />
+            <div className='barrier'></div>
+            <CardProfile name={userData.name} userId={userData.id} />
           </button>
           {open ? (
             <div className='profileButtons'>
