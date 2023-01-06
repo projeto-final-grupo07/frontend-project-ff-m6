@@ -52,10 +52,6 @@ export const Header = styled.div`
 `;
 
 export const HomeContainer = styled.div`
-  /* @media (max-width: 800px) {
-    margin-left: 23px;
-  } */
-
   display: flex;
   flex-direction: column;
   gap: 200px;
@@ -64,7 +60,6 @@ export const HomeContainer = styled.div`
   .header {
     background-color: var(--brand1);
     width: 100%;
-    /* position: absolute; */
   }
 
   .vehicleCards {

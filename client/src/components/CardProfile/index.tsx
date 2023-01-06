@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { StyledTitle } from '../../styles/typography';
 import { ThemeCardProfile } from './style';
 

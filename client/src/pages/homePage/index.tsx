@@ -1,21 +1,17 @@
 import Footer from '../../components/Footer';
-import Modal from '../../components/Modal';
-import { StyledParagraph, StyledTitle } from '../../styles/typography';
-import imgCarro from '../../assets/images/unsplash_3ZUsNJhi_Ik.png';
+import { StyledTitle } from '../../styles/typography';
 import Navbar from '../../components/Navbar';
 import { AuctionSection, Header, HomeContainer } from './style';
 import VehicleList from '../../components/VehicleList';
-import RegisterVehicle from '../../components/RegisterVehicle';
 import ProductCardAuction from '../../components/ProductCardAuction';
-import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext/UserContext';
-import { VehiclesSection } from '../profilePage/style';
 import { fakeUser } from '../../fakeData';
 import { StyledButton } from '../../styles/button';
 
 export const Home = () => {
   const { home } = useContext(UserContext);
+  home;
   return (
     <>
       <Navbar />
@@ -86,19 +82,6 @@ export const Home = () => {
           </StyledTitle>
           <VehicleList typeVehicle={true} />
         </div>
-
-        {/* <ProductCardAuction
-          title={'Mercedes Benz A 200 CGI ADVANCE SEDAN Mercedes Benz A 200 '}
-          name={'Steve Jobs'}
-          description={
-            'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Lorem Ipsum is simply dummy text of the printing and typesetting industry. LoremLorem Ipsum is simply dummy text of the printing and typesetting industry. LoremLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem'
-          }
-          year={2022}
-          km={2}
-          img={imgCarro}
-          price={23000}
-          time={'01:52:00'}
-        /> */}
       </HomeContainer>
       <Footer />
     </>
