@@ -20,6 +20,7 @@ export const NavbarContainer = styled.section`
 
   border-bottom: 2px solid var(--grey6);
   font-size: 16px;
+  z-index: 999;
 
   section {
     display: flex;
@@ -108,6 +109,7 @@ export const NotWide = styled.section`
   color: var(--grey2);
 
   filter: drop-shadow(0px 40px 40px rgba(0, 0, 0, 0.2));
+  z-index: 999;
 
   a {
     color: var(--grey2);
