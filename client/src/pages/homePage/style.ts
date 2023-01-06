@@ -66,7 +66,6 @@ export const HomeContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 60px;
-    margin-right: 60px;
   }
 
   @media (max-width: 700px) {
@@ -84,7 +83,6 @@ export const AuctionSection = styled.section`
   overflow-x: scroll;
   overflow-y: hidden;
   gap: 50px;
-  margin-right: 60px;
   height: fit-content;
 
   ::-webkit-scrollbar {
@@ -103,8 +101,5 @@ export const AuctionSection = styled.section`
     display: flex;
     align-items: center;
     gap: 25px;
-  }
-  @media (max-width: 700px) {
-    margin-right: 10px;
   }
 `;
