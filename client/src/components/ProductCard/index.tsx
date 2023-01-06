@@ -14,13 +14,13 @@ interface ProductCardProps {
   price: number;
   appearActive?: boolean;
   active: boolean;
-  id: string;
+  vehicleId: string;
   userId: string;
 }
 
 const ProductCard = ({
   userId,
-  id,
+  vehicleId,
   title,
   describe,
   coverImg,
@@ -33,9 +33,15 @@ const ProductCard = ({
 }: ProductCardProps) => {
   return (
     <ThemeProductCard>
-      <Link to={'/vehicle/12312'}>
+      <Link to={`/vehicle/${vehicleId}`}>
         <div className='divImage'>
-          {appearActive && <div className='active'>Ativo</div>}
+          {appearActive && active ? (
+            <div className='active'>Ativo</div>
+          ) : appearActive ? (
+            <div className='inactive'>Inativo</div>
+          ) : (
+            <></>
+          )}
           <img className='image' src={coverImg} alt='Image of the vehicle' />
         </div>
         <StyledTitle className='title' tag='h4' fontSize='Heading-7-600'>

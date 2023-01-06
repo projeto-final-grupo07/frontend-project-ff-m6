@@ -65,18 +65,27 @@ export const ThemeProductCard = styled.div`
     justify-content: center;
     align-items: center;
     position: absolute;
-    /* top: 110px;
-    left: 160px; */
-
     background-color: var(--brand1);
     color: var(--whiteFixed);
-
     padding: 4px 8px;
-
     margin: 11px 0 0 16px;
-
     height: 24px;
     width: 51px;
+    font-size: 14px;
+  }
+
+  .inactive {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background-color: var(--grey4);
+    color: var(--whiteFixed);
+    padding: 4px 8px;
+    margin: 11px 0 0 16px;
+    height: 24px;
+    width: 51px;
+    font-size: 14px;
   }
 `;
 
