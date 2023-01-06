@@ -1,36 +1,46 @@
 import styled from 'styled-components';
 
 export const ProductCardAuctionContainer = styled.div`
-  width: 55vw;
-  min-width: 328px;
-  border-radius: 10px;
-  margin: 10px;
+  min-width: 735px;
   max-width: 735px;
+
+  @media (max-width: 800px) {
+    min-width: 328px;
+  }
 `;
 
 export const ThemeProductCard = styled.div`
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.29) 0%, #000000 100%);
   color: var(--whiteFixed);
 
   transition-property: background-color;
   transition-duration: 0.5s;
 
-  border-radius: 5px 5px 0px 0px;
-
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+  justify-content: space-around;
+
+  gap: 10px;
+  height: 330px;
+  position: relative;
+  padding: 20px 30px;
+
+  a {
+    color: var(--whiteFixed);
+  }
+
+  .backGround {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.29) 0%, #000000 100%);
+    position: absolute;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    border-radius: 5px 5px 0px 0px;
+  }
 
   :hover {
     background-color: rgba(0, 0, 0, 0.6);
   }
-
-  height: 330px;
-  padding: 20px 30px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  gap: 10px;
 
   .description {
     text-overflow: ellipsis;
@@ -39,12 +49,11 @@ export const ThemeProductCard = styled.div`
     width: 100%;
   }
 
-  .divImage {
-    z-index: -1;
+  .image {
     position: absolute;
-    max-width: 735px;
-    max-height: 330px;
+    z-index: -2;
     align-self: center;
+    display: flex;
   }
 `;
 
