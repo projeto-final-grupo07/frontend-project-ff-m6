@@ -3,25 +3,44 @@ import Modal from '../../components/Modal';
 import { StyledParagraph, StyledTitle } from '../../styles/typography';
 import imgCarro from '../../assets/images/unsplash_3ZUsNJhi_Ik.png';
 import Navbar from '../../components/Navbar';
-import { MainContainer } from './style';
+import { AuctionSection, Header, HomeContainer } from './style';
 import VehicleList from '../../components/VehicleList';
 import RegisterVehicle from '../../components/RegisterVehicle';
 import ProductCardAuction from '../../components/ProductCardAuction';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext/UserContext';
-
+import { VehiclesSection } from '../profilePage/style';
+import { fakeUser } from '../../fakeData';
+import { StyledButton } from '../../styles/button';
 
 export const Home = () => {
-  const {  home } = useContext(UserContext);
+  const { home } = useContext(UserContext);
   return (
     <>
       <Navbar />
-      <MainContainer>
-        <StyledTitle fontSize='Heading-1-700' tag='h1'>
-          Olá! essa e a {home}
+      <Header>
+        <StyledTitle fontSize='Heading-1-700' tag='h2' className='title'>
+          Velocidade e experiência em um lugar feito para você
         </StyledTitle>
-        <Modal
+        <StyledTitle fontSize='body-1-400' tag='p'>
+          Um ambiente feito para você explorar o seu melhor
+        </StyledTitle>
+        <div>
+          <a href='#car'>
+            <StyledButton type='button' buttonStyle='outlined2'>
+              Carros
+            </StyledButton>
+          </a>
+          <a href='#moto'>
+            <StyledButton type='button' buttonStyle='outlined2'>
+              Motos
+            </StyledButton>
+          </a>
+        </div>
+      </Header>
+      <HomeContainer>
+        {/* <Modal
           propsButton={{
             buttonStyle: 'alert',
             buttonSize: 'medium',
@@ -30,24 +49,45 @@ export const Home = () => {
           nameButtonOpen='ABRIRRRE'
         >
           Algo aqui
-        </Modal>
-        <StyledParagraph>Bem-vindo</StyledParagraph>
+        </Modal> */}
 
-        <RegisterVehicle />
+        <AuctionSection>
+          <StyledTitle fontSize='Heading-5-600' tag='h5'>
+            Leilão
+          </StyledTitle>
+          <section className='cards'>
+            {fakeUser?.vehicles.map((vehicle) => {
+              return (
+                <ProductCardAuction
+                  key={vehicle.id}
+                  title={vehicle.title}
+                  name={fakeUser.name}
+                  description={vehicle.describe}
+                  year={vehicle.year}
+                  km={vehicle.mileage}
+                  img={vehicle.coverImg}
+                  price={vehicle.price}
+                  time={'01:52:00'}
+                />
+              );
+            }) || <p>funciona krai</p>}
+          </section>
+        </AuctionSection>
 
-        <StyledTitle className='titleVehicles' fontSize='Heading-5-600' tag='h5'>
-          Carros
-        </StyledTitle>
-        <VehicleList typeVehicle={false} />
-        <StyledTitle className='titleVehicles' fontSize='Heading-5-600' tag='h5'>
-          Motos
-        </StyledTitle>
-        <VehicleList typeVehicle={true} />
-        <Link to={"/profile/e2a01b35-03ee-46db-a9cd-54adeb085e20"}>
-          ausgdiuas
-        </Link>
+        <div id='car' className='vehicleCards'>
+          <StyledTitle className='titleVehicles' fontSize='Heading-5-600' tag='h5'>
+            Carros
+          </StyledTitle>
+          <VehicleList typeVehicle={false} />
+        </div>
+        <div id='moto' className='vehicleCards'>
+          <StyledTitle className='titleVehicles' fontSize='Heading-5-600' tag='h5'>
+            Motos
+          </StyledTitle>
+          <VehicleList typeVehicle={true} />
+        </div>
 
-        <ProductCardAuction
+        {/* <ProductCardAuction
           title={'Mercedes Benz A 200 CGI ADVANCE SEDAN Mercedes Benz A 200 '}
           name={'Steve Jobs'}
           description={
@@ -58,8 +98,8 @@ export const Home = () => {
           img={imgCarro}
           price={23000}
           time={'01:52:00'}
-        />
-      </MainContainer>
+        /> */}
+      </HomeContainer>
       <Footer />
     </>
   );
