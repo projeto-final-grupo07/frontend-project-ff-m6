@@ -11,6 +11,9 @@ export default createGlobalStyle`
     text-decoration:none;
 	font-family: 'Inter', sans-serif;
 
+	a{
+		color: var(--grey1);
+	}
 	img{
 		max-width: 100%;
 	}
