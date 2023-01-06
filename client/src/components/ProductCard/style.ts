@@ -22,7 +22,7 @@ export const ThemeProductCard = styled.div`
     /* margin: 0 auto; */
     background-color: var(--grey7);
     border: 2px solid transparent;
-    z-index: -1;
+    z-index: 1;
     position: relative;
   }
 
@@ -30,13 +30,10 @@ export const ThemeProductCard = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    object-fit: contain;
     height: 100%;
     width: 312px;
 
-    margin: 1px 0;
-    padding: 0 25px;
-
+    object-fit: cover;
     z-index: -1;
   }
   .divImage:hover {
