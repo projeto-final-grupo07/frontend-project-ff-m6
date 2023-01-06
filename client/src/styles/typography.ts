@@ -8,7 +8,7 @@ export const StyledTitle = styled(Typograph)`
     switch (fontSize) {
       case 'Heading-1-700':
         return css`
-          font-size: 56px;
+          font-size: 44px;
           font-weight: 700;
           @media (max-width: 800px) {
             font-size: 46px;
@@ -16,7 +16,7 @@ export const StyledTitle = styled(Typograph)`
         `;
       case 'Heading-2-600':
         return css`
-          font-size: 45px;
+          font-size: 36px;
           font-weight: 600;
           @media (max-width: 800px) {
             font-size: 35px;
@@ -25,7 +25,7 @@ export const StyledTitle = styled(Typograph)`
 
       case 'Heading-3-600':
         return css`
-          font-size: 40px;
+          font-size: 32px;
           font-weight: 600;
           @media (max-width: 800px) {
             font-size: 30px;
@@ -33,7 +33,7 @@ export const StyledTitle = styled(Typograph)`
         `;
       case 'Heading-3-500':
         return css`
-          font-size: 40px;
+          font-size: 32px;
           font-weight: 500;
           @media (max-width: 800px) {
             font-size: 30px;
@@ -41,7 +41,7 @@ export const StyledTitle = styled(Typograph)`
         `;
       case 'Heading-4-600':
         return css`
-          font-size: 35px;
+          font-size: 28px;
           font-weight: 600;
           @media (max-width: 800px) {
             font-size: 26px;
@@ -49,7 +49,7 @@ export const StyledTitle = styled(Typograph)`
         `;
       case 'Heading-4-500':
         return css`
-          font-size: 35px;
+          font-size: 28px;
           font-weight: 500;
           @media (max-width: 800px) {
             font-size: 26px;
@@ -57,7 +57,7 @@ export const StyledTitle = styled(Typograph)`
         `;
       case 'Heading-5-600':
         return css`
-          font-size: 30px;
+          font-size: 24px;
           font-weight: 600;
           @media (max-width: 800px) {
             font-size: 20px;
@@ -65,7 +65,7 @@ export const StyledTitle = styled(Typograph)`
         `;
       case 'Heading-5-500':
         return css`
-          font-size: 30px;
+          font-size: 24px;
           font-weight: 500;
           @media (max-width: 800px) {
             font-size: 20px;
