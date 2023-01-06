@@ -27,7 +27,7 @@ export const StyledButton = styled.button<iStyledButtonProps>`
 
   border-radius: 4px;
 
-  border: 1.5px solid;
+  border: 2px solid;
   transition: 0.3s;
 
   ${({ buttonSize }) => {
