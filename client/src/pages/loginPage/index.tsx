@@ -81,7 +81,7 @@ export const Login = () => {
             <p className='error'>{errors.password.message as ReactNode}</p>
           )}
 
-          <Link to={'/'} className='flexEnd'>
+          <Link to={'/recoverPassword'} className='flexEnd'>
             <StyledTitle fontSize='body-2-400' tag='p'>
               Esqueci minha senha
             </StyledTitle>
