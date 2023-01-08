@@ -21,6 +21,28 @@ export const RegisterContainer = styled.form`
     font-weight: 600;
   }
 
+  .loading {
+    -webkit-animation: spin 4s linear infinite;
+    -moz-animation: spin 4s linear infinite;
+    animation: spin 4s linear infinite;
+    @-moz-keyframes spin {
+      100% {
+        -moz-transform: rotate(360deg);
+      }
+    }
+    @-webkit-keyframes spin {
+      100% {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+    @keyframes spin {
+      100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+  }
+
   .flexRow {
     display: flex;
     gap: 10px;
@@ -34,6 +56,11 @@ export const RegisterContainer = styled.form`
     width: 100px;
     width: 100%;
 
+    .error {
+      flex-direction: column;
+      align-self: flex-start;
+    }
+
     div {
       width: 100%;
     }
@@ -45,16 +72,8 @@ export const RegisterContainer = styled.form`
       cursor: pointer;
       padding: 10px;
       width: 154px;
-      /* width: 100%; */
       height: 50px;
-
-      /* padding: 10px; */
-      /* width: 15%; */
-      /* height: 5%; */
-      /* top: 0; */
       position: absolute;
-
-      /* background-color: rgb(0, 0, 0, 0.5); */
     }
 
     #select2 {
@@ -65,14 +84,7 @@ export const RegisterContainer = styled.form`
       padding: 10px;
       width: 154px;
       height: 50px;
-
-      /* padding: 10px; */
-      /* width: 15%; */
-      /* height: 5%; */
-      /* top: 0; */
       position: absolute;
-
-      /* background-color: rgb(0, 0, 0, 0.5); */
     }
 
     #select1:checked ~ .buyer {

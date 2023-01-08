@@ -15,8 +15,10 @@ import { BiLoaderCircle } from 'react-icons/bi';
 
 export const Login = () => {
   const formSchema = yup.object().shape({
-    email: yup.string().required('O campo Email é obrigatório'),
-
+    email: yup
+      .string()
+      .required('O campo Email é obrigatório')
+      .email('Necessário ser um Email valido'),
     password: yup.string().required('O campo Senha é obrigatório'),
   });
 

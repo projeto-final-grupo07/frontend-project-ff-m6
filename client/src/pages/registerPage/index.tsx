@@ -4,33 +4,14 @@ import Footer from '../../components/Footer';
 import Input from '../../components/Input';
 import Navbar from '../../components/Navbar';
 import { StyledTitle } from '../../styles/typography';
-import * as yup from 'yup';
 import { StyledButton } from '../../styles/button';
 import { RegisterContainer } from './style';
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
+import api from '../../services';
+import { BiLoaderCircle } from 'react-icons/bi';
+import formSchema from './schema';
 
 export const Register = () => {
-  const formSchema = yup.object().shape({
-    name: yup.string().required('O campo Nome é obrigatório'),
-    email: yup.string().required('O campo Email é obrigatório'),
-    cpf: yup.string().required('O campo CPF é obrigatório'),
-    phone: yup.string().required('O campo Celular é obrigatório'),
-    birthdate: yup.string().required('O campo Data de Nascimento é obrigatório'),
-    description: yup.string().required('O campo Descrição é obrigatório'),
-    cep: yup.string().required('O campo CEP é obrigatório'),
-    state: yup.string().required('O campo Estado é obrigatório'),
-    city: yup.string().required('O campo Cidade é obrigatório'),
-    road: yup.string().required('O campo Rua é obrigatório'),
-    number: yup.string().required('O campo Número é obrigatório'),
-    complement: yup.string().required('O campo Complemento é obrigatório'),
-    userType: yup.string().required('O campo Tipo de Conta é obrigatório'),
-    password: yup.string().required('O campo Senha é obrigatório'),
-    confPassword: yup
-      .string()
-      .required('O campo Confirmar Senha é obrigatório')
-      .oneOf([yup.ref('password')], 'Senha não corresponde'),
-  });
-
   const {
     register,
     handleSubmit,
@@ -40,15 +21,64 @@ export const Register = () => {
     resolver: yupResolver(formSchema),
   });
 
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const test = true;
   const onSubmit = (data: any) => {
-    console.log(typeof data);
+    setLoading(true);
     if (data.userType == 0) {
       data.userType = false;
-    } else if (data.userType) {
+    } else {
       data.userType = true;
     }
-    console.log(data);
-    reset();
+
+    const request = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      cpf: data.cpf,
+      phone: data.phone,
+      birthDate: `${
+        data.birthdate.getMonth() + 1
+      }/${data.birthdate.getDate()}/${data.birthdate.getFullYear()}`,
+      typeAccount: data.userType,
+      is_active: true,
+      describe: data.description,
+      Address: {
+        cep: data.cep,
+        state: data.state,
+        city: data.city,
+        street: data.street,
+        number: data.number.toString(),
+        complement: data.complement,
+      },
+    };
+
+    api
+      .post('/user', request)
+      .then((res) => {
+        setSuccess(true);
+        setLoading(false);
+        setError('');
+        reset();
+      })
+      .catch((err) => {
+        console.log(err);
+        setSuccess(false);
+
+        if (err.message === 'Network Error') {
+          setLoading(false);
+          setError('Erro no servidor... tente novamente mais tarde.');
+        } else if (err.response.data.message === 'User already exists') {
+          setLoading(false);
+          setError('Email já cadastrado');
+        } else {
+          setLoading(false);
+          setError('Erro');
+        }
+      });
   };
 
   return (
@@ -73,7 +103,13 @@ export const Register = () => {
           register={register}
         />
         {errors.email?.message && <p className='error'>{errors.email.message as ReactNode}</p>}
-        <Input label='CPF' placeholder='000.000.000-00' registerName='cpf' register={register} />
+        <Input
+          type='number'
+          label='CPF'
+          placeholder='000.000.000-00'
+          registerName='cpf'
+          register={register}
+        />
         {errors.cpf?.message && <p className='error'>{errors.cpf.message as ReactNode}</p>}
         <Input
           type='tel'
@@ -98,7 +134,7 @@ export const Register = () => {
         <Input
           text
           label='Descrição'
-          placeholder='Digitar descrição'
+          placeholder='Digitar Descrição'
           registerName='description'
           register={register}
         />
@@ -123,7 +159,7 @@ export const Register = () => {
 
           <Input
             label='Cidade'
-            placeholder='Digitar cidade'
+            placeholder='Digitar Cidade'
             registerName='city'
             register={register}
           />
@@ -131,8 +167,8 @@ export const Register = () => {
         {errors.state?.message && <p className='error'>{errors.state.message as ReactNode}</p>}
         {errors.city?.message && <p className='error'>{errors.city.message as ReactNode}</p>}
 
-        <Input label='Rua' placeholder='00000.000' registerName='road' register={register} />
-        {errors.road?.message && <p className='error'>{errors.road.message as ReactNode}</p>}
+        <Input label='Rua' placeholder='Digitar Rua' registerName='street' register={register} />
+        {errors.street?.message && <p className='error'>{errors.street.message as ReactNode}</p>}
 
         <div className='flexRow'>
           <Input
@@ -161,7 +197,7 @@ export const Register = () => {
 
         <div className='buttonsTypes'>
           <div>
-            <input checked value={0} id='select1' {...register('userType')} type='radio' />
+            <input value={0} id='select1' {...register('userType')} type='radio' />
             <StyledButton className='buyer' type='button' buttonStyle='outlined2'>
               Comprador
             </StyledButton>
@@ -174,10 +210,10 @@ export const Register = () => {
               Anunciante
             </StyledButton>
           </div>
-          {errors.userType?.message && (
-            <p className='error'>{errors.userType.message as ReactNode}</p>
-          )}
         </div>
+        {errors.userType?.message && (
+          <p className='error'>{errors.userType.message as ReactNode}</p>
+        )}
 
         <Input
           type='password'
@@ -201,8 +237,15 @@ export const Register = () => {
           <p className='error'>{errors.confPassword.message as ReactNode}</p>
         )}
 
-        <StyledButton type='submit' buttonStyle='brand'>
-          Finalizar cadastro
+        {error && <p className='error'>{error}</p>}
+        <StyledButton type='submit' buttonStyle={success ? 'sucess' : 'brand'}>
+          {success ? (
+            'Cadastrado com sucesso!'
+          ) : loading && test ? (
+            <BiLoaderCircle size={'2em'} className='loading' />
+          ) : (
+            'Finalizar cadastro'
+          )}
         </StyledButton>
       </RegisterContainer>
 
