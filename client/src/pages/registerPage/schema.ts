@@ -49,7 +49,7 @@ const formSchema = yup.object().shape({
     .required('O campo Cidade é obrigatório')
     .min(2, 'Mínimo de 2 letras na Cidade'),
   street: yup.string().required('O campo Rua é obrigatório').min(2, 'Mínimo de 2 letras na Rua'),
-  number: yup.number().required('O campo Número é obrigatório'),
+  number: yup.number().required('O campo Número é obrigatório').typeError('Número Inválido'),
   complement: yup.string().required('O campo Complemento é obrigatório'),
   userType: yup
     .string()
