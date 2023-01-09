@@ -10,6 +10,7 @@ export default createGlobalStyle`
     list-style: none;
     text-decoration:none;
 	font-family: 'Inter', sans-serif;
+	transition: 0.3s;
 
 	a{
 		color: var(--grey1);
