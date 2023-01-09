@@ -1,6 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { ChangePassword } from '../pages/changePass';
-import { Dashboard } from '../pages/dashBoard';
 import { PageError } from '../pages/errorPage';
 import { Home } from '../pages/homePage';
 import { Login } from '../pages/loginPage';
@@ -23,11 +22,6 @@ export const router = createBrowserRouter([
   {
     path: '/register',
     element: <Register />,
-    errorElement: <PageError />,
-  },
-  {
-    path: '/dashboard',
-    element: <Dashboard />,
     errorElement: <PageError />,
   },
   {
