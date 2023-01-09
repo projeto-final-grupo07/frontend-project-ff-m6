@@ -4,6 +4,15 @@ export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
 
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+
   input {
     border: 1.5px solid #e9ecef;
     border-radius: 4px;
