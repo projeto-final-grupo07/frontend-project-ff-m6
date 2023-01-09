@@ -1,5 +1,5 @@
 import Footer from '../../components/Footer';
-import Navbar, { IDecodedToken } from '../../components/Navbar';
+import Navbar from '../../components/Navbar';
 import { StyledButton } from '../../styles/button';
 import { useParams } from 'react-router-dom';
 import {
@@ -13,13 +13,11 @@ import {
   StyledRegisterComment,
   StyledForm,
 } from './style';
-import img from '../../assets/images/unsplash_3ZUsNJhi_Ik.png';
 import { StyledTitle } from '../../styles/typography';
 import CardProfile from '../../components/CardProfile';
 import CommentCard from '../../components/CommentCard';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import jwt_decode from 'jwt-decode';
 import api from '../../services';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -80,6 +78,7 @@ export const VehicleDetail = () => {
   const [loading, setLoading] = useState(false);
   const [vehicleData, setVehicleData] = useState<IVehicle>();
   const [commentData, setCommentData] = useState<IMessage[]>([]);
+  const [flagComment, setFlagComment] = useState<boolean>(false);
 
   if (token) {
     useEffect(() => {
@@ -91,7 +90,7 @@ export const VehicleDetail = () => {
           setCommentData(res.data.Message);
         })
         .catch((err) => console.log(err));
-    }, [commentData]);
+    }, [flagComment]);
   }
 
   const {
@@ -122,6 +121,7 @@ export const VehicleDetail = () => {
         reset();
         setCommentData([...commentData, data]);
         loadUser();
+        setFlagComment(!flagComment);
       })
       .catch((err) => {
         setLoading(false);
@@ -135,15 +135,18 @@ export const VehicleDetail = () => {
       });
   };
 
-  function days(commentDate: any) {
+  function days(commentDate: Date) {
     const date1: any = new Date();
     const date2: any = new Date(commentDate);
+
+    const diff = date1 - date2;
+    console.log(diff);
 
     const daysComment = (date1 - date2) / 86400000;
 
     console.log(daysComment);
 
-    return daysComment;
+    return Math.trunc(daysComment);
   }
 
   return (
@@ -201,8 +204,7 @@ export const VehicleDetail = () => {
                     key={comment.id}
                     name={comment.user?.name || 'Name'}
                     comment={comment.comment}
-                    daysOfComment={1}
-                    // daysOfComment={days(comment.createdAt)}
+                    daysOfComment={days(new Date(comment.createdAt))}
                   />
                 );
               })}
@@ -241,7 +243,7 @@ export const VehicleDetail = () => {
             <h2>Fotos</h2>
             <div className='photoGalery'>
               {vehicleData?.GalleryImgs.length === 0 ? (
-                <StyledBox className="noImage">Sem mais imagens</StyledBox>
+                <StyledBox className='noImage'>Sem mais imagens</StyledBox>
               ) : (
                 vehicleData?.GalleryImgs.map((image) => {
                   return <img key={image?.id} src={image?.url} alt={'Imagem de um veículo'} />;
