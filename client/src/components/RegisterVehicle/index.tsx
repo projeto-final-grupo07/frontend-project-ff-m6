@@ -1,7 +1,7 @@
 import { ReactNode, useState } from 'react';
 import { StyledButton } from '../../styles/button';
 import ImageGallery from '../ImageGallery';
-import Modal from '../Modal';
+import StyledModal from '../StyledModal';
 import { StyledForm } from './style';
 
 import { useForm } from 'react-hook-form';
@@ -61,7 +61,7 @@ const RegisterVehicle = () => {
   };
   return (
     <>
-      <Modal
+      <StyledModal
         nameButtonOpen='Criar anuncio'
         nameModal='Criar Anuncio'
         propsButton={{
@@ -170,7 +170,7 @@ const RegisterVehicle = () => {
             </div>
           </div>
         </StyledForm>
-      </Modal>
+      </StyledModal>
     </>
   );
 };
