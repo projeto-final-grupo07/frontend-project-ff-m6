@@ -6,10 +6,10 @@ import { useEffect, useState } from 'react';
 import { FaBars } from 'react-icons/fa';
 import { IoClose } from 'react-icons/io5';
 import CardProfile from '../CardProfile';
-import Modal from '../Modal';
 import jwt_decode from 'jwt-decode';
 import api from '../../services';
 import { StyledButton } from '../../styles/button';
+import StyledModal from '../StyledModal';
 
 function Navbar() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -119,7 +119,7 @@ const NavButtons = (): JSX.Element => {
           </button>
           {open ? (
             <div className='profileButtons'>
-              <Modal
+              <StyledModal
                 propsButton={{
                   buttonStyle: 'link',
                 }}
@@ -127,8 +127,8 @@ const NavButtons = (): JSX.Element => {
                 nameButtonOpen='Editar Perfil'
               >
                 ... Conteudo ...
-              </Modal>
-              <Modal
+              </StyledModal>
+              <StyledModal
                 propsButton={{
                   buttonStyle: 'link',
                 }}
@@ -136,7 +136,7 @@ const NavButtons = (): JSX.Element => {
                 nameButtonOpen='Editar endereço'
               >
                 ... Conteudo ...
-              </Modal>
+              </StyledModal>
 
               <StyledButton type='button' buttonStyle='link'>
                 <Link to={`/profile/${userData.id}`}>Meus Anúncios</Link>
