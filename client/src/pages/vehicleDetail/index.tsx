@@ -11,6 +11,7 @@ import {
   StyledDivGap,
   SytledDivInfoVehicle,
   StyledRegisterComment,
+  StyledForm,
 } from './style';
 import img from '../../assets/images/unsplash_3ZUsNJhi_Ik.png';
 import { StyledTitle } from '../../styles/typography';
@@ -20,25 +21,129 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import jwt_decode from 'jwt-decode';
 import api from '../../services';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { formSchema } from './schema';
+import { BiLoaderCircle } from 'react-icons/bi';
+import { toast } from 'react-toastify';
+import { router } from '../../routes';
+import { UserContext } from '../../contexts/UserContext/UserContext';
+import { useContext } from 'react';
+
+export interface IVehicle {
+  id: string;
+  typeOffer: boolean;
+  title: string;
+  year: string;
+  mileage: string;
+  price: string;
+  describe: string;
+  typeVehicles: boolean;
+  coverImg: string;
+  isActive: boolean;
+  user_id: string;
+  GalleryImgs: IGalleryImg[];
+  Message: IMessage[];
+}
+
+export interface IGalleryImg {
+  id: string;
+  url: string;
+  vehicle_id: string;
+}
+
+export interface IMessage {
+  id: string;
+  comment: string;
+  createdAt: string;
+  user_id: string;
+  vehicle_id: string;
+  user: IUser;
+}
+
+export interface IUser {
+  name: string;
+}
+
+export interface IUserData {
+  name: string;
+  id: string;
+}
 
 export const VehicleDetail = () => {
   const price = 192900;
   const { id } = useParams();
 
+  const { userData, loadUser } = useContext(UserContext);
+
   const token = localStorage.getItem('token');
-  const [userData, setUserData] = useState({ name: 'User Name', id: '123' });
+  const [loading, setLoading] = useState(false);
+  const [vehicleData, setVehicleData] = useState<IVehicle>();
+  const [commentData, setCommentData] = useState<IMessage[]>([]);
 
   if (token) {
-    const decodedToken: IDecodedToken = jwt_decode(token);
     useEffect(() => {
+      loadUser();
       api
-        .get(`/user/${decodedToken.id}`)
-        .then((resp) => {
-          console.log(resp.data);
-          setUserData(resp.data);
+        .get(`/vehicle/${id}`)
+        .then((res) => {
+          setVehicleData(res.data);
+          setCommentData(res.data.Message);
         })
-        .catch((err) => console.error(err));
-    }, []);
+        .catch((err) => console.log(err));
+    }, [commentData]);
+  }
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(formSchema),
+  });
+
+  const notifySuccess = () =>
+    toast.success('Comentário adicionado com sucesso', { autoClose: 1500 });
+  const notifyError = (msg: string) => toast.error(msg, { autoClose: 1500, position: 'top-right' });
+
+  const onSubmitFunction = (data: any) => {
+    setLoading(true);
+    api
+      .post(`/comment/${id}`, data, {
+        headers: {
+          'content-type': 'application/json',
+          Authorization: 'Bearer ' + token,
+        },
+      })
+      .then((res) => {
+        notifySuccess();
+        setLoading(false);
+        reset();
+        setCommentData([...commentData, data]);
+        loadUser();
+      })
+      .catch((err) => {
+        setLoading(false);
+        reset();
+        if (err.message === 'Request failed with status code 401') {
+          setTimeout(() => router.navigate('/login'), 2500);
+          notifyError('Faça login novamente');
+        } else {
+          notifyError('Tente novamente mais tarde');
+        }
+      });
+  };
+
+  function days(commentDate: any) {
+    const date1: any = new Date();
+    const date2: any = new Date(commentDate);
+
+    const daysComment = (date1 - date2) / 86400000;
+
+    console.log(daysComment);
+
+    return daysComment;
   }
 
   return (
@@ -46,21 +151,21 @@ export const VehicleDetail = () => {
       <Navbar />
       <div className='mainContainer'>
         <StyledSection>
-          <StyledBox>
-            <img src={img} alt='x' />
+          <StyledBox className='mainImage'>
+            <img src={vehicleData?.coverImg} alt='x' />
           </StyledBox>
           <StyledBox>
             <StyledDivGap>
               <StyledTitle fontSize='Heading-6-600' tag='h6'>
-                Mercedes Benz A 200 CGI ADVANCE SEDAN
+                {vehicleData?.title}
               </StyledTitle>
               <SytledDivInfoVehicle>
                 <div>
                   <StyledTitle fontSize='body-2-500' tag='p' className='tag'>
-                    2013/2014
+                    {vehicleData?.year}
                   </StyledTitle>
                   <StyledTitle fontSize='body-2-500' tag='p' className='tag'>
-                    120.024 KM
+                    {vehicleData?.mileage} KM
                   </StyledTitle>
                 </div>
                 <StyledTitle fontSize='Heading-7-500' tag='h3'>
@@ -81,9 +186,7 @@ export const VehicleDetail = () => {
                 Descrição
               </StyledTitle>
               <StyledTitle fontSize='body-1-400' tag='p' fontColor='var(--grey2)'>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore nihil sunt,
-                expedita dolorum dicta sint ullam aliquam quisquam magni perspiciatis ex esse cumque
-                nam pariatur, sit consequuntur ut totam. Dicta!
+                {vehicleData?.describe}
               </StyledTitle>
             </StyledDivGap>
           </StyledBox>
@@ -92,24 +195,44 @@ export const VehicleDetail = () => {
               <StyledTitle fontSize='Heading-6-600' tag='h6'>
                 Comentários
               </StyledTitle>
-              <CommentCard />
-              <CommentCard />
-              <CommentCard />
+              {commentData?.map((comment) => {
+                return (
+                  <CommentCard
+                    key={comment.id}
+                    name={comment.user?.name || 'Name'}
+                    comment={comment.comment}
+                    daysOfComment={1}
+                    // daysOfComment={days(comment.createdAt)}
+                  />
+                );
+              })}
             </StyledDivGap>
           </StyledBox>
           <StyledBox>
             <StyledDivGap>
-              <CardProfile name={userData.name} userId={userData.id} />
-              <div className='textarea-container'>
-                <StyledRegisterComment
-                  rows={2}
-                  maxLength={250}
-                  placeholder='Carro muito confortável, foi uma ótima experiência de compra...'
-                ></StyledRegisterComment>
-                <StyledButton className='commentButton' buttonStyle='brand' buttonSize='medium'>
-                  Comentar
-                </StyledButton>
-              </div>
+              <CardProfile name={userData?.name || 'Name'} userId={userData?.id} />
+              <StyledForm
+                onSubmit={handleSubmit((evt) => {
+                  return onSubmitFunction(evt);
+                })}
+              >
+                <div className='textarea-container'>
+                  <StyledRegisterComment
+                    rows={2}
+                    maxLength={250}
+                    placeholder='Carro muito confortável, foi uma ótima experiência de compra...'
+                    {...register('message')}
+                  ></StyledRegisterComment>
+                  <StyledButton
+                    type='submit'
+                    className='commentButton'
+                    buttonStyle='brand'
+                    buttonSize='medium'
+                  >
+                    {loading ? <BiLoaderCircle size={'2em'} className='loading' /> : 'Comentar'}
+                  </StyledButton>
+                </div>
+              </StyledForm>
             </StyledDivGap>
           </StyledBox>
         </StyledSection>
@@ -117,23 +240,23 @@ export const VehicleDetail = () => {
           <StyledPhotoDetail>
             <h2>Fotos</h2>
             <div className='photoGalery'>
-              <img src={img} alt='1' />
-              <img src={img} alt='1' />
-              <img src={img} alt='1' />
-              <img src={img} alt='1' />
-              <img src={img} alt='1' />
-              <img src={img} alt='1' />
+              {vehicleData?.GalleryImgs.length === 0 ? (
+                <StyledBox className="noImage">Sem mais imagens</StyledBox>
+              ) : (
+                vehicleData?.GalleryImgs.map((image) => {
+                  return <img key={image?.id} src={image?.url} alt={'Imagem de um veículo'} />;
+                })
+              )}
             </div>
           </StyledPhotoDetail>
           <StyledBox center flex columnFlex>
             <StyledDivGap center>
-              <CardProfile name='Ronado' />
+              <CardProfile direction={true} name={userData?.name || 'undefined'} />
               <StyledTitle fontSize='body-1-400' tag='p' fontColor='var(--grey2)'>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                Ipsum has been the industrys
+                {userData?.describe}
               </StyledTitle>
             </StyledDivGap>
-            <Link to={'/'}>
+            <Link to={`/profile/${vehicleData?.user_id}`}>
               <StyledButton buttonStyle='grey1' buttonSize='medium'>
                 Ver todos os anuncios
               </StyledButton>

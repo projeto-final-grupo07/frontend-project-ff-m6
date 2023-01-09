@@ -1,8 +1,85 @@
-import { createContext } from 'react';
+import { createContext, ReactNode, useState } from 'react';
+import { IDecodedToken } from '../../components/Navbar';
+import jwt_decode from 'jwt-decode';
+import api from '../../services';
+import { router } from '../../routes';
 
-export const UserContext = createContext({} as any);
+export interface IUser {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+  cpf: string;
+  phone: string;
+  birthDate: string;
+  describe: string;
+  typeAccount: boolean;
+  is_active: boolean;
+  passwordResetToken: any;
+  passwordResetExpires: any;
+  Address: IAddress;
+  Vehicle: IVehicle[];
+  Message: IMessage[];
+}
 
-export const UserProviders = ({ children }: any) => {
-  const home = 'Home';
-  return <UserContext.Provider value={{ home }}>{children}</UserContext.Provider>;
+export interface IAddress {
+  id: string;
+  cep: string;
+  state: string;
+  city: string;
+  street: string;
+  number: string;
+  complement: string;
+  user_id: string;
+}
+
+export interface IVehicle {
+  id: string;
+  typeOffer: boolean;
+  title: string;
+  year: string;
+  mileage: string;
+  price: string;
+  describe: string;
+  typeVehicles: boolean;
+  coverImg: string;
+  isActive: boolean;
+  user_id: string;
+}
+
+export interface IMessage {
+  id: string;
+  comment: string;
+  createdAt: string;
+  user_id: string;
+  vehicle_id: string;
+}
+
+interface IUserContext {
+  loadUser(): void;
+  userData: IUser | undefined;
+}
+
+interface IUserProviderProps {
+  children: ReactNode;
+}
+
+export const UserContext = createContext<IUserContext>({} as IUserContext);
+
+export const UserProviders = ({ children }: IUserProviderProps) => {
+  const [userData, setUserData] = useState<IUser>();
+
+  const token = localStorage.getItem('token') || '';
+
+  const loadUser = () => {
+    const decodedToken: IDecodedToken = jwt_decode(token);
+    api
+      .get(`/user/${decodedToken.id}`)
+      .then((resp) => {
+        setUserData(resp.data);
+      })
+      .catch((err) => console.error(err));
+  };
+
+  return <UserContext.Provider value={{ loadUser, userData }}>{children}</UserContext.Provider>;
 };

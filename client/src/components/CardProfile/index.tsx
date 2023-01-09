@@ -6,9 +6,10 @@ interface CardProfileProps {
   name: string;
   size?: string;
   userId?: string;
+  direction?: boolean;
 }
 
-const CardProfile = ({ name, size, userId }: CardProfileProps) => {
+const CardProfile = ({ direction = false, name, size, userId }: CardProfileProps) => {
   const arrName = name.split(' ');
 
   const colorName: any = {
@@ -47,10 +48,14 @@ const CardProfile = ({ name, size, userId }: CardProfileProps) => {
 
   return (
     <Link to={`/profile/${userId}`}>
-      <ThemeCardProfile color={'random' + number} size={size}>
+      <ThemeCardProfile direction={direction} color={'random' + number} size={size}>
         <span className='initial'>{initials.toUpperCase()}</span>
 
-        <StyledTitle className='nameAuthor' fontSize='body-2-500' tag='p'>
+        <StyledTitle
+          className='nameAuthor'
+          fontSize={direction ? 'Heading-6-600' : 'body-2-500'}
+          tag='p'
+        >
           {name}
         </StyledTitle>
       </ThemeCardProfile>
