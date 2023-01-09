@@ -1,12 +1,27 @@
 import styled from 'styled-components';
 
 export const StyledVehicleDetail = styled.div`
+  width: 100%;
+  position: relative;
+  .divRoxinha {
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    background-color: var(--brand1);
+    height: 580px;
+  }
   .mainContainer {
-    padding: 1rem 60px;
+    margin: 2rem auto 0 auto;
+    /* padding: 1rem 60px; */
     display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
     flex-direction: row;
     gap: 1rem;
-    justify-content: flex-start;
+
+    max-width: 1200px;
     width: 100%;
   }
   @media (max-width: 900px) {
@@ -17,7 +32,7 @@ export const StyledVehicleDetail = styled.div`
   }
 `;
 export const StyledSection = styled.div`
-  width: 50%;
+  width: 60%;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -32,7 +47,7 @@ export const StyledSection = styled.div`
     justify-content: center;
 
     min-height: 355px;
-    img{
+    img {
       width: 100%;
       height: 100%;
       object-fit: contain;
@@ -78,10 +93,19 @@ export const StyledDivGap = styled.div<any>`
     position: relative;
     width: 100%;
 
+    @media (width < 600px) {
+      position: static;
+    }
+
     .commentButton {
       position: absolute;
       bottom: 13px;
       right: 11px;
+
+      @media (width < 600px) {
+        position: static;
+        margin-top: 0.7rem;
+      }
     }
   }
 
@@ -111,24 +135,42 @@ export const StyledDivGap = styled.div<any>`
 export const StyledPhotoDetail = styled.div`
   display: flex;
   flex-direction: column;
+  /* align-items: center; */
+  /* justify-content: center; */
   width: 100%;
   height: 200px;
+  min-height: 250px;
   max-height: 400px;
   padding: 2rem;
   gap: 1rem;
   object-fit: center;
+  @media (900px < width < 1200px) {
+    min-height: 250px;
+  }
+  @media (600px < width < 900px) {
+    min-height: 400px;
+  }
+  @media (400px < width < 600px) {
+    min-height: 300px;
+  }
+  @media (width < 400px) {
+    min-height: 220px;
+  }
   
-  
+
   background: var(--whiteFixed);
   border-radius: 4px;
-  .photoGalery {
+
+  .gridGallery {
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+  }
+
+  .imgGallery {
     width: 100%;
-    img {
-      object-fit: contain;
-      width: calc((100% - 2rem) / 3);
-      height: 108px;
-      cursor: pointer;
-    }
+    height: 100%;
+    object-fit: cover;
   }
   .noImage {
     display: flex;

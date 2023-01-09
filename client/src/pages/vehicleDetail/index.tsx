@@ -27,6 +27,8 @@ import { toast } from 'react-toastify';
 import { router } from '../../routes';
 import { UserContext } from '../../contexts/UserContext/UserContext';
 import { useContext } from 'react';
+import { data } from '../../fakeData/data';
+import { Grid } from '@mui/material';
 
 export interface IVehicle {
   id: string;
@@ -34,7 +36,7 @@ export interface IVehicle {
   title: string;
   year: string;
   mileage: string;
-  price: string;
+  price: number;
   describe: string;
   typeVehicles: boolean;
   coverImg: string;
@@ -69,7 +71,6 @@ export interface IUserData {
 }
 
 export const VehicleDetail = () => {
-  const price = 192900;
   const { id } = useParams();
 
   const { userData, loadUser } = useContext(UserContext);
@@ -79,6 +80,7 @@ export const VehicleDetail = () => {
   const [vehicleData, setVehicleData] = useState<IVehicle>();
   const [commentData, setCommentData] = useState<IMessage[]>([]);
   const [flagComment, setFlagComment] = useState<boolean>(false);
+  const [price, setPrice] = useState(0);
 
   if (token) {
     useEffect(() => {
@@ -87,7 +89,9 @@ export const VehicleDetail = () => {
         .get(`/vehicle/${id}`)
         .then((res) => {
           setVehicleData(res.data);
+
           setCommentData(res.data.Message);
+          setPrice(+res.data.price);
         })
         .catch((err) => console.log(err));
     }, [flagComment]);
@@ -152,6 +156,7 @@ export const VehicleDetail = () => {
   return (
     <StyledVehicleDetail>
       <Navbar />
+      <div className='divRoxinha'></div>
       <div className='mainContainer'>
         <StyledSection>
           <StyledBox className='mainImage'>
@@ -241,19 +246,30 @@ export const VehicleDetail = () => {
         <StyledSectionFixed>
           <StyledPhotoDetail>
             <h2>Fotos</h2>
-            <div className='photoGalery'>
+            <Grid
+              container
+              justifyContent='center'
+              spacing={1}
+              columns={12}
+              className='gridGallery'
+    
+            >
               {vehicleData?.GalleryImgs.length === 0 ? (
                 <StyledBox className='noImage'>Sem mais imagens</StyledBox>
               ) : (
                 vehicleData?.GalleryImgs.map((image) => {
-                  return <img key={image?.id} src={image?.url} alt={'Imagem de um veículo'} />;
+                  return (
+                    <Grid key={image?.id} item  xs={4} sm={4} md={4} lg={4}>
+                      <img className='imgGallery' key={image?.id} src={image?.url} alt={'Imagem de um veículo'} />
+                    </Grid>
+                  );
                 })
               )}
-            </div>
+            </Grid>
           </StyledPhotoDetail>
           <StyledBox center flex columnFlex>
             <StyledDivGap center>
-              <CardProfile direction={true} name={userData?.name || 'undefined'} />
+              <CardProfile direction='true' name={userData?.name || 'undefined'} />
               <StyledTitle fontSize='body-1-400' tag='p' fontColor='var(--grey2)'>
                 {userData?.describe}
               </StyledTitle>
