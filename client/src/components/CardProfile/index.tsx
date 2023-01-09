@@ -48,8 +48,10 @@ const CardProfile = ({ name, size, userId }: CardProfileProps) => {
 
   return (
     <Link to={`/profile/${userId}`}>
+
       <ThemeCardProfile color={'random' + number} size={size}>
         <span className='initial'>{initials}</span>
+
         <StyledTitle className='nameAuthor' fontSize='body-2-500' tag='p'>
           {name}
         </StyledTitle>
