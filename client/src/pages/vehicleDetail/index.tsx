@@ -29,6 +29,8 @@ import { toast } from 'react-toastify';
 import { router } from '../../routes';
 import { UserContext } from '../../contexts/UserContext/UserContext';
 import { useContext } from 'react';
+import StyledModal from '../../components/StyledModal';
+import ImgModal from '../../components/StyledModal/ImgModal';
 
 export interface IVehicle {
   id: string;
@@ -241,10 +243,19 @@ export const VehicleDetail = () => {
             <h2>Fotos</h2>
             <div className='photoGalery'>
               {vehicleData?.GalleryImgs.length === 0 ? (
-                <StyledBox className="noImage">Sem mais imagens</StyledBox>
+                <StyledBox className='noImage'>Sem mais imagens</StyledBox>
               ) : (
                 vehicleData?.GalleryImgs.map((image) => {
-                  return <img key={image?.id} src={image?.url} alt={'Imagem de um veículo'} />;
+                  return (
+                    <ImgModal
+                      key={image?.id}
+                      src={image?.url}
+                      altName={'Imagem de um veículo'}
+                      nameModal='Imagem do veículo'
+                    >
+                      <img src={image?.url} alt={'Imagem de um veículo'} />
+                    </ImgModal>
+                  );
                 })
               )}
             </div>
