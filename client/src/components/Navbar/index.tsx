@@ -72,12 +72,25 @@ const NavButtons = (): JSX.Element => {
       api
         .get(`/user/${decodedToken.id}`)
         .then((resp) => {
-          console.log(resp.data);
           setUserData(resp.data);
         })
         .catch((err) => console.error(err));
     }, []);
   }
+
+  const [inLogin, setInLogin] = useState('no');
+  const [inRegister, setInRegister] = useState('registerBtn');
+
+  useEffect(() => {
+    if (document.URL.includes('login')) {
+      setInLogin('inLogin');
+    } else if (document.URL.includes('register')) {
+      setInRegister('inRegister');
+    } else {
+      setInLogin('no');
+      setInRegister('registerBtn');
+    }
+  });
 
   const [open, setOpen] = useState(false);
   return (
@@ -149,15 +162,13 @@ const NavButtons = (): JSX.Element => {
         </>
       ) : (
         <>
-          <Link to={'/login'}>
-            <StyledTitle fontSize='button-big-text' tag='h3'>
+          <Link to={'/login'} className='navButtons'>
+            <StyledTitle fontSize='button-big-text' tag='h3' className={inLogin}>
               Fazer Login
             </StyledTitle>
           </Link>
-          <Link to={'/register'} className='registerBtn'>
-            <StyledTitle fontColor='var(--grey0)' fontSize='button-big-text' tag='h3'>
-              Cadastrar
-            </StyledTitle>
+          <Link to={'/register'} className={inRegister}>
+            Cadastrar
           </Link>
         </>
       )}
