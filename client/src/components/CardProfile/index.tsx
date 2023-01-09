@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { StyledTitle } from '../../styles/typography';
 import { ThemeCardProfile } from './style';
@@ -12,7 +11,7 @@ interface CardProfileProps {
 const CardProfile = ({ name, size, userId }: CardProfileProps) => {
   const arrName = name.split(' ');
 
-  const colorName : any = {
+  const colorName: any = {
     a: '1',
     b: '1',
     c: '2',
@@ -43,14 +42,13 @@ const CardProfile = ({ name, size, userId }: CardProfileProps) => {
 
   const initials =
     arrName.length > 1 ? arrName[0][0] + arrName[arrName.length - 1][0] : arrName[0][0];
-    
-  const number = colorName[arrName[0][0].toLowerCase()] || "1";
+
+  const number = colorName[arrName[0][0].toLowerCase()] || '1';
 
   return (
     <Link to={`/profile/${userId}`}>
-
       <ThemeCardProfile color={'random' + number} size={size}>
-        <span className='initial'>{initials}</span>
+        <span className='initial'>{initials.toUpperCase()}</span>
 
         <StyledTitle className='nameAuthor' fontSize='body-2-500' tag='p'>
           {name}
