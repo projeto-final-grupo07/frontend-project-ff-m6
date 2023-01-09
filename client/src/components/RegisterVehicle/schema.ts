@@ -6,8 +6,26 @@ export const formSchema = yup.object().shape({
   price: yup.string().required('O campo Preço é obrigatório'),
   describe: yup.string().required('O campo Descrição é obrigatório'),
   coverImg: yup.string().required('O campo Imagem de capa é obrigatório'),
-  img1: yup.string().required('O campo Imagem é obrigatório'),
-  img2: yup.string(),
-  img3: yup.string(),
-  img4: yup.string(),
+  img1: yup
+    .string()
+    .required('O campo Imagem é obrigatório')
+    .matches(
+      /((?:(ftp|http[s]?:[//])?)?([w]{3}[.])?)((.*[.](com|php|net|org|br|dk|at|us|tv|info|uk|co.uk|biz|se)?)?)((.*[.](aspx|htm|html|HTM|HTML|jhtm|jhtml|JHTM|JHTML|xhtm|xhtml|XHTM|XHTML)?)?)/,
+    ),
+  // "(\\w+(\\.(\\w|-)+)*(/(\\w|-)+)*/?)?"/,
+  img2: yup
+    .string()
+    .matches(
+      /((?:(ftp|http[s]?:[//])?)?([w]{3}[.])?)((.*[.](com|php|net|org|br|dk|at|us|tv|info|uk|co.uk|biz|se)?)?)((.*[.](aspx|htm|html|HTM|HTML|jhtm|jhtml|JHTM|JHTML|xhtm|xhtml|XHTM|XHTML)?)?)/,
+    ),
+  img3: yup
+    .string()
+    .matches(
+      /((?:(ftp|http[s]?:[//])?)?([w]{3}[.])?)((.*[.](com|php|net|org|br|dk|at|us|tv|info|uk|co.uk|biz|se)?)?)((.*[.](aspx|htm|html|HTM|HTML|jhtm|jhtml|JHTM|JHTML|xhtm|xhtml|XHTM|XHTML)?)?)/,
+    ),
+  img4: yup
+    .string()
+    .matches(
+      /((?:(ftp|http[s]?:[//])?)?([w]{3}[.])?)((.*[.](com|php|net|org|br|dk|at|us|tv|info|uk|co.uk|biz|se)?)?)((.*[.](aspx|htm|html|HTM|HTML|jhtm|jhtml|JHTM|JHTML|xhtm|xhtml|XHTM|XHTML)?)?)/,
+    ),
 });

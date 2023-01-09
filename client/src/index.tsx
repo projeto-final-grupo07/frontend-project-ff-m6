@@ -4,6 +4,9 @@ import { RouterProvider } from 'react-router-dom';
 import { router } from './routes';
 import GlobalStyle from './styles/globalStyle';
 import Providers from './contexts/Providers';
+import { ToastContainer } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
@@ -11,6 +14,7 @@ root.render(
     <GlobalStyle />
     <Providers>
       <RouterProvider router={router} />
+      <ToastContainer />
     </Providers>
   </React.StrictMode>,
 );

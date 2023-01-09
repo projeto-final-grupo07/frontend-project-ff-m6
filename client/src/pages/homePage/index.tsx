@@ -10,8 +10,6 @@ import { fakeUser } from '../../fakeData';
 import { StyledButton } from '../../styles/button';
 
 export const Home = () => {
-  const { home } = useContext(UserContext);
-  home;
   return (
     <>
       <Navbar />

@@ -25,6 +25,21 @@ export const StyledSection = styled.div`
     padding: 0;
     width: 100%;
   }
+
+  .mainImage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 355px;
+    img{
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      max-height: 355px;
+      max-width: 700px;
+    }
+  }
 `;
 export const StyledSectionFixed = styled.div`
   width: 50%;
@@ -59,14 +74,37 @@ export const StyledDivGap = styled.div<any>`
   margin: ${({ marginC }: any) => (marginC ? marginC : '1rem 0')};
   align-items: ${({ center }: any) => (center ? 'center' : 'flex-start')};
 
-  .textarea-container{
+  .textarea-container {
     position: relative;
     width: 100%;
 
-    .commentButton{
+    .commentButton {
       position: absolute;
       bottom: 13px;
       right: 11px;
+    }
+  }
+
+  .loading {
+    -webkit-animation: spin 4s linear infinite;
+    -moz-animation: spin 4s linear infinite;
+    animation: spin 4s linear infinite;
+
+    @-moz-keyframes spin {
+      100% {
+        -moz-transform: rotate(360deg);
+      }
+    }
+    @-webkit-keyframes spin {
+      100% {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+    @keyframes spin {
+      100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
     }
   }
 `;
@@ -74,19 +112,34 @@ export const StyledPhotoDetail = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 200px;
   max-height: 400px;
   padding: 2rem;
   gap: 1rem;
   object-fit: center;
-
+  
+  
   background: var(--whiteFixed);
   border-radius: 4px;
   .photoGalery {
     width: 100%;
     img {
+      object-fit: contain;
       width: calc((100% - 2rem) / 3);
+      height: 108px;
       cursor: pointer;
     }
+  }
+  .noImage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 24px;
+    font-weight: 700;
+
+    width: 100%;
+    height: 100%;
   }
 `;
 
@@ -125,4 +178,8 @@ export const StyledRegisterComment = styled.textarea`
 
   overflow-y: hidden;
   resize: none;
+`;
+
+export const StyledForm = styled.form`
+  width: 100%;
 `;
