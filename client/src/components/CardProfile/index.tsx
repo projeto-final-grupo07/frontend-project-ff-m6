@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { StyledTitle } from '../../styles/typography';
 import { ThemeCardProfile } from './style';
@@ -11,13 +12,43 @@ interface CardProfileProps {
 const CardProfile = ({ name, size, userId }: CardProfileProps) => {
   const arrName = name.split(' ');
 
+  const colorName : any = {
+    a: '1',
+    b: '1',
+    c: '2',
+    d: '2',
+    e: '3',
+    f: '3',
+    g: '4',
+    h: '4',
+    i: '5',
+    j: '5',
+    k: '6',
+    l: '6',
+    m: '7',
+    n: '7',
+    o: '8',
+    p: '8',
+    q: '9',
+    r: '9',
+    s: '10',
+    t: '10',
+    u: '11',
+    v: '11',
+    w: '12',
+    x: '12',
+    y: '12',
+    z: '12',
+  };
+
   const initials =
     arrName.length > 1 ? arrName[0][0] + arrName[arrName.length - 1][0] : arrName[0][0];
+    
+  const number = colorName[arrName[0][0].toLowerCase()] || "1";
 
-  const randomColor = 'random' + (1 + Math.floor(Math.random() * 12));
   return (
     <Link to={`/profile/${userId}`}>
-      <ThemeCardProfile color={randomColor} size={size}>
+      <ThemeCardProfile color={'random' + number} size={size}>
         <span className='initial'>{initials}</span>
         <StyledTitle className='nameAuthor' fontSize='body-2-500' tag='p'>
           {name}
