@@ -144,7 +144,13 @@ export const Register = () => {
           Infomações de endereço
         </StyledTitle>
 
-        <Input label='CEP' placeholder='00000.000' registerName='cep' register={register} />
+        <Input
+          type='number'
+          label='CEP'
+          placeholder='00000.000'
+          registerName='cep'
+          register={register}
+        />
         {errors.cep?.message && <p className='error'>{errors.cep.message as ReactNode}</p>}
 
         <div className='flexRow'>
