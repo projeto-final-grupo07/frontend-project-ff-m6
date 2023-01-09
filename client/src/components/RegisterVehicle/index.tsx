@@ -58,8 +58,6 @@ const RegisterVehicle = () => {
       data['imageGallery'] = [...data['imageGallery'], { url: data.img4 }];
       delete data.img4;
     }
-
-    console.log(data);
   };
   return (
     <>

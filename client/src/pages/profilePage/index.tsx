@@ -45,10 +45,7 @@ interface IGalleryImg {
 
 export const Profile = () => {
   const [data, setData] = useState<IUser>();
-
   const { userId } = useParams();
-
-  console.log(userId);
 
   useEffect(() => {
     api
@@ -59,7 +56,6 @@ export const Profile = () => {
       .catch((err) => console.error(err));
   }, []);
 
-  console.log(data);
   return (
     <>
       <Navbar />
@@ -67,7 +63,7 @@ export const Profile = () => {
         <div className='containerProfileTop'>
           <section>
             <div>
-              <CardProfile name={data?.name || 'name user'} size='100px' />
+              <CardProfile name={data?.name || 'User name'} size='100px' />
             </div>
             <StyledTitle className='profileTag' fontSize='body-2-500' tag='p'>
               Anunciante
@@ -103,7 +99,7 @@ export const Profile = () => {
                   active={vehicle.isActive}
                 />
               );
-          }) || <p>funciona krai</p>}
+          }) || <p>Null</p>}
         </section>
       </VehiclesSection>
 
@@ -130,7 +126,7 @@ export const Profile = () => {
                   active={vehicle.isActive}
                 />
               );
-          }) || <p>funciona krai</p>}
+          }) || <p>Null</p>}
         </section>
       </VehiclesSection>
       <Footer />

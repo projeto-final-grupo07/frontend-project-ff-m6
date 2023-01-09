@@ -58,14 +58,13 @@ export const Register = () => {
 
     api
       .post('/user', request)
-      .then((res) => {
+      .then(() => {
         setSuccess(true);
         setLoading(false);
         setError('');
         reset();
       })
       .catch((err) => {
-        console.log(err);
         setSuccess(false);
 
         if (err.message === 'Network Error') {

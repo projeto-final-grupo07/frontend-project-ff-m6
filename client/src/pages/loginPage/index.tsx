@@ -43,7 +43,6 @@ export const Login = () => {
         reset();
       })
       .catch((err) => {
-        console.log(err);
         if (err.message === 'Network Error') {
           setLoading(false);
           setError('Erro no servidor... tente novamente mais tarde.');

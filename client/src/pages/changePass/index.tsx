@@ -29,7 +29,7 @@ export const ChangePassword = () => {
     setLoad(true);
     api
       .post('/resetPassword', data)
-      .then((_) => {
+      .then(() => {
         setLoad(false);
         setNotFound(false);
         router.navigate('/login');
