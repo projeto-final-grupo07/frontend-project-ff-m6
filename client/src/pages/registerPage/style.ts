@@ -89,11 +89,13 @@ export const RegisterContainer = styled.form`
 
     #select1:checked ~ .buyer {
       background-color: var(--brand1);
+      border-color: var(--brand1);
       color: var(--whiteFixed);
     }
 
     #select2:checked ~ .seller {
       background-color: var(--brand1);
+      border-color: var(--brand1);
       color: var(--whiteFixed);
     }
   }

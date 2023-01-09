@@ -88,8 +88,14 @@ export const Login = () => {
             </StyledTitle>
           </Link>
           {error && <p className='error'>{error}</p>}
-          <StyledButton type='submit' buttonStyle='brand'>
-            {loading ? <BiLoaderCircle size={'2em'} className='loading' /> : 'Entrar'}
+          <StyledButton type='submit' buttonStyle={error ? 'alert' : 'brand'}>
+            {loading ? (
+              <BiLoaderCircle size={'2em'} className='loading' />
+            ) : error ? (
+              'Tente Novamente'
+            ) : (
+              'Entrar'
+            )}
           </StyledButton>
 
           <StyledTitle className='flexCenter' fontSize='body-2-400' tag='p'>

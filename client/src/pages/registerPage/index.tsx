@@ -25,7 +25,6 @@ export const Register = () => {
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const test = true;
   const onSubmit = (data: any) => {
     setLoading(true);
     if (data.userType == 0) {
@@ -237,11 +236,13 @@ export const Register = () => {
         )}
 
         {error && <p className='error'>{error}</p>}
-        <StyledButton type='submit' buttonStyle={success ? 'sucess' : 'brand'}>
+        <StyledButton type='submit' buttonStyle={success ? 'sucess' : error ? 'alert' : 'brand'}>
           {success ? (
             'Cadastrado com sucesso!'
-          ) : loading && test ? (
+          ) : loading ? (
             <BiLoaderCircle size={'2em'} className='loading' />
+          ) : error ? (
+            'Tente Novamente'
           ) : (
             'Finalizar cadastro'
           )}
