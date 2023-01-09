@@ -61,12 +61,15 @@ export const NavbarContainer = styled.section`
 
   a {
     color: var(--grey2);
-    border-radius: 4px;
-    padding: 10px;
-    margin: 5px 15px;
-    width: fit-content;
   }
-  a:hover {
+  .navButtons {
+    margin: 5px 10px;
+    padding: 10px;
+    border-radius: 4px;
+    width: fit-content;
+    font-weight: 400;
+  }
+  .navButtons:hover {
     background-color: var(--grey8);
   }
 
@@ -130,12 +133,14 @@ export const NotWide = styled.section`
 
   a {
     color: var(--grey2);
+  }
+  .navButtons {
     margin: 5px 10px;
     padding: 10px;
     border-radius: 4px;
     width: fit-content;
   }
-  a:hover {
+  .navButtons:hover {
     background-color: var(--grey6);
   }
 
