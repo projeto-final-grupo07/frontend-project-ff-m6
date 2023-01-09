@@ -66,7 +66,7 @@ export const Home = () => {
                   time={'01:52:00'}
                 />
               );
-            }) || <p>funciona krai</p>}
+            }) || <p>Null</p>}
           </section>
         </AuctionSection>
 
