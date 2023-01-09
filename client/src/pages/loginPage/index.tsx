@@ -15,8 +15,10 @@ import { BiLoaderCircle } from 'react-icons/bi';
 
 export const Login = () => {
   const formSchema = yup.object().shape({
-    email: yup.string().required('O campo Email é obrigatório'),
-
+    email: yup
+      .string()
+      .required('O campo Email é obrigatório')
+      .email('Necessário ser um Email valido'),
     password: yup.string().required('O campo Senha é obrigatório'),
   });
 
@@ -81,7 +83,7 @@ export const Login = () => {
             <p className='error'>{errors.password.message as ReactNode}</p>
           )}
 
-          <Link to={'/'} className='flexEnd'>
+          <Link to={'/recoverPassword'} className='flexEnd'>
             <StyledTitle fontSize='body-2-400' tag='p'>
               Esqueci minha senha
             </StyledTitle>
