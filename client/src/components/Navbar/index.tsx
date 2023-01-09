@@ -9,6 +9,7 @@ import CardProfile from '../CardProfile';
 import Modal from '../Modal';
 import jwt_decode from 'jwt-decode';
 import api from '../../services';
+import { StyledButton } from '../../styles/button';
 
 function Navbar() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -31,7 +32,7 @@ function Navbar() {
       <NavBackground />
       <NavbarContainer>
         <section>
-          <Logo />
+          <Logo className='logo' />
 
           {isWide ? (
             <div className='isWide'>
@@ -66,6 +67,7 @@ const NavButtons = (): JSX.Element => {
 
   if (token) {
     const decodedToken: IDecodedToken = jwt_decode(token);
+
     useEffect(() => {
       api
         .get(`/user/${decodedToken.id}`)
@@ -80,17 +82,17 @@ const NavButtons = (): JSX.Element => {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <a href='/#car'>
+      <a href='/#car' className='navButtons'>
         <StyledTitle fontSize='button-big-text' tag='h3'>
           Carros
         </StyledTitle>
       </a>
-      <a href='/#moto'>
+      <a href='/#moto' className='navButtons'>
         <StyledTitle fontSize='button-big-text' tag='h3'>
           Motos
         </StyledTitle>
       </a>
-      <a href='/#auction'>
+      <a href='/#auction' className='navButtons'>
         <StyledTitle fontSize='button-big-text' tag='h3'>
           Leião
         </StyledTitle>
@@ -122,27 +124,24 @@ const NavButtons = (): JSX.Element => {
               >
                 ... Conteudo ...
               </Modal>
-              <Modal
-                propsButton={{
-                  buttonStyle: 'link',
-                }}
-                nameModal='Meus Anúncios'
-                nameButtonOpen='Meus Anúncios'
-              >
-                ... Conteudo ...
-              </Modal>
 
-              <Link
-                to={'/'}
-                onClick={() => {
-                  localStorage.clear();
-                  window.location.reload();
-                }}
-              >
-                <StyledTitle fontSize='body-1-400' tag='p'>
-                  Sair
-                </StyledTitle>
-              </Link>
+              <StyledButton type='button' buttonStyle='link'>
+                <Link to={`/profile/${userData.id}`}>Meus Anúncios</Link>
+              </StyledButton>
+
+              <StyledButton type='button' buttonStyle='link'>
+                <Link
+                  to={'/'}
+                  onClick={() => {
+                    localStorage.clear();
+                    window.location.reload();
+                  }}
+                >
+                  <StyledTitle fontSize='body-1-400' tag='p'>
+                    Sair
+                  </StyledTitle>
+                </Link>
+              </StyledButton>
             </div>
           ) : (
             <></>
