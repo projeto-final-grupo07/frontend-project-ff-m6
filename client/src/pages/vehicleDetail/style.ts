@@ -58,6 +58,17 @@ export const StyledDivGap = styled.div<any>`
   flex-direction: ${({ row }: any) => (row ? 'row' : 'column')};
   margin: ${({ marginC }: any) => (marginC ? marginC : '1rem 0')};
   align-items: ${({ center }: any) => (center ? 'center' : 'flex-start')};
+
+  .textarea-container{
+    position: relative;
+    width: 100%;
+
+    .commentButton{
+      position: absolute;
+      bottom: 13px;
+      right: 11px;
+    }
+  }
 `;
 export const StyledPhotoDetail = styled.div`
   display: flex;
@@ -102,4 +113,16 @@ export const SytledDivInfoVehicle = styled.div`
     border-radius: 5px;
     background-color: var(--brand4);
   }
+`;
+
+export const StyledRegisterComment = styled.textarea`
+  width: 100%;
+  min-height: 128px;
+
+  padding: 20px 28px 0px 28px;
+
+  border: 1.5px solid var(--grey7);
+
+  overflow-y: hidden;
+  resize: none;
 `;

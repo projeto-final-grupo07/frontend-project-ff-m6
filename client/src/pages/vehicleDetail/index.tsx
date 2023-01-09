@@ -1,5 +1,5 @@
 import Footer from '../../components/Footer';
-import Navbar from '../../components/Navbar';
+import Navbar, { IDecodedToken } from '../../components/Navbar';
 import { StyledButton } from '../../styles/button';
 import { useParams } from 'react-router-dom';
 import {
@@ -10,16 +10,37 @@ import {
   StyledBox,
   StyledDivGap,
   SytledDivInfoVehicle,
+  StyledRegisterComment,
 } from './style';
 import img from '../../assets/images/unsplash_3ZUsNJhi_Ik.png';
 import { StyledTitle } from '../../styles/typography';
 import CardProfile from '../../components/CardProfile';
 import CommentCard from '../../components/CommentCard';
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import jwt_decode from 'jwt-decode';
+import api from '../../services';
 
 export const VehicleDetail = () => {
   const price = 192900;
   const { id } = useParams();
+
+  const token = localStorage.getItem('token');
+  const [userData, setUserData] = useState({ name: 'User Name', id: '123' });
+
+  if (token) {
+    const decodedToken: IDecodedToken = jwt_decode(token);
+    useEffect(() => {
+      api
+        .get(`/user/${decodedToken.id}`)
+        .then((resp) => {
+          console.log(resp.data);
+          setUserData(resp.data);
+        })
+        .catch((err) => console.error(err));
+    }, []);
+  }
+
   return (
     <StyledVehicleDetail>
       <Navbar />
@@ -74,6 +95,21 @@ export const VehicleDetail = () => {
               <CommentCard />
               <CommentCard />
               <CommentCard />
+            </StyledDivGap>
+          </StyledBox>
+          <StyledBox>
+            <StyledDivGap>
+              <CardProfile name={userData.name} userId={userData.id} />
+              <div className='textarea-container'>
+                <StyledRegisterComment
+                  rows={2}
+                  maxLength={250}
+                  placeholder='Carro muito confortável, foi uma ótima experiência de compra...'
+                ></StyledRegisterComment>
+                <StyledButton className='commentButton' buttonStyle='brand' buttonSize='medium'>
+                  Comentar
+                </StyledButton>
+              </div>
             </StyledDivGap>
           </StyledBox>
         </StyledSection>
