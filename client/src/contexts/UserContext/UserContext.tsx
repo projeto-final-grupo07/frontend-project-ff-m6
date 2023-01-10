@@ -2,7 +2,6 @@ import { createContext, ReactNode, useState } from 'react';
 import { IDecodedToken } from '../../components/Navbar';
 import jwt_decode from 'jwt-decode';
 import api from '../../services';
-import { router } from '../../routes';
 
 export interface IUser {
   id: string;
