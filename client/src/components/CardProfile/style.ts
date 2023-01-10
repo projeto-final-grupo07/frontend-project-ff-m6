@@ -3,7 +3,7 @@ import styled from 'styled-components';
 interface ColorRandomProps {
   color: string;
   size?: string;
-  direction?: boolean;
+  direction?: string;
 }
 
 export const ThemeCardProfile = styled.div<ColorRandomProps>`
@@ -12,7 +12,7 @@ export const ThemeCardProfile = styled.div<ColorRandomProps>`
   margin-top: 10px;
   margin-bottom: 10px;
   font-size: 14px;
-  flex-direction: ${({ direction }) => (direction ? 'column' : 'row')};
+  flex-direction: ${({ direction }) => (direction === 'true' ? 'column' : 'row')};
   word-break: normal;
 
   .initial {
@@ -20,8 +20,8 @@ export const ThemeCardProfile = styled.div<ColorRandomProps>`
     align-items: center;
     justify-content: center;
 
-    width: ${({ size, direction }) => (direction ? '104px' : size || '32px')};
-    height: ${({ size, direction }) => (direction ? '104px' : size || '32px')};
+    width: ${({ size, direction }) => (direction === 'true' ? '104px' : size || '32px')};
+    height: ${({ size, direction }) => (direction === 'true' ? '104px' : size || '32px')};
 
     background-color: var(--${({ color }) => color});
 
@@ -33,7 +33,7 @@ export const ThemeCardProfile = styled.div<ColorRandomProps>`
 
     color: var(--brand4);
 
-    font-size: ${({ direction }) => (direction ? '36px' : '0.875rem')};
+    font-size: ${({ direction }) => (direction === 'true' ? '36px' : '0.875rem')};
     font-weight: 500;
   }
 `;

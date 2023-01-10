@@ -15,6 +15,8 @@ export const ProfileTop = styled.section`
 
     margin-top: 0px;
     margin-bottom: 0px;
+
+    font-size: 130%;
   }
 
   .nameAuthor {
