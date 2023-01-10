@@ -29,6 +29,8 @@ import { UserContext } from '../../contexts/UserContext/UserContext';
 import { useContext } from 'react';
 import { data } from '../../fakeData/data';
 import { Grid } from '@mui/material';
+import StyledModal from '../../components/StyledModal';
+import ImgModal from '../../components/StyledModal/ImgModal';
 
 export interface IVehicle {
   id: string;
