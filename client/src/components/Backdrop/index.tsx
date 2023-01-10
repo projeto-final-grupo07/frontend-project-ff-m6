@@ -9,7 +9,7 @@ const StyledBackdrop = () => {
   return (
     <div>
       <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        sx={{ color: 'var(--whiteFixed)', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={globalLoading}
       >
         <CircularProgress color='inherit' />
