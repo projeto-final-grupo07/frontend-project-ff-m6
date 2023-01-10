@@ -11,6 +11,7 @@ export const ProfileTop = styled.section`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    flex-wrap: nowrap;
 
     margin-top: 0px;
     margin-bottom: 0px;

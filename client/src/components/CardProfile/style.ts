@@ -13,6 +13,7 @@ export const ThemeCardProfile = styled.div<ColorRandomProps>`
   margin-bottom: 10px;
   font-size: 14px;
   flex-direction: ${({ direction }) => (direction === 'true' ? 'column' : 'row')};
+  word-break: normal;
 
   .initial {
     display: flex;
@@ -27,7 +28,7 @@ export const ThemeCardProfile = styled.div<ColorRandomProps>`
     padding: 16px 7.5px;
     margin-right: 8px;
 
-    margin-bottom: ${({ direction }) => (direction === 'true' ? '26px' : '0')};
+    margin-bottom: ${({ direction }) => (direction ? '28px' : '0')};
     border-radius: 100%;
 
     color: var(--brand4);
