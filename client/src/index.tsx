@@ -7,6 +7,7 @@ import Providers from './contexts/Providers';
 import { ToastContainer } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
+import StyledBackdrop from './components/Backdrop';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
@@ -15,6 +16,7 @@ root.render(
     <Providers>
       <RouterProvider router={router} />
       <ToastContainer />
+      <StyledBackdrop />
     </Providers>
   </React.StrictMode>,
 );
