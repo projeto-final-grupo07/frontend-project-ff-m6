@@ -63,7 +63,7 @@ export const Profile = () => {
         <div className='containerProfileTop'>
           <section>
             <div>
-              <CardProfile name={data?.name || 'User name'} size='100px' />
+              <CardProfile direction="true" name={data?.name || 'User name'} size='100px' />
             </div>
             <StyledTitle className='profileTag' fontSize='body-2-500' tag='p'>
               Anunciante

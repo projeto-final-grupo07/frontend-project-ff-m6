@@ -6,10 +6,10 @@ interface CardProfileProps {
   name: string;
   size?: string;
   userId?: string;
-  direction?: boolean;
+  direction?: string;
 }
 
-const CardProfile = ({ direction = false, name, size, userId }: CardProfileProps) => {
+const CardProfile = ({ direction = 'false', name, size, userId }: CardProfileProps) => {
   const arrName = name.split(' ');
 
   const colorName: any = {
@@ -53,7 +53,7 @@ const CardProfile = ({ direction = false, name, size, userId }: CardProfileProps
 
         <StyledTitle
           className='nameAuthor'
-          fontSize={direction ? 'Heading-6-600' : 'body-2-500'}
+          fontSize={direction === 'true' ? 'Heading-6-600' : 'body-2-500'}
           tag='p'
         >
           {name}
