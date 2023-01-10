@@ -7,7 +7,7 @@ import { DefinedArraySchema } from 'yup/lib/array';
 interface ICommentCard {
   name: string;
   comment: string;
-  daysOfComment: number
+  daysOfComment: number;
 }
 
 
