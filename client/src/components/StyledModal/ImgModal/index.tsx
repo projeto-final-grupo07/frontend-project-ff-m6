@@ -14,6 +14,8 @@ const style = {
   bgcolor: 'background.paper',
   boxShadow: 24,
   p: 4,
+  borderRadius: '5px',
+
   '& .content-box': {
     display: 'flex',
     flexDirection: 'column',
@@ -44,14 +46,15 @@ export interface ICreateModalProps {
   children: React.ReactNode;
   altName?: string;
   src: string;
+  className: string;
 }
-function ImgModal({ children, nameModal, altName, src }: ICreateModalProps) {
+function ImgModal({ children, nameModal, altName, src, className }: ICreateModalProps) {
   const [open, setOpen] = React.useState(false);
   const handleClose = () => setOpen(false);
 
   return (
     <>
-      <img alt={altName} src={src} onClick={() => setOpen(!open)} />
+      <img alt={altName} src={src} onClick={() => setOpen(!open)} className={className} />
 
       <Modal
         open={open}
