@@ -29,6 +29,7 @@ import { UserContext } from '../../contexts/UserContext/UserContext';
 import { useContext } from 'react';
 import { Grid } from '@mui/material';
 import ImgModal from '../../components/StyledModal/ImgModal';
+import StyledModal from '../../components/StyledModal';
 
 export interface IVehicle {
   id: string;
@@ -192,9 +193,16 @@ export const VehicleDetail = () => {
                 </StyledTitle>
               </SytledDivInfoVehicle>
             </StyledDivGap>
-            <StyledButton buttonStyle='brand' buttonSize='medium'>
-              Comprar
-            </StyledButton>
+            <StyledModal
+              propsButton={{
+                buttonStyle: 'brand',
+                buttonSize: 'medium',
+              }}
+              nameModal='Comprar'
+              nameButtonOpen='Comprar'
+            >
+              Chama no zap
+            </StyledModal>
           </StyledBox>
           <StyledBox>
             <StyledDivGap>
