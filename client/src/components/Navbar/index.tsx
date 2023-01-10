@@ -10,6 +10,7 @@ import jwt_decode from 'jwt-decode';
 import api from '../../services';
 import { StyledButton } from '../../styles/button';
 import StyledModal from '../StyledModal';
+import { router } from '../../routes';
 
 function Navbar() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -64,7 +65,10 @@ export interface IDecodedToken {
 const NavButtons = (): JSX.Element => {
   const token = localStorage.getItem('token');
   const [userData, setUserData] = useState({ name: 'User Name', id: '123' });
-
+  console.log(window.location.href.split(''));
+  // console.log(if(window.location.href.split('').pop()){
+  //   console.log('dasd')
+  // });
   if (token) {
     const decodedToken: IDecodedToken = jwt_decode(token);
 
@@ -147,6 +151,7 @@ const NavButtons = (): JSX.Element => {
                   to={'/'}
                   onClick={() => {
                     localStorage.clear();
+                    router.navigate('/');
                     window.location.reload();
                   }}
                 >
