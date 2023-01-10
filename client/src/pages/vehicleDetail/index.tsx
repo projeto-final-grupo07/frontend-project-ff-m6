@@ -29,7 +29,6 @@ import { UserContext } from '../../contexts/UserContext/UserContext';
 import { useContext } from 'react';
 import { data } from '../../fakeData/data';
 import { Grid } from '@mui/material';
-import StyledModal from '../../components/StyledModal';
 import ImgModal from '../../components/StyledModal/ImgModal';
 
 export interface IVehicle {
@@ -254,15 +253,30 @@ export const VehicleDetail = () => {
               spacing={1}
               columns={12}
               className='gridGallery'
-    
             >
               {vehicleData?.GalleryImgs.length === 0 ? (
                 <StyledBox className='noImage'>Sem mais imagens</StyledBox>
               ) : (
                 vehicleData?.GalleryImgs.map((image) => {
                   return (
-                    <Grid key={image?.id} item  xs={4} sm={4} md={4} lg={4}>
-                      <img className='imgGallery' key={image?.id} src={image?.url} alt={'Imagem de um veículo'} />
+                    <Grid
+                      key={image?.id}
+                      item
+                      xs={4}
+                      sm={4}
+                      md={4}
+                      lg={4}
+                      sx={{ cursor: 'pointer' }}
+                    >
+                      <ImgModal
+                        key={image?.id}
+                        src={image?.url}
+                        altName={'Imagem de um veículo'}
+                        nameModal='Imagem do veículo'
+                        className='imgGallery'
+                      >
+                        <img src={image?.url} alt={'Imagem de um veículo'} className='imgGallery' />
+                      </ImgModal>
                     </Grid>
                   );
                 })
