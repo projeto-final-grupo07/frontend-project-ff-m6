@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import api from '../../services';
 import ProductCard from '../ProductCard';
 import { ThemeCarList } from './style';
+import { UserContext } from '../../contexts/UserContext/UserContext';
 
 interface IVehicleListProps {
   typeVehicle: boolean;
@@ -41,13 +42,16 @@ interface IGalleryImg {
 }
 
 const VehicleList = ({ typeVehicle }: IVehicleListProps) => {
+  const { setGlobalLoading } = useContext(UserContext);
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
 
   useEffect(() => {
+    setGlobalLoading(true);
     api
       .get('/vehicle')
       .then((resp) => setVehicles(resp.data))
-      .catch((err) => console.error(err));
+      .catch((err) => console.error(err))
+      .finally(() => setGlobalLoading(false));
   }, []);
 
   return (
