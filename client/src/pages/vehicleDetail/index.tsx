@@ -28,6 +28,7 @@ import { router } from '../../routes';
 import { UserContext } from '../../contexts/UserContext/UserContext';
 import { useContext } from 'react';
 import { Grid } from '@mui/material';
+import ImgModal from '../../components/StyledModal/ImgModal';
 
 export interface IVehicle {
   id: string;
@@ -269,13 +270,24 @@ export const VehicleDetail = () => {
               ) : (
                 vehicleData?.GalleryImgs.map((image) => {
                   return (
-                    <Grid key={image?.id} item xs={4} sm={4} md={4} lg={4}>
-                      <img
-                        className='imgGallery'
+                    <Grid
+                      key={image?.id}
+                      item
+                      xs={4}
+                      sm={4}
+                      md={4}
+                      lg={4}
+                      sx={{ cursor: 'pointer' }}
+                    >
+                      <ImgModal
                         key={image?.id}
                         src={image?.url}
-                        alt={'Imagem de um veículo'}
-                      />
+                        altName={'Imagem de um veículo'}
+                        nameModal='Imagem do veículo'
+                        className='imgGallery'
+                      >
+                        <img src={image?.url} alt={'Imagem de um veículo'} className='imgGallery' />
+                      </ImgModal>
                     </Grid>
                   );
                 })
