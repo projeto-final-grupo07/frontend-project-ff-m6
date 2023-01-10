@@ -27,7 +27,6 @@ import { toast } from 'react-toastify';
 import { router } from '../../routes';
 import { UserContext } from '../../contexts/UserContext/UserContext';
 import { useContext } from 'react';
-import { data } from '../../fakeData/data';
 import { Grid } from '@mui/material';
 import ImgModal from '../../components/StyledModal/ImgModal';
 
@@ -45,6 +44,7 @@ export interface IVehicle {
   user_id: string;
   GalleryImgs: IGalleryImg[];
   Message: IMessage[];
+  user: IUser;
 }
 
 export interface IGalleryImg {
@@ -64,6 +64,7 @@ export interface IMessage {
 
 export interface IUser {
   name: string;
+  describe: string;
 }
 
 export interface IUserData {
@@ -86,6 +87,18 @@ export const VehicleDetail = () => {
   if (token) {
     useEffect(() => {
       loadUser();
+      api
+        .get(`/vehicle/${id}`)
+        .then((res) => {
+          setVehicleData(res.data);
+
+          setCommentData(res.data.Message);
+          setPrice(+res.data.price);
+        })
+        .catch((err) => console.log(err));
+    }, [flagComment]);
+  } else {
+    useEffect(() => {
       api
         .get(`/vehicle/${id}`)
         .then((res) => {
@@ -144,13 +157,7 @@ export const VehicleDetail = () => {
     const date1: any = new Date();
     const date2: any = new Date(commentDate);
 
-    const diff = date1 - date2;
-    console.log(diff);
-
     const daysComment = (date1 - date2) / 86400000;
-
-    console.log(daysComment);
-
     return Math.trunc(daysComment);
   }
 
@@ -218,7 +225,11 @@ export const VehicleDetail = () => {
           </StyledBox>
           <StyledBox>
             <StyledDivGap>
-              <CardProfile name={userData?.name || 'Name'} userId={userData?.id} />
+              {token ? (
+                <CardProfile name={userData?.name || 'Name'} userId={userData?.id} />
+              ) : (
+                <></>
+              )}
               <StyledForm
                 onSubmit={handleSubmit((evt) => {
                   return onSubmitFunction(evt);
@@ -234,7 +245,7 @@ export const VehicleDetail = () => {
                   <StyledButton
                     type='submit'
                     className='commentButton'
-                    buttonStyle='brand'
+                    buttonStyle={token ? 'brand' : 'disabled'}
                     buttonSize='medium'
                   >
                     {loading ? <BiLoaderCircle size={'2em'} className='loading' /> : 'Comentar'}
@@ -283,11 +294,11 @@ export const VehicleDetail = () => {
               )}
             </Grid>
           </StyledPhotoDetail>
-          <StyledBox center flex columnFlex>
+          <StyledBox center flex columnFlex paddingC='30px'>
             <StyledDivGap center>
-              <CardProfile direction='true' name={userData?.name || 'undefined'} />
+              <CardProfile direction='true' name={vehicleData?.user.name || 'undefined'} />
               <StyledTitle fontSize='body-1-400' tag='p' fontColor='var(--grey2)'>
-                {userData?.describe}
+                {vehicleData?.user.describe}
               </StyledTitle>
             </StyledDivGap>
             <Link to={`/profile/${vehicleData?.user_id}`}>

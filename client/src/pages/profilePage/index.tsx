@@ -63,15 +63,15 @@ export const Profile = () => {
         <div className='containerProfileTop'>
           <section>
             <div>
-              <CardProfile direction="true" name={data?.name || 'User name'} size='100px' />
+              <CardProfile name={data?.name || 'Not Found'} size='100px' direction={'true'} />
             </div>
             <StyledTitle className='profileTag' fontSize='body-2-500' tag='p'>
-              Anunciante
+              {data?.typeAccount ? 'Anunciante' : 'Comprador'}
             </StyledTitle>
           </section>
 
           <StyledTitle fontSize='body-1-400' tag='p'>
-            {fakeUser.describe}
+            {data?.describe}
           </StyledTitle>
         </div>
       </ProfileTop>
