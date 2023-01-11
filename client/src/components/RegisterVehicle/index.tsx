@@ -1,6 +1,5 @@
 import { ReactNode, useContext, useState } from 'react';
 import { StyledButton } from '../../styles/button';
-import ImageGallery from '../ImageGallery';
 import StyledModal from '../StyledModal';
 import { StyledForm } from './style';
 import { useForm } from 'react-hook-form';
@@ -8,23 +7,23 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { formSchema } from './schema';
 import api from '../../services';
 import { UserContext } from '../../contexts/UserContext/UserContext';
+import ImageGallery from '../ImageGallery';
 
 interface IPropsVehicle {
   findUser: () => void;
 }
-const RegisterVehicle = ({ findUser }: IPropsVehicle) => {
+const RegisterVehicle = () => {
   const { loadUser } = useContext(UserContext);
-  const [imageGallery, setImageGallery] = useState(['1']);
+  const [GalleryImg, setImageGallery] = useState(['1']);
+
   const [typeVehicles, setTypeVehicles] = useState(false);
   const [typeOffer, setTypeOffer] = useState(true);
   const [closeModal, setCloseModal] = useState(false);
 
-  const token = localStorage.getItem('token');
-
   const eventClick = () => {
-    const newElem = imageGallery.length + 1;
+    const newElem = GalleryImg.length + 1;
     if (newElem <= 4) {
-      setImageGallery([...imageGallery, newElem.toString()]);
+      setImageGallery([...GalleryImg, newElem.toString()]);
     }
   };
 
@@ -51,19 +50,19 @@ const RegisterVehicle = ({ findUser }: IPropsVehicle) => {
     data['typeOffer'] = typeOffer;
     data['typeVehicles'] = typeVehicles;
 
-    data['imageGallery'] = [{ url: data.img1 }];
+    data['GalleryImg'] = [{ url: data.img1 }];
     delete data.img1;
 
     if (data.img2 !== undefined) {
-      data['imageGallery'] = [...data['imageGallery'], { url: data.img2 }];
+      data['GalleryImg'] = [...data['GalleryImg'], { url: data.img2 }];
       delete data.img2;
     }
     if (data.img3 !== undefined) {
-      data['imageGallery'] = [...data['imageGallery'], { url: data.img3 }];
+      data['GalleryImg'] = [...data['GalleryImg'], { url: data.img3 }];
       delete data.img3;
     }
     if (data.img4 !== undefined) {
-      data['imageGallery'] = [...data['imageGallery'], { url: data.img4 }];
+      data['GalleryImg'] = [...data['GalleryImg'], { url: data.img4 }];
       delete data.img4;
     }
 
@@ -72,7 +71,7 @@ const RegisterVehicle = ({ findUser }: IPropsVehicle) => {
         setCloseModal(true);
         api.defaults.headers.authorization = `Bearer ${token}`;
         await api.post('/vehicle/', data);
-        findUser();
+        // findUser();
         reset();
       } catch (error) {
         console.log(error);
@@ -195,7 +194,7 @@ const RegisterVehicle = ({ findUser }: IPropsVehicle) => {
             )}
 
             <ul>
-              {imageGallery.map((img) => (
+              {GalleryImg.map((img) => (
                 <li key={img}>
                   <ImageGallery errors={errors} indexImage={img} register={register} />
                 </li>
