@@ -141,7 +141,15 @@ const NavButtons = (): JSX.Element => {
 
               {userData.typeAccount ? (
                 <StyledButton type='button' buttonStyle='link'>
-                  <Link to={`/profile/${userData.id}`}>Meus Anúncios</Link>
+                  <Link
+                    to={`/profile/${userData.id}`}
+                    onClick={() => {
+                      router.navigate(`/profile/${userData.id}`);
+                      window.location.reload();
+                    }}
+                  >
+                    Meus Anúncios
+                  </Link>
                 </StyledButton>
               ) : (
                 <></>
