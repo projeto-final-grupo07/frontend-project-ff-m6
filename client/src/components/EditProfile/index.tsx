@@ -31,7 +31,6 @@ const EditProfile = () => {
   const onSubmit = async (data: any) => {
     const token = localStorage.getItem('token');
     setLoading(true);
-    console.log(userData);
     const request = {
       name: data.name,
       email: data.email,
@@ -39,7 +38,7 @@ const EditProfile = () => {
       phone: data.phone,
       describe: data.describe,
     };
-    console.log(userData?.birthDate);
+
     api.defaults.headers.authorization = `Bearer ${token}`;
     await api
       .patch('/user', request)
@@ -63,7 +62,17 @@ const EditProfile = () => {
         }
       });
   };
+  function formatDate(date: string): string {
+    const d = new Date(date);
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
 
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+  }
   return (
     <StyledModal
       propsButton={{
@@ -116,9 +125,9 @@ const EditProfile = () => {
           type='date'
           label='Data de nascimento'
           placeholder='00/00/00'
-          registerName='birthdate'
+          registerName='birthDate'
           register={register}
-          defaultValue={'2010-11-11'}
+          defaultValue={formatDate(userData?.birthDate)}
         />
         {errors.birthdate?.message && (
           <p className='error'>{errors.birthdate.message as ReactNode}</p>
