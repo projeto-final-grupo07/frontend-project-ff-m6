@@ -8,6 +8,7 @@ import { fakeUser } from '../../fakeData';
 import { useEffect, useState } from 'react';
 import api from '../../services';
 import { useParams } from 'react-router-dom';
+import RegisterVehicle from '../../components/RegisterVehicle';
 
 interface IVehicle {
   id: string;
@@ -47,13 +48,16 @@ export const Profile = () => {
   const [data, setData] = useState<IUser>();
   const { userId } = useParams();
 
-  useEffect(() => {
+  const findUser = () => {
     api
       .get(`/user/${userId}`)
       .then((resp) => {
         setData(resp.data);
       })
       .catch((err) => console.error(err));
+  };
+  useEffect(() => {
+    findUser();
   }, []);
 
   return (
@@ -63,7 +67,7 @@ export const Profile = () => {
         <div className='containerProfileTop'>
           <section>
             <div>
-              <CardProfile direction="true" name={data?.name || 'User name'} size='100px' />
+              <CardProfile direction='true' name={data?.name || 'User name'} size='100px' />
             </div>
             <StyledTitle className='profileTag' fontSize='body-2-500' tag='p'>
               Anunciante
@@ -73,6 +77,7 @@ export const Profile = () => {
           <StyledTitle fontSize='body-1-400' tag='p'>
             {fakeUser.describe}
           </StyledTitle>
+          <RegisterVehicle findUser={findUser} />
         </div>
       </ProfileTop>
 

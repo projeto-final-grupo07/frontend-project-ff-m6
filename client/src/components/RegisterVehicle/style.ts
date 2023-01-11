@@ -6,6 +6,8 @@ export const StyledForm = styled.form`
   margin: 0 auto;
   gap: 1rem;
   width: 100%;
+  max-height: 600px;
+  overflow-y: scroll;
 
   .errorValue {
     color: red;

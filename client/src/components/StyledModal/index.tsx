@@ -10,10 +10,10 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: { sm: '90%', md: '30%' },
   bgcolor: 'background.paper',
   boxShadow: 24,
-  p: 4,
+  p: 1,
   '& .content-box': {
     display: 'flex',
     flexDirection: 'column',
@@ -46,6 +46,7 @@ export interface ICreateModalProps {
   nameButtonOpen: string;
   propsButton: iStyledButtonProps;
   closeButton?: iStyledButtonProps;
+  closeModal?: boolean;
 }
 function StyledModal({
   children,
@@ -53,9 +54,17 @@ function StyledModal({
   nameButtonOpen,
   propsButton,
   closeButton,
+  closeModal,
 }: ICreateModalProps) {
   const [open, setOpen] = React.useState(false);
   const handleClose = () => setOpen(false);
+
+  if (closeModal) {
+    // console.log(closeModal);
+    if (open) {
+      setOpen(false);
+    }
+  }
 
   return (
     <div>
