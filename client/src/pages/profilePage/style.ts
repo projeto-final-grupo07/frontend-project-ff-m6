@@ -40,7 +40,7 @@ export const ProfileTop = styled.section`
     width: 90%;
     max-width: 1240px;
     padding: 40px 29px;
-    gap: 10px;
+    gap: 2rem;
     border-radius: 4px;
 
     section {
