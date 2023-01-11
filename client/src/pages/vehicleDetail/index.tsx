@@ -169,7 +169,7 @@ export const VehicleDetail = () => {
       <div className='mainContainer'>
         <StyledSection>
           <StyledBox className='mainImage'>
-            <img src={vehicleData?.coverImg} alt='x' />
+            <img src={vehicleData?.coverImg} alt='Vehicle' />
           </StyledBox>
           <StyledBox>
             <StyledDivGap>
