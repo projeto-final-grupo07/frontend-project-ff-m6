@@ -19,13 +19,12 @@ const RegisterVehicle = ({ findUser }: IPropsVehicle) => {
   const [typeOffer, setTypeOffer] = useState(true);
   const [closeModal, setCloseModal] = useState(false);
 
-
   const token = localStorage.getItem('token');
 
   const eventClick = () => {
-    const newElem = GalleryImg.length + 1;
+    const newElem = imageGallery.length + 1;
     if (newElem <= 4) {
-      setGalleryImg([...GalleryImg, newElem.toString()]);
+      setImageGallery([...imageGallery, newElem.toString()]);
     }
   };
 
@@ -48,23 +47,23 @@ const RegisterVehicle = ({ findUser }: IPropsVehicle) => {
 
   const onSubmitFunction = async (data: any) => {
     const token = localStorage.getItem('token');
-    
+
     data['typeOffer'] = typeOffer;
     data['typeVehicles'] = typeVehicles;
 
-    data['GalleryImg'] = [{ url: data.img1 }];
+    data['imageGallery'] = [{ url: data.img1 }];
     delete data.img1;
 
     if (data.img2 !== undefined) {
-      data['GalleryImg'] = [...data['GalleryImg'], { url: data.img2 }];
+      data['imageGallery'] = [...data['imageGallery'], { url: data.img2 }];
       delete data.img2;
     }
     if (data.img3 !== undefined) {
-      data['GalleryImg'] = [...data['GalleryImg'], { url: data.img3 }];
+      data['imageGallery'] = [...data['imageGallery'], { url: data.img3 }];
       delete data.img3;
     }
     if (data.img4 !== undefined) {
-      data['GalleryImg'] = [...data['GalleryImg'], { url: data.img4 }];
+      data['imageGallery'] = [...data['imageGallery'], { url: data.img4 }];
       delete data.img4;
     }
 
@@ -196,7 +195,7 @@ const RegisterVehicle = ({ findUser }: IPropsVehicle) => {
             )}
 
             <ul>
-              {GalleryImg.map((img) => (
+              {imageGallery.map((img) => (
                 <li key={img}>
                   <ImageGallery errors={errors} indexImage={img} register={register} />
                 </li>

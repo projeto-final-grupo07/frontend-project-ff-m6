@@ -4,11 +4,12 @@ import Navbar, { IDecodedToken } from '../../components/Navbar';
 import ProductCard from '../../components/ProductCard';
 import { StyledTitle } from '../../styles/typography';
 import { ProfileTop, VehiclesSection } from './style';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import api from '../../services';
 import { useParams } from 'react-router-dom';
 import RegisterVehicle from '../../components/RegisterVehicle';
 import jwt_decode from 'jwt-decode';
+import { UserContext } from '../../contexts/UserContext/UserContext';
 
 interface IVehicle {
   id: string;
@@ -53,22 +54,9 @@ export const Profile = () => {
   const [data, setData] = useState<IUser>();
   const [owner, setOwner] = useState(false);
 
-  const token = localStorage.getItem('token');
+  const { token } = useContext(UserContext);
 
   const findUser = () => {
-  if (token) {
-    useEffect(() => {
-      const decodedToken: IDecodedToken = jwt_decode(token);
-      if (userId === decodedToken.id) {
-        if (data?.typeAccount === true) {
-          setOwner(true);
-        } else {
-          setOwner(false);
-        }
-      }
-    });
-  }
-  useEffect(() => {
     api
       .get(`/user/${userId}`)
       .then((resp) => {
@@ -77,9 +65,19 @@ export const Profile = () => {
       .catch((err) => console.error(err));
   };
   useEffect(() => {
+    if (token) {
+      const decodedToken: IDecodedToken = jwt_decode(token);
+      if (userId === decodedToken.id) {
+        if (data?.typeAccount === true) {
+          setOwner(true);
+        } else {
+          setOwner(false);
+        }
+      }
+    }
+
     findUser();
   }, []);
-
   return (
     <>
       <Navbar />

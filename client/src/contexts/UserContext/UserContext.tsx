@@ -59,6 +59,7 @@ interface IUserContext {
   userData: IUser | undefined;
   globalLoading: boolean;
   setGlobalLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  token: string;
 }
 
 interface IUserProviderProps {
@@ -70,7 +71,11 @@ export const UserContext = createContext({} as IUserContext);
 export const UserProviders = ({ children }: IUserProviderProps) => {
   const [userData, setUserData] = useState<IUser>();
   const [globalLoading, setGlobalLoading] = useState(false);
-  const token = localStorage.getItem('token') || '';
+  const [token, setToken] = useState('');
+
+  if (token) {
+    setToken(localStorage.getItem('token') || '');
+  }
 
   const loadUser = () => {
     const decodedToken: IDecodedToken = jwt_decode(token);
@@ -85,7 +90,7 @@ export const UserProviders = ({ children }: IUserProviderProps) => {
   };
 
   return (
-    <UserContext.Provider value={{ loadUser, userData, globalLoading, setGlobalLoading }}>
+    <UserContext.Provider value={{ loadUser, userData, globalLoading, setGlobalLoading, token }}>
       {children}
     </UserContext.Provider>
   );
