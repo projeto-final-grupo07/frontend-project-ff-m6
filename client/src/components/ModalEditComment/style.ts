@@ -19,3 +19,9 @@ export const StyledEditComment = styled.textarea`
   overflow-y: hidden;
   resize: none;
 `;
+
+export const StyledTitleModal = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+`;

@@ -5,11 +5,12 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import api from '../../services';
-import { StyledEditComment, StyledFormEditComment } from './style';
+import { StyledEditComment, StyledFormEditComment, StyledTitleModal } from './style';
 import { StyledButton } from '../../styles/button';
 import { notifyError, notifySuccess } from '../../helpers/toasts';
 import { useContext } from 'react';
 import { CommentContext } from '../../contexts/CommentContext/CommentContext';
+import { StyledTitle } from '../../styles/typography';
 
 const style = {
   position: 'absolute',
@@ -18,10 +19,13 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 400,
   bgcolor: 'background.paper',
-  border: '2px solid #000',
+  //   border: '2px solid #000',
   boxShadow: 24,
-  p: 4,
+  p: 2,
   height: 230,
+  display: 'flex',
+  gap: 1,
+  flexDirection: 'column',
 };
 
 interface IModalProps {
@@ -67,12 +71,17 @@ const ModalEditComment = () => {
         aria-describedby='modal-modal-description'
       >
         <Box sx={style}>
+          <StyledTitleModal >
+            <StyledTitle fontSize='body-2-500' tag='h5'>
+              EDITE SEU COMENTÁRIO
+            </StyledTitle>
+          </StyledTitleModal>
           <StyledFormEditComment onSubmit={handleSubmit(editComment)} {...register('message')}>
             <StyledEditComment
               onChange={(evt) => handleChange(evt)}
               value={commentTextClicked}
             ></StyledEditComment>
-            <StyledButton type='submit' buttonStyle='brand'>
+            <StyledButton type='submit' buttonStyle='brand' buttonSize='medium'>
               Editar comentário
             </StyledButton>
           </StyledFormEditComment>

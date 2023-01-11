@@ -12,6 +12,7 @@ export interface IVehicle {
   user_id: string;
   GalleryImgs: IGalleryImg[];
   Message: IMessage[];
+  user: IUser;
 }
 
 export interface IGalleryImg {
@@ -31,6 +32,7 @@ export interface IMessage {
 
 export interface IUser {
   name: string;
+  describe: string;
 }
 
 export interface IUserData {

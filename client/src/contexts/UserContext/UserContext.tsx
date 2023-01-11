@@ -57,28 +57,36 @@ export interface IMessage {
 interface IUserContext {
   loadUser(): void;
   userData: IUser | undefined;
+  globalLoading: boolean;
+  setGlobalLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface IUserProviderProps {
   children: ReactNode;
 }
 
-export const UserContext = createContext<IUserContext>({} as IUserContext);
+export const UserContext = createContext({} as IUserContext);
 
 export const UserProviders = ({ children }: IUserProviderProps) => {
   const [userData, setUserData] = useState<IUser>();
-
+  const [globalLoading, setGlobalLoading] = useState(false);
   const token = localStorage.getItem('token') || '';
 
   const loadUser = () => {
     const decodedToken: IDecodedToken = jwt_decode(token);
+    setGlobalLoading(true);
     api
       .get(`/user/${decodedToken.id}`)
       .then((resp) => {
         setUserData(resp.data);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => console.error(err))
+      .finally(() => setGlobalLoading(false));
   };
 
-  return <UserContext.Provider value={{ loadUser, userData }}>{children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider value={{ loadUser, userData, globalLoading, setGlobalLoading }}>
+      {children}
+    </UserContext.Provider>
+  );
 };

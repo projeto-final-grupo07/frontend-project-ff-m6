@@ -18,6 +18,18 @@ export default createGlobalStyle`
 	img{
 		max-width: 100%;
 	}
+
+	::-webkit-scrollbar {
+    height: 30px;
+  	}
+  	::-webkit-scrollbar-thumb {
+    border: 5px solid var(--grey8);
+    border-radius: 10px;
+    background: var(--grey2);
+  	}
+  	::-webkit-scrollbar-thumb:hover {
+    background: var(--grey1);
+  	}
   }
   :root {
 	--brand1: #4529E6;

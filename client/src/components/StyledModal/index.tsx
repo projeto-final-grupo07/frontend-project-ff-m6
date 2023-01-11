@@ -13,6 +13,7 @@ const style = {
   width: 400,
   bgcolor: 'background.paper',
   boxShadow: 24,
+  borderRadius: '5px',
   p: 4,
   '& .content-box': {
     display: 'flex',
@@ -72,6 +73,7 @@ function StyledModal({
         onClose={handleClose}
         aria-labelledby='modal-modal-title'
         aria-describedby='modal-modal-description'
+        disableScrollLock={true}
       >
         <Box sx={style}>
           <div className='moda-header'>

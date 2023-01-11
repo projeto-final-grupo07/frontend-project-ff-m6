@@ -140,7 +140,7 @@ export const StyledButton = styled.button<iStyledButtonProps>`
           border-color: var(--brand3);
           color: var(--brand4);
           &:hover {
-            filter: brightness(0);
+            filter: brightness(0.9);
           }
         `;
       case 'link':
@@ -154,7 +154,4 @@ export const StyledButton = styled.button<iStyledButtonProps>`
         `;
     }
   }}
-  &:disabled {
-    cursor: not-allowed;
-  }
 `;
