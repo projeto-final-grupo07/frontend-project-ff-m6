@@ -15,10 +15,12 @@ interface IPropsVehicle {
   findUser: () => void;
 }
 const EditProfile = () => {
+  const { userData, loadUser } = useContext(UserContext);
+
   useEffect(() => {
     window.scrollTo(0, 0);
+    console.log(userData);
   }, []);
-  const { userData } = useContext(UserContext);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -26,24 +28,31 @@ const EditProfile = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
-  } = useForm({
-    resolver: yupResolver(formSchema),
-  });
-  const onSubmit = (data: any) => {
-    setLoading(true);
-    console.log(userData, data);
+  } = useForm({});
+  const onSubmit = async (data: any) => {
+    const token = localStorage.getItem('token');
+    // setLoading(true);
     const request = {
       name: data.name,
       email: data.email,
-      password: data.password,
       cpf: data.cpf,
       phone: data.phone,
-      birthDate: `${
-        data.birthdate.getMonth() + 1
-      }/${data.birthdate.getDate()}/${data.birthdate.getFullYear()}`,
+      //   birthDate: `${
+      //     data.birthdate.getMonth() + 1
+      //   }/${data.birthdate.getDate()}/${data.birthdate.getFullYear()}`,
       describe: data.description,
     };
+
+    console.log(token, userData);
+    try {
+      api.defaults.headers.authorization = `Bearer ${token}`;
+      await api.patch('/user', request);
+      console.log(request);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      console.log('yes');
+    }
   };
 
   return (
@@ -58,7 +67,13 @@ const EditProfile = () => {
         <StyledTitle fontSize='body-2-500' tag='p'>
           Infomações pessoais
         </StyledTitle>
-        <Input label='Nome' placeholder='Ex: Samuel Leão' registerName='name' register={register} />
+        <Input
+          value={userData?.name}
+          label='Nome'
+          placeholder='Ex: Samuel Leão'
+          registerName='name'
+          register={register}
+        />
         {errors.name?.message && <p className='error'>{errors.name.message as ReactNode}</p>}
         <Input
           type='email'
@@ -66,6 +81,7 @@ const EditProfile = () => {
           placeholder='Ex: samuel@kenzie.com.br'
           registerName='email'
           register={register}
+          value={userData?.email}
         />
         {errors.email?.message && <p className='error'>{errors.email.message as ReactNode}</p>}
         <Input
@@ -74,6 +90,7 @@ const EditProfile = () => {
           placeholder='000.000.000-00'
           registerName='cpf'
           register={register}
+          value={userData?.cpf}
         />
         {errors.cpf?.message && <p className='error'>{errors.cpf.message as ReactNode}</p>}
         <Input
@@ -82,6 +99,7 @@ const EditProfile = () => {
           placeholder='(DDD) 90000-0000'
           registerName='phone'
           register={register}
+          value={userData?.phone}
         />
         {errors.phone?.message && <p className='error'>{errors.phone.message as ReactNode}</p>}
 
@@ -91,6 +109,7 @@ const EditProfile = () => {
           placeholder='00/00/00'
           registerName='birthdate'
           register={register}
+          value={userData?.birthDate}
         />
         {errors.birthdate?.message && (
           <p className='error'>{errors.birthdate.message as ReactNode}</p>
@@ -102,6 +121,7 @@ const EditProfile = () => {
           placeholder='Digitar Descrição'
           registerName='description'
           register={register}
+          value={userData?.describe}
         />
         {errors.description?.message && (
           <p className='error'>{errors.description.message as ReactNode}</p>
@@ -175,7 +195,7 @@ const EditProfile = () => {
             ) : error ? (
               'Tente Novamente'
             ) : (
-              'Finalizar Edição'
+              'Salvar Alterações'
             )}
           </StyledButton>
         </div>

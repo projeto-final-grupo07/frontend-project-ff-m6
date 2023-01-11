@@ -9,9 +9,10 @@ interface IInputProps {
   register: UseFormRegister<FieldValues>;
   registerName: string;
   text?: boolean;
+  value?: any;
 }
 
-function Input({ type, label, placeholder, register, registerName, text }: IInputProps) {
+function Input({ type, label, placeholder, register, registerName, text, value }: IInputProps) {
   return (
     <InputContainer>
       <label>
@@ -22,7 +23,7 @@ function Input({ type, label, placeholder, register, registerName, text }: IInpu
       {text ? (
         <textarea placeholder={placeholder} {...register(registerName)}></textarea>
       ) : (
-        <input type={type} placeholder={placeholder} {...register(registerName)} />
+        <input type={type} placeholder={placeholder} {...register(registerName)} value={value} />
       )}
     </InputContainer>
   );
