@@ -2,8 +2,12 @@ import { Link } from 'react-router-dom';
 import { StyledButton } from '../../styles/button';
 import { Container } from './style';
 import { BiErrorCircle } from 'react-icons/bi';
+import { useEffect } from 'react';
 
 export const PageError = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <Container>
       <div>

@@ -7,13 +7,16 @@ import { StyledTitle } from '../../styles/typography';
 import * as yup from 'yup';
 import { StyledButton } from '../../styles/button';
 import { Container, LoginContainer } from './style';
-import { ReactNode, useState } from 'react';
+import { ReactNode, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../services';
 import { router } from '../../routes';
 import { BiLoaderCircle } from 'react-icons/bi';
 
 export const Login = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const formSchema = yup.object().shape({
     email: yup
       .string()

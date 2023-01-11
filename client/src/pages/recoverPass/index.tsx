@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import Input from '../../components/Input';
 import * as yup from 'yup';
-import { ReactNode, useState } from 'react';
+import { ReactNode, useState, useEffect } from 'react';
 import { StyledContainer } from './style';
 import { StyledButton } from '../../styles/button';
 import api from '../../services';
@@ -10,6 +10,9 @@ import { router } from '../../routes';
 import Logo from '../../components/Logo';
 
 export const Recover = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [load, setLoad] = useState(false);
   const [notFound, setNotFound] = useState(false);
   const formSchema = yup.object().shape({

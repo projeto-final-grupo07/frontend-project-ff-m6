@@ -45,8 +45,11 @@ interface IGalleryImg {
 }
 
 export const Profile = () => {
-  const { userId } = useParams();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
+  const { userId } = useParams();
   const [data, setData] = useState<IUser>();
   const [owner, setOwner] = useState(false);
 

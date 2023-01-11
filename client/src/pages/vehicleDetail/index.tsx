@@ -74,6 +74,9 @@ export interface IUserData {
 }
 
 export const VehicleDetail = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const { id } = useParams();
 
   const { userData, loadUser } = useContext(UserContext);
