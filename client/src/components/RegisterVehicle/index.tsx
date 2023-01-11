@@ -3,7 +3,6 @@ import { StyledButton } from '../../styles/button';
 import ImageGallery from '../ImageGallery';
 import StyledModal from '../StyledModal';
 import { StyledForm } from './style';
-
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { formSchema } from './schema';
@@ -20,13 +19,13 @@ const RegisterVehicle = ({ findUser }: IPropsVehicle) => {
   const [typeOffer, setTypeOffer] = useState(true);
   const [closeModal, setCloseModal] = useState(false);
 
-  const [imageGalleryArr, setImageGalleryArr] = useState([]);
-  const [value, setValue] = useState('');
+
+  const token = localStorage.getItem('token');
 
   const eventClick = () => {
-    const newElem = imageGallery.length + 1;
+    const newElem = GalleryImg.length + 1;
     if (newElem <= 4) {
-      setImageGallery([...imageGallery, newElem.toString()]);
+      setGalleryImg([...GalleryImg, newElem.toString()]);
     }
   };
 
@@ -49,6 +48,7 @@ const RegisterVehicle = ({ findUser }: IPropsVehicle) => {
 
   const onSubmitFunction = async (data: any) => {
     const token = localStorage.getItem('token');
+    
     data['typeOffer'] = typeOffer;
     data['typeVehicles'] = typeVehicles;
 
@@ -56,15 +56,15 @@ const RegisterVehicle = ({ findUser }: IPropsVehicle) => {
     delete data.img1;
 
     if (data.img2 !== undefined) {
-      data['imageGallery'] = [...data['imageGallery'], { url: data.img2 }];
+      data['GalleryImg'] = [...data['GalleryImg'], { url: data.img2 }];
       delete data.img2;
     }
     if (data.img3 !== undefined) {
-      data['imageGallery'] = [...data['imageGallery'], { url: data.img3 }];
+      data['GalleryImg'] = [...data['GalleryImg'], { url: data.img3 }];
       delete data.img3;
     }
     if (data.img4 !== undefined) {
-      data['imageGallery'] = [...data['imageGallery'], { url: data.img4 }];
+      data['GalleryImg'] = [...data['GalleryImg'], { url: data.img4 }];
       delete data.img4;
     }
 
@@ -82,6 +82,7 @@ const RegisterVehicle = ({ findUser }: IPropsVehicle) => {
       }
     }
   };
+
   return (
     <>
       <StyledModal
@@ -89,6 +90,7 @@ const RegisterVehicle = ({ findUser }: IPropsVehicle) => {
         nameModal='Criar Anuncio'
         propsButton={{
           buttonStyle: 'outlinedBrand1',
+          buttonSize: 'big',
           color: '#FDFDFD',
         }}
         closeModal={closeModal}
@@ -194,7 +196,7 @@ const RegisterVehicle = ({ findUser }: IPropsVehicle) => {
             )}
 
             <ul>
-              {imageGallery.map((img) => (
+              {GalleryImg.map((img) => (
                 <li key={img}>
                   <ImageGallery errors={errors} indexImage={img} register={register} />
                 </li>
@@ -205,7 +207,12 @@ const RegisterVehicle = ({ findUser }: IPropsVehicle) => {
               Adicionar campo para imagem da galeria
             </button>
             <div className='BtnSubmityAndClose'>
-              <StyledButton type='submit' className='Submit' buttonStyle='disabled'>
+              <StyledButton
+                buttonSize='medium'
+                type='submit'
+                className='Submit'
+                buttonStyle='disabled'
+              >
                 Criar anúncio
               </StyledButton>
             </div>

@@ -6,12 +6,15 @@ import Navbar from '../../components/Navbar';
 import { StyledTitle } from '../../styles/typography';
 import { StyledButton } from '../../styles/button';
 import { RegisterContainer } from './style';
-import { ReactNode, useState } from 'react';
+import { ReactNode, useState, useEffect } from 'react';
 import api from '../../services';
 import { BiLoaderCircle } from 'react-icons/bi';
 import formSchema from './schema';
 
 export const Register = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const {
     register,
     handleSubmit,

@@ -8,8 +8,12 @@ import { useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext/UserContext';
 import { fakeUser } from '../../fakeData';
 import { StyledButton } from '../../styles/button';
+import { useEffect } from 'react';
 
 export const Home = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <Navbar />

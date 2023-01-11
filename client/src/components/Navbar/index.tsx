@@ -10,6 +10,7 @@ import jwt_decode from 'jwt-decode';
 import api from '../../services';
 import { StyledButton } from '../../styles/button';
 import StyledModal from '../StyledModal';
+import { router } from '../../routes';
 
 function Navbar() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -63,7 +64,7 @@ export interface IDecodedToken {
 
 const NavButtons = (): JSX.Element => {
   const token = localStorage.getItem('token');
-  const [userData, setUserData] = useState({ name: 'User Name', id: '123' });
+  const [userData, setUserData] = useState({ name: 'User Name', id: '123', typeAccount: false });
 
   if (token) {
     const decodedToken: IDecodedToken = jwt_decode(token);
@@ -138,15 +139,20 @@ const NavButtons = (): JSX.Element => {
                 ... Conteudo ...
               </StyledModal>
 
-              <StyledButton type='button' buttonStyle='link'>
-                <Link to={`/profile/${userData.id}`}>Meus Anúncios</Link>
-              </StyledButton>
+              {userData.typeAccount ? (
+                <StyledButton type='button' buttonStyle='link'>
+                  <Link to={`/profile/${userData.id}`}>Meus Anúncios</Link>
+                </StyledButton>
+              ) : (
+                <></>
+              )}
 
               <StyledButton type='button' buttonStyle='link'>
                 <Link
                   to={'/'}
                   onClick={() => {
                     localStorage.clear();
+                    router.navigate('/');
                     window.location.reload();
                   }}
                 >

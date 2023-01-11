@@ -3,11 +3,10 @@ import styled from 'styled-components';
 export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
   gap: 1rem;
   width: 100%;
   max-height: 600px;
-  overflow-y: scroll;
+  overflow: auto;
 
   .errorValue {
     color: red;
@@ -20,6 +19,7 @@ export const StyledForm = styled.form`
     flex-direction: column;
 
     div {
+      overflow: auto;
       display: flex;
       button {
         width: 100%;

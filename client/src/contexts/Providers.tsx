@@ -1,3 +1,4 @@
+import { CommentProviders } from './CommentContext/CommentContext';
 import { UserProviders } from './UserContext/UserContext';
 
 interface IDefaultProps {
@@ -5,6 +6,10 @@ interface IDefaultProps {
 }
 
 const Providers = ({ children }: IDefaultProps) => {
-  return <UserProviders>{children}</UserProviders>;
+  return (
+    <UserProviders>
+      <CommentProviders>{children}</CommentProviders>
+    </UserProviders>
+  );
 };
 export default Providers;

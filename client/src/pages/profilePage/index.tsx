@@ -1,14 +1,14 @@
 import CardProfile from '../../components/CardProfile';
 import Footer from '../../components/Footer';
-import Navbar from '../../components/Navbar';
+import Navbar, { IDecodedToken } from '../../components/Navbar';
 import ProductCard from '../../components/ProductCard';
 import { StyledTitle } from '../../styles/typography';
 import { ProfileTop, VehiclesSection } from './style';
-import { fakeUser } from '../../fakeData';
 import { useEffect, useState } from 'react';
 import api from '../../services';
 import { useParams } from 'react-router-dom';
 import RegisterVehicle from '../../components/RegisterVehicle';
+import jwt_decode from 'jwt-decode';
 
 interface IVehicle {
   id: string;
@@ -45,10 +45,30 @@ interface IGalleryImg {
 }
 
 export const Profile = () => {
-  const [data, setData] = useState<IUser>();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const { userId } = useParams();
+  const [data, setData] = useState<IUser>();
+  const [owner, setOwner] = useState(false);
+
+  const token = localStorage.getItem('token');
 
   const findUser = () => {
+  if (token) {
+    useEffect(() => {
+      const decodedToken: IDecodedToken = jwt_decode(token);
+      if (userId === decodedToken.id) {
+        if (data?.typeAccount === true) {
+          setOwner(true);
+        } else {
+          setOwner(false);
+        }
+      }
+    });
+  }
+  useEffect(() => {
     api
       .get(`/user/${userId}`)
       .then((resp) => {
@@ -67,17 +87,17 @@ export const Profile = () => {
         <div className='containerProfileTop'>
           <section>
             <div>
-              <CardProfile direction='true' name={data?.name || 'User name'} size='100px' />
+              <CardProfile name={data?.name || 'Not Found'} size='100px' direction={'true'} />
             </div>
             <StyledTitle className='profileTag' fontSize='body-2-500' tag='p'>
-              Anunciante
+              {data?.typeAccount ? 'Anunciante' : 'Comprador'}
             </StyledTitle>
           </section>
 
           <StyledTitle fontSize='body-1-400' tag='p'>
-            {fakeUser.describe}
+            {data?.describe}
           </StyledTitle>
-          <RegisterVehicle findUser={findUser} />
+          {owner ? <RegisterVehicle findUser={findUser} /> : <></>}
         </div>
       </ProfileTop>
 

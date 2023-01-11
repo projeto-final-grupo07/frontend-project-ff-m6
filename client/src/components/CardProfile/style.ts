@@ -8,11 +8,14 @@ interface ColorRandomProps {
 
 export const ThemeCardProfile = styled.div<ColorRandomProps>`
   display: flex;
+  flex-direction: ${({ direction }) => (direction === 'true' ? 'column' : 'row')};
   align-items: center;
+  /* justify-content: center; */
   margin-top: 10px;
   margin-bottom: 10px;
   font-size: 14px;
-  flex-direction: ${({ direction }) => (direction === 'true' ? 'column' : 'row')};
+  word-break: normal;
+  /* width: fit-content; */
 
   .initial {
     display: flex;
@@ -27,7 +30,7 @@ export const ThemeCardProfile = styled.div<ColorRandomProps>`
     padding: 16px 7.5px;
     margin-right: 8px;
 
-    margin-bottom: ${({ direction }) => (direction === 'true' ? '26px' : '0')};
+    margin-bottom: ${({ direction }) => (direction === 'true' ? '28px' : '0px')};
     border-radius: 100%;
 
     color: var(--brand4);
