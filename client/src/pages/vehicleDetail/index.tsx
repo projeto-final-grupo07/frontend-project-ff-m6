@@ -134,7 +134,7 @@ export const VehicleDetail = () => {
           Authorization: 'Bearer ' + token,
         },
       })
-      .then((res) => {
+      .then(() => {
         notifySuccess();
         setLoading(false);
         reset();
@@ -253,7 +253,7 @@ export const VehicleDetail = () => {
                   <StyledButton
                     type='submit'
                     className='commentButton'
-                    buttonStyle={token ? 'brand' : 'disabled'}
+                    buttonStyle={errors?.message ? 'alert' : token ? 'brand' : 'disabled'}
                     buttonSize='medium'
                   >
                     {loading ? <BiLoaderCircle size={'2em'} className='loading' /> : 'Comentar'}
