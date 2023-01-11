@@ -10,9 +10,19 @@ interface IInputProps {
   registerName: string;
   text?: boolean;
   value?: any;
+  defaultValue?: any;
 }
 
-function Input({ type, label, placeholder, register, registerName, text, value }: IInputProps) {
+function Input({
+  type,
+  label,
+  placeholder,
+  register,
+  registerName,
+  text,
+  value,
+  defaultValue,
+}: IInputProps) {
   return (
     <InputContainer>
       <label>
@@ -21,9 +31,20 @@ function Input({ type, label, placeholder, register, registerName, text, value }
         </StyledTitle>
       </label>
       {text ? (
-        <textarea placeholder={placeholder} {...register(registerName)}></textarea>
+        <textarea
+          defaultValue={defaultValue}
+          value={value}
+          placeholder={placeholder}
+          {...register(registerName)}
+        ></textarea>
       ) : (
-        <input type={type} placeholder={placeholder} {...register(registerName)} value={value} />
+        <input
+          defaultValue={defaultValue}
+          type={type}
+          placeholder={placeholder}
+          {...register(registerName)}
+          value={value}
+        />
       )}
     </InputContainer>
   );
