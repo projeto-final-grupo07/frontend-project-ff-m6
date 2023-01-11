@@ -59,7 +59,6 @@ interface IUserContext {
   userData: IUser | undefined;
   globalLoading: boolean;
   setGlobalLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  token: string;
 }
 
 interface IUserProviderProps {
@@ -71,28 +70,25 @@ export const UserContext = createContext({} as IUserContext);
 export const UserProviders = ({ children }: IUserProviderProps) => {
   const [userData, setUserData] = useState<IUser>();
   const [globalLoading, setGlobalLoading] = useState(false);
-  const [token, setToken] = useState('');
 
-  useEffect(() => {
-    if (token) {
-      setToken(localStorage.getItem('token') || '');
-    }
-  }, []);
+  const token = localStorage.getItem('token');
 
   const loadUser = () => {
-    const decodedToken: IDecodedToken = jwt_decode(token);
-    setGlobalLoading(true);
-    api
-      .get(`/user/${decodedToken.id}`)
-      .then((resp) => {
-        setUserData(resp.data);
-      })
-      .catch((err) => console.error(err))
-      .finally(() => setGlobalLoading(false));
+    if (token) {
+      const decodedToken: IDecodedToken = jwt_decode(token);
+      setGlobalLoading(true);
+      api
+        .get(`/user/${decodedToken.id}`)
+        .then((resp) => {
+          setUserData(resp.data);
+        })
+        .catch((err) => console.error(err))
+        .finally(() => setGlobalLoading(false));
+    }
   };
 
   return (
-    <UserContext.Provider value={{ loadUser, userData, globalLoading, setGlobalLoading, token }}>
+    <UserContext.Provider value={{ loadUser, userData, globalLoading, setGlobalLoading }}>
       {children}
     </UserContext.Provider>
   );
