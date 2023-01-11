@@ -1,4 +1,5 @@
-import { ReactNode, useContext, useState } from 'react';
+import { ReactNode, useContext, useEffect, useState } from 'react';
+import React from 'react';
 import { StyledButton } from '../../styles/button';
 import StyledModal from '../StyledModal';
 import { StyledForm } from './style';
@@ -8,11 +9,44 @@ import { formSchema } from './schema';
 import api from '../../services';
 import { UserContext } from '../../contexts/UserContext/UserContext';
 import ImageGallery from '../ImageGallery';
-
-interface IPropsVehicle {
-  findUser: () => void;
+interface IVehicle {
+  id: string;
+  typeOffer: boolean;
+  title: string;
+  year: number;
+  mileage: number;
+  price: number;
+  describe: string;
+  typeVehicles: boolean;
+  coverImg: string;
+  GalleryImg: IGalleryImg[];
+  user: IUser;
+  isActive: boolean;
 }
-const RegisterVehicle = () => {
+
+export interface IUser {
+  name: string;
+  email: string;
+  password: string;
+  cpf: string;
+  phone: string;
+  birthDate: string;
+  describe: string;
+  typeAccount: boolean;
+  is_active: boolean;
+  id: string;
+  Vehicle: IVehicle[];
+}
+
+interface IGalleryImg {
+  id?: string;
+  url: string;
+}
+interface IPropsVehicle {
+  setData: (value: React.SetStateAction<IUser | undefined>) => void;
+  userId: string | undefined;
+}
+const RegisterVehicle = ({ setData, userId }: IPropsVehicle) => {
   const { loadUser } = useContext(UserContext);
   const [GalleryImg, setImageGallery] = useState(['1']);
 
@@ -25,6 +59,15 @@ const RegisterVehicle = () => {
     if (newElem <= 4) {
       setImageGallery([...GalleryImg, newElem.toString()]);
     }
+  };
+
+  const findUser = () => {
+    api
+      .get(`/user/${userId}`)
+      .then((resp) => {
+        setData(resp.data);
+      })
+      .catch((err) => console.error(err));
   };
 
   const {
@@ -71,7 +114,7 @@ const RegisterVehicle = () => {
         setCloseModal(true);
         api.defaults.headers.authorization = `Bearer ${token}`;
         await api.post('/vehicle/', data);
-        // findUser();
+        findUser();
         reset();
       } catch (error) {
         console.log(error);
