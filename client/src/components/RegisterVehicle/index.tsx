@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode, useContext, useState } from 'react';
 import { StyledButton } from '../../styles/button';
 import ImageGallery from '../ImageGallery';
 import StyledModal from '../StyledModal';
@@ -7,13 +7,18 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { formSchema } from './schema';
 import api from '../../services';
+import { UserContext } from '../../contexts/UserContext/UserContext';
 
-const RegisterVehicle = () => {
-  const [GalleryImg, setGalleryImg] = useState(['1']);
+interface IPropsVehicle {
+  findUser: () => void;
+}
+const RegisterVehicle = ({ findUser }: IPropsVehicle) => {
+  const { loadUser } = useContext(UserContext);
+  const [imageGallery, setImageGallery] = useState(['1']);
   const [typeVehicles, setTypeVehicles] = useState(false);
   const [typeOffer, setTypeOffer] = useState(true);
-  const [imageGalleryArr, setImageGalleryArr] = useState([]);
-  const [value, setValue] = useState('');
+  const [closeModal, setCloseModal] = useState(false);
+
 
   const token = localStorage.getItem('token');
 
@@ -41,11 +46,9 @@ const RegisterVehicle = () => {
     setTypeVehicles(true);
   };
 
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-  const onSubmitFunction = (data: any) => {
+  const onSubmitFunction = async (data: any) => {
+    const token = localStorage.getItem('token');
+    
     data['typeOffer'] = typeOffer;
     data['typeVehicles'] = typeVehicles;
 
@@ -65,30 +68,19 @@ const RegisterVehicle = () => {
       delete data.img4;
     }
 
-    api
-      .post('/vehicle', data, {
-        headers: {
-          'content-type': 'application/json',
-          Authorization: 'Bearer ' + token,
-        },
-      })
-      .then(() => {
-        setSuccess(true);
-        setLoading(false);
-        setError('');
+    if (token) {
+      try {
+        setCloseModal(true);
+        api.defaults.headers.authorization = `Bearer ${token}`;
+        await api.post('/vehicle/', data);
+        findUser();
         reset();
-      })
-      .catch((err) => {
-        setSuccess(false);
-
-        if (err.message === 'Network Error') {
-          setLoading(false);
-          setError('Erro no servidor... tente novamente mais tarde.');
-        } else {
-          setLoading(false);
-          setError('Erro');
-        }
-      });
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setCloseModal(false);
+      }
+    }
   };
 
   return (
@@ -101,10 +93,7 @@ const RegisterVehicle = () => {
           buttonSize: 'big',
           color: '#FDFDFD',
         }}
-        closeButton={{
-          buttonStyle: 'negative',
-          buttonSize: 'medium',
-        }}
+        closeModal={closeModal}
       >
         <StyledForm onSubmit={handleSubmit(onSubmitFunction)}>
           <div className='TypeAnnounce'>
@@ -163,20 +152,40 @@ const RegisterVehicle = () => {
           <div className='TypeAnnounce'>
             <p>Tipo de veículo</p>
             <div>
-              <StyledButton
-                type='button'
-                buttonStyle='brand'
-                onClick={() => changeTypeVehiclesFalse()}
-              >
-                Carro
-              </StyledButton>
-              <StyledButton
-                type='button'
-                buttonStyle='outlined2'
-                onClick={() => changeTypeVehiclesTrue()}
-              >
-                Moto
-              </StyledButton>
+              {typeVehicles == false ? (
+                <StyledButton
+                  type='button'
+                  buttonStyle='brand'
+                  onClick={() => changeTypeVehiclesFalse()}
+                >
+                  Carro
+                </StyledButton>
+              ) : (
+                <StyledButton
+                  type='button'
+                  buttonStyle='outlined2'
+                  onClick={() => changeTypeVehiclesFalse()}
+                >
+                  Carro
+                </StyledButton>
+              )}
+              {typeVehicles == true ? (
+                <StyledButton
+                  type='button'
+                  buttonStyle='brand'
+                  onClick={() => changeTypeVehiclesTrue()}
+                >
+                  Moto
+                </StyledButton>
+              ) : (
+                <StyledButton
+                  type='button'
+                  buttonStyle='outlined2'
+                  onClick={() => changeTypeVehiclesTrue()}
+                >
+                  Moto
+                </StyledButton>
+              )}
             </div>
           </div>
           <div className='Pictures'>

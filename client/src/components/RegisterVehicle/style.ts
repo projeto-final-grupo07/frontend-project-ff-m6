@@ -4,7 +4,8 @@ export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  max-height: 800px;
+  width: 100%;
+  max-height: 600px;
   overflow: auto;
 
   .errorValue {

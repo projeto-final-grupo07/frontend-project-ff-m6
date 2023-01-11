@@ -55,6 +55,7 @@ export const Profile = () => {
 
   const token = localStorage.getItem('token');
 
+  const findUser = () => {
   if (token) {
     useEffect(() => {
       const decodedToken: IDecodedToken = jwt_decode(token);
@@ -74,6 +75,9 @@ export const Profile = () => {
         setData(resp.data);
       })
       .catch((err) => console.error(err));
+  };
+  useEffect(() => {
+    findUser();
   }, []);
 
   return (
@@ -93,7 +97,7 @@ export const Profile = () => {
           <StyledTitle fontSize='body-1-400' tag='p'>
             {data?.describe}
           </StyledTitle>
-          {owner ? <RegisterVehicle /> : <></>}
+          {owner ? <RegisterVehicle findUser={findUser} /> : <></>}
         </div>
       </ProfileTop>
 
