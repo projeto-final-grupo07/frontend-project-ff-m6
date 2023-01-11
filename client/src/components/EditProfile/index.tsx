@@ -62,7 +62,7 @@ const EditProfile = () => {
         }
       });
   };
-  function formatDate(date: string): string {
+  function formatDate(date: any): string {
     const d = new Date(date);
     let month = '' + (d.getMonth() + 1);
     let day = '' + d.getDate();
