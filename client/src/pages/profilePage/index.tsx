@@ -90,7 +90,7 @@ export const Profile = () => {
           <StyledTitle fontSize='body-1-400' tag='p'>
             {data?.describe}
           </StyledTitle>
-          {owner ? <RegisterVehicle /> : <></>}
+          {owner ? <RegisterVehicle setData={setData} userId={userId} /> : <></>}
         </div>
       </ProfileTop>
 
