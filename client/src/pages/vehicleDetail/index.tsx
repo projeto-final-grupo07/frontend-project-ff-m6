@@ -23,55 +23,16 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { formSchema } from './schema';
 import { BiLoaderCircle } from 'react-icons/bi';
-import { toast } from 'react-toastify';
 import { router } from '../../routes';
 import { UserContext } from '../../contexts/UserContext/UserContext';
 import { useContext } from 'react';
 import { Grid } from '@mui/material';
+import ModalEditComment from '../../components/ModalEditComment';
+import { notifyError, notifySuccess } from '../../helpers/toasts';
+import { CommentContext } from '../../contexts/CommentContext/CommentContext';
 import ImgModal from '../../components/StyledModal/ImgModal';
 import StyledModal from '../../components/StyledModal';
 
-export interface IVehicle {
-  id: string;
-  typeOffer: boolean;
-  title: string;
-  year: string;
-  mileage: string;
-  price: number;
-  describe: string;
-  typeVehicles: boolean;
-  coverImg: string;
-  isActive: boolean;
-  user_id: string;
-  GalleryImgs: IGalleryImg[];
-  Message: IMessage[];
-  user: IUser;
-}
-
-export interface IGalleryImg {
-  id: string;
-  url: string;
-  vehicle_id: string;
-}
-
-export interface IMessage {
-  id: string;
-  comment: string;
-  createdAt: string;
-  user_id: string;
-  vehicle_id: string;
-  user: IUser;
-}
-
-export interface IUser {
-  name: string;
-  describe: string;
-}
-
-export interface IUserData {
-  name: string;
-  id: string;
-}
 
 export const VehicleDetail = () => {
   useEffect(() => {
@@ -80,13 +41,14 @@ export const VehicleDetail = () => {
   const { id } = useParams();
 
   const { userData, loadUser } = useContext(UserContext);
+  const { commentData, setCommentData, setId, setVehicleData, setPrice, vehicleData, price, getVehicle } =
+    useContext(CommentContext);
+
+  setId(id);
 
   const token = localStorage.getItem('token');
   const [loading, setLoading] = useState(false);
-  const [vehicleData, setVehicleData] = useState<IVehicle>();
-  const [commentData, setCommentData] = useState<IMessage[]>([]);
   const [flagComment, setFlagComment] = useState<boolean>(false);
-  const [price, setPrice] = useState(0);
 
   if (token) {
     useEffect(() => {
@@ -124,10 +86,6 @@ export const VehicleDetail = () => {
     resolver: yupResolver(formSchema),
   });
 
-  const notifySuccess = () =>
-    toast.success('Comentário adicionado com sucesso', { autoClose: 1500 });
-  const notifyError = (msg: string) => toast.error(msg, { autoClose: 1500, position: 'top-right' });
-
   const onSubmitFunction = (data: any) => {
     setLoading(true);
     api
@@ -138,7 +96,7 @@ export const VehicleDetail = () => {
         },
       })
       .then(() => {
-        notifySuccess();
+        notifySuccess('Comentário adicionado com sucesso!');
         setLoading(false);
         reset();
         setCommentData([...commentData, data]);
@@ -166,7 +124,9 @@ export const VehicleDetail = () => {
   }
 
   return (
-    <StyledVehicleDetail>
+    <>
+      <ModalEditComment />
+      <StyledVehicleDetail>
       <Navbar />
       <div className='divRoxinha'></div>
       <div className='mainContainer'>
@@ -229,6 +189,7 @@ export const VehicleDetail = () => {
                     name={comment.user?.name || 'Name'}
                     comment={comment.comment}
                     daysOfComment={days(new Date(comment.createdAt))}
+                    commentId={comment.id}
                   />
                 );
               })}
@@ -322,5 +283,6 @@ export const VehicleDetail = () => {
       </div>
       <Footer />
     </StyledVehicleDetail>
+    </>
   );
 };
