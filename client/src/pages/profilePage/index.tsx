@@ -54,29 +54,24 @@ export const Profile = () => {
   const [data, setData] = useState<IUser>();
   const [owner, setOwner] = useState(false);
 
-  const { token } = useContext(UserContext);
+  const token = localStorage.getItem('token' || '');
 
-  const findUser = () => {
+  useEffect(() => {
     api
       .get(`/user/${userId}`)
       .then((resp) => {
         setData(resp.data);
       })
       .catch((err) => console.error(err));
-  };
-  useEffect(() => {
+
     if (token) {
       const decodedToken: IDecodedToken = jwt_decode(token);
       if (userId === decodedToken.id) {
-        if (data?.typeAccount === true) {
-          setOwner(true);
-        } else {
-          setOwner(false);
-        }
+        setOwner(true);
+      } else {
+        setOwner(false);
       }
     }
-
-    findUser();
   }, []);
   return (
     <>
@@ -95,7 +90,7 @@ export const Profile = () => {
           <StyledTitle fontSize='body-1-400' tag='p'>
             {data?.describe}
           </StyledTitle>
-          {owner ? <RegisterVehicle findUser={findUser} /> : <></>}
+          {owner ? <RegisterVehicle /> : <></>}
         </div>
       </ProfileTop>
 

@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from 'react';
+import { createContext, ReactNode, useEffect, useState } from 'react';
 import { IDecodedToken } from '../../components/Navbar';
 import jwt_decode from 'jwt-decode';
 import api from '../../services';
@@ -73,9 +73,11 @@ export const UserProviders = ({ children }: IUserProviderProps) => {
   const [globalLoading, setGlobalLoading] = useState(false);
   const [token, setToken] = useState('');
 
-  if (token) {
-    setToken(localStorage.getItem('token') || '');
-  }
+  useEffect(() => {
+    if (token) {
+      setToken(localStorage.getItem('token') || '');
+    }
+  }, []);
 
   const loadUser = () => {
     const decodedToken: IDecodedToken = jwt_decode(token);
