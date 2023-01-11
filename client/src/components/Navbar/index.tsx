@@ -64,11 +64,8 @@ export interface IDecodedToken {
 
 const NavButtons = (): JSX.Element => {
   const token = localStorage.getItem('token');
-  const [userData, setUserData] = useState({ name: 'User Name', id: '123' });
-  console.log(window.location.href.split(''));
-  // console.log(if(window.location.href.split('').pop()){
-  //   console.log('dasd')
-  // });
+  const [userData, setUserData] = useState({ name: 'User Name', id: '123', typeAccount: false });
+
   if (token) {
     const decodedToken: IDecodedToken = jwt_decode(token);
 
@@ -142,9 +139,13 @@ const NavButtons = (): JSX.Element => {
                 ... Conteudo ...
               </StyledModal>
 
-              <StyledButton type='button' buttonStyle='link'>
-                <Link to={`/profile/${userData.id}`}>Meus Anúncios</Link>
-              </StyledButton>
+              {userData.typeAccount ? (
+                <StyledButton type='button' buttonStyle='link'>
+                  <Link to={`/profile/${userData.id}`}>Meus Anúncios</Link>
+                </StyledButton>
+              ) : (
+                <></>
+              )}
 
               <StyledButton type='button' buttonStyle='link'>
                 <Link
