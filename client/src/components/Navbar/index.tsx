@@ -2,7 +2,7 @@ import Logo from '../Logo';
 import { NavBackground, NavbarContainer, NotWide } from './style';
 import { Link } from 'react-router-dom';
 import { StyledTitle } from '../../styles/typography';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { FaBars } from 'react-icons/fa';
 import { IoClose } from 'react-icons/io5';
 import CardProfile from '../CardProfile';
@@ -12,6 +12,7 @@ import { StyledButton } from '../../styles/button';
 import StyledModal from '../StyledModal';
 import { router } from '../../routes';
 import EditProfile from '../EditProfile';
+import { UserContext } from '../../contexts/UserContext/UserContext';
 
 function Navbar() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -66,6 +67,7 @@ export interface IDecodedToken {
 const NavButtons = (): JSX.Element => {
   const token = localStorage.getItem('token');
   const [userData, setUserData] = useState({ name: 'User Name', id: '123', typeAccount: false });
+  const { loadUser } = useContext(UserContext);
 
   if (token) {
     const decodedToken: IDecodedToken = jwt_decode(token);
@@ -138,8 +140,7 @@ const NavButtons = (): JSX.Element => {
                   <Link
                     to={`/profile/${userData.id}`}
                     onClick={() => {
-                      router.navigate(`/profile/${userData.id}`);
-                      window.location.reload();
+                      loadUser();
                     }}
                   >
                     Meus Anúncios

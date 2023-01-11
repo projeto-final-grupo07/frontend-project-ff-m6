@@ -50,19 +50,37 @@ export const Profile = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const { setGlobalLoading, userData } = useContext(UserContext);
+
   const { userId } = useParams();
   const [data, setData] = useState<IUser>();
   const [owner, setOwner] = useState(false);
 
   const token = localStorage.getItem('token' || '');
 
+  const [flagCar, setFlagCar] = useState(false);
+  const [flagMoto, setFlagMoto] = useState(false);
+
   useEffect(() => {
+    setGlobalLoading(true);
     api
       .get(`/user/${userId}`)
       .then((resp) => {
         setData(resp.data);
+        if (resp.data.Vehicle) {
+          for (let i = 0; i < resp.data.Vehicle.length; i++) {
+            console.log(i);
+            if (resp.data.Vehicle[i].typeVehicles == false) {
+              setFlagCar(true);
+            }
+            if (resp.data.Vehicle[i].typeVehicles == true) {
+              setFlagMoto(true);
+            }
+          }
+        }
       })
-      .catch((err) => console.error(err));
+      .catch((err) => console.error(err))
+      .finally(() => setGlobalLoading(false));
 
     if (token) {
       const decodedToken: IDecodedToken = jwt_decode(token);
@@ -72,7 +90,8 @@ export const Profile = () => {
         setOwner(false);
       }
     }
-  }, []);
+  }, [userData]);
+
   return (
     <>
       <Navbar />
@@ -95,57 +114,69 @@ export const Profile = () => {
       </ProfileTop>
 
       <VehiclesSection>
-        <StyledTitle fontSize='Heading-5-600' tag='h5'>
-          Carros
-        </StyledTitle>
-        <section className='vehicleCards'>
-          {data?.Vehicle.map((vehicle) => {
-            if (vehicle.typeVehicles == false)
-              return (
-                <ProductCard
-                  appearActive
-                  userId={data.id}
-                  vehicleId={vehicle.id}
-                  key={vehicle.id}
-                  title={vehicle.title}
-                  describe={vehicle.describe}
-                  coverImg={vehicle.coverImg}
-                  name={data.name}
-                  mileage={vehicle.mileage}
-                  year={vehicle.year}
-                  price={+vehicle.price}
-                  active={vehicle.isActive}
-                />
-              );
-          }) || <p>Null</p>}
-        </section>
+        {flagCar ? (
+          <>
+            <StyledTitle fontSize='Heading-5-600' tag='h5'>
+              Carros
+            </StyledTitle>
+            <section className='vehicleCards'>
+              {data?.Vehicle.map((vehicle) => {
+                if (vehicle.typeVehicles == false)
+                  return (
+                    <ProductCard
+                      appearActive
+                      userId={data.id}
+                      vehicleId={vehicle.id}
+                      key={vehicle.id}
+                      title={vehicle.title}
+                      describe={vehicle.describe}
+                      coverImg={vehicle.coverImg}
+                      name={data.name}
+                      mileage={vehicle.mileage}
+                      year={vehicle.year}
+                      price={+vehicle.price}
+                      active={vehicle.isActive}
+                    />
+                  );
+              })}
+            </section>
+          </>
+        ) : (
+          <></>
+        )}
       </VehiclesSection>
 
       <VehiclesSection>
-        <StyledTitle fontSize='Heading-5-600' tag='h5'>
-          Motos
-        </StyledTitle>
-        <section className='vehicleCards'>
-          {data?.Vehicle.map((vehicle) => {
-            if (vehicle.typeVehicles == true)
-              return (
-                <ProductCard
-                  appearActive
-                  userId={data.id}
-                  vehicleId={vehicle.id}
-                  key={vehicle.id}
-                  title={vehicle.title}
-                  describe={vehicle.describe}
-                  coverImg={vehicle.coverImg}
-                  name={data.name}
-                  mileage={vehicle.mileage}
-                  year={vehicle.year}
-                  price={+vehicle.price}
-                  active={vehicle.isActive}
-                />
-              );
-          }) || <p>Null</p>}
-        </section>
+        {flagMoto ? (
+          <>
+            <StyledTitle fontSize='Heading-5-600' tag='h5'>
+              Motos
+            </StyledTitle>
+            <section className='vehicleCards'>
+              {data?.Vehicle.map((vehicle) => {
+                if (vehicle.typeVehicles == true)
+                  return (
+                    <ProductCard
+                      appearActive
+                      userId={data.id}
+                      vehicleId={vehicle.id}
+                      key={vehicle.id}
+                      title={vehicle.title}
+                      describe={vehicle.describe}
+                      coverImg={vehicle.coverImg}
+                      name={data.name}
+                      mileage={vehicle.mileage}
+                      year={vehicle.year}
+                      price={+vehicle.price}
+                      active={vehicle.isActive}
+                    />
+                  );
+              })}
+            </section>
+          </>
+        ) : (
+          <></>
+        )}
       </VehiclesSection>
       <Footer />
     </>
