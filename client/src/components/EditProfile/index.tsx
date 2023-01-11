@@ -118,9 +118,7 @@ const EditProfile = () => {
           placeholder='00/00/00'
           registerName='birthdate'
           register={register}
-          defaultValue={`${
-            userData?.birthDate.getMonth() + 1
-          }-${userData?.birthDate.getDate()}-${userData?.birthDate.getFullYear()}`}
+          defaultValue={'2010-11-11'}
         />
         {errors.birthdate?.message && (
           <p className='error'>{errors.birthdate.message as ReactNode}</p>
