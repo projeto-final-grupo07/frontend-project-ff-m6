@@ -11,6 +11,7 @@ import api from '../../services';
 import { StyledButton } from '../../styles/button';
 import StyledModal from '../StyledModal';
 import { router } from '../../routes';
+import EditProfile from '../EditProfile';
 
 function Navbar() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -120,15 +121,8 @@ const NavButtons = (): JSX.Element => {
           </button>
           {open ? (
             <div className='profileButtons'>
-              <StyledModal
-                propsButton={{
-                  buttonStyle: 'link',
-                }}
-                nameModal='Editar Perfil'
-                nameButtonOpen='Editar Perfil'
-              >
-                ... Conteudo ...
-              </StyledModal>
+              <EditProfile />
+
               <StyledModal
                 propsButton={{
                   buttonStyle: 'link',
