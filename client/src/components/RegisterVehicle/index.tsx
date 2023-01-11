@@ -3,29 +3,31 @@ import { StyledButton } from '../../styles/button';
 import ImageGallery from '../ImageGallery';
 import StyledModal from '../StyledModal';
 import { StyledForm } from './style';
-
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { formSchema } from './schema';
+import api from '../../services';
 
 const RegisterVehicle = () => {
-  const [imageGallery, setImageGallery] = useState(['1']);
+  const [GalleryImg, setGalleryImg] = useState(['1']);
   const [typeVehicles, setTypeVehicles] = useState(false);
   const [typeOffer, setTypeOffer] = useState(true);
-
   const [imageGalleryArr, setImageGalleryArr] = useState([]);
   const [value, setValue] = useState('');
 
+  const token = localStorage.getItem('token');
+
   const eventClick = () => {
-    const newElem = imageGallery.length + 1;
+    const newElem = GalleryImg.length + 1;
     if (newElem <= 4) {
-      setImageGallery([...imageGallery, newElem.toString()]);
+      setGalleryImg([...GalleryImg, newElem.toString()]);
     }
   };
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(formSchema),
@@ -39,26 +41,56 @@ const RegisterVehicle = () => {
     setTypeVehicles(true);
   };
 
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const onSubmitFunction = (data: any) => {
     data['typeOffer'] = typeOffer;
     data['typeVehicles'] = typeVehicles;
 
-    data['imageGallery'] = [{ url: data.img1 }];
+    data['GalleryImg'] = [{ url: data.img1 }];
     delete data.img1;
 
     if (data.img2 !== undefined) {
-      data['imageGallery'] = [...data['imageGallery'], { url: data.img2 }];
+      data['GalleryImg'] = [...data['GalleryImg'], { url: data.img2 }];
       delete data.img2;
     }
     if (data.img3 !== undefined) {
-      data['imageGallery'] = [...data['imageGallery'], { url: data.img3 }];
+      data['GalleryImg'] = [...data['GalleryImg'], { url: data.img3 }];
       delete data.img3;
     }
     if (data.img4 !== undefined) {
-      data['imageGallery'] = [...data['imageGallery'], { url: data.img4 }];
+      data['GalleryImg'] = [...data['GalleryImg'], { url: data.img4 }];
       delete data.img4;
     }
+
+    api
+      .post('/vehicle', data, {
+        headers: {
+          'content-type': 'application/json',
+          Authorization: 'Bearer ' + token,
+        },
+      })
+      .then(() => {
+        setSuccess(true);
+        setLoading(false);
+        setError('');
+        reset();
+      })
+      .catch((err) => {
+        setSuccess(false);
+
+        if (err.message === 'Network Error') {
+          setLoading(false);
+          setError('Erro no servidor... tente novamente mais tarde.');
+        } else {
+          setLoading(false);
+          setError('Erro');
+        }
+      });
   };
+
   return (
     <>
       <StyledModal
@@ -66,10 +98,12 @@ const RegisterVehicle = () => {
         nameModal='Criar Anuncio'
         propsButton={{
           buttonStyle: 'outlinedBrand1',
+          buttonSize: 'big',
           color: '#FDFDFD',
         }}
         closeButton={{
           buttonStyle: 'negative',
+          buttonSize: 'medium',
         }}
       >
         <StyledForm onSubmit={handleSubmit(onSubmitFunction)}>
@@ -153,7 +187,7 @@ const RegisterVehicle = () => {
             )}
 
             <ul>
-              {imageGallery.map((img) => (
+              {GalleryImg.map((img) => (
                 <li key={img}>
                   <ImageGallery errors={errors} indexImage={img} register={register} />
                 </li>
@@ -164,7 +198,12 @@ const RegisterVehicle = () => {
               Adicionar campo para imagem da galeria
             </button>
             <div className='BtnSubmityAndClose'>
-              <StyledButton type='submit' className='Submit' buttonStyle='disabled'>
+              <StyledButton
+                buttonSize='medium'
+                type='submit'
+                className='Submit'
+                buttonStyle='disabled'
+              >
                 Criar anúncio
               </StyledButton>
             </div>
