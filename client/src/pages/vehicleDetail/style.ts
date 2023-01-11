@@ -13,7 +13,6 @@ export const StyledVehicleDetail = styled.div`
   }
   .mainContainer {
     margin: 2rem auto 0 auto;
-    /* padding: 1rem 60px; */
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -35,10 +34,12 @@ export const StyledSection = styled.div`
   width: 60%;
   display: flex;
   flex-direction: column;
+  margin: 0 1rem 0 5rem;
   gap: 1rem;
   @media (max-width: 900px) {
     padding: 0;
     width: 100%;
+    margin: 0;
   }
 
   .mainImage {
@@ -63,12 +64,13 @@ export const StyledSectionFixed = styled.div`
   flex-direction: column;
   gap: 1rem;
 
-  padding: 0px 60px;
+  margin: 0 5rem 0 1rem;
 
   @media (max-width: 900px) {
     position: static;
     padding: 0;
     width: 100%;
+    margin: 0;
   }
   position: static;
   right: 0;
@@ -135,8 +137,6 @@ export const StyledDivGap = styled.div<any>`
 export const StyledPhotoDetail = styled.div`
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
-  /* justify-content: center; */
   width: 100%;
   height: 200px;
   min-height: 250px;
@@ -156,7 +156,6 @@ export const StyledPhotoDetail = styled.div`
   @media (width < 400px) {
     min-height: 220px;
   }
-  
 
   background: var(--whiteFixed);
   border-radius: 4px;
@@ -164,7 +163,6 @@ export const StyledPhotoDetail = styled.div`
   .gridGallery {
     display: flex;
     justify-content: center;
-    /* align-items: center; */
   }
 
   .imgGallery {

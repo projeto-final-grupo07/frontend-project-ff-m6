@@ -2,36 +2,44 @@ import styled from 'styled-components';
 
 export const StyledContainer = styled.div`
   display: flex;
-  margin: 100px auto;
-  padding: 10px;
+  flex-direction: column;
   justify-content: center;
 
-  border: 1px solid black;
-  border-radius: 15px;
-  background-color: #adb5bd;
-  width: 300px;
+  gap: 2rem;
+  margin: 15vh auto;
+  padding: 20px;
+
+  border-radius: 5px;
+  background-color: var(--grey5);
+  max-width: 300px;
 
   div {
     display: flex;
     flex-direction: column;
-    padding: 10px;
   }
 
   span {
-    color: red;
-  }
-
-  .NotFound {
+    color: var(--alert1);
     font-weight: bold;
   }
 
+  button {
+    width: 100%;
+    padding: 20px;
+  }
+  .btn2 {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    button {
+      width: fit-content;
+    }
+  }
   form {
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 1rem;
-
-    button {
+    input {
       width: 100%;
     }
   }

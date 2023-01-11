@@ -92,7 +92,7 @@ export const VehicleDetail = () => {
           Authorization: 'Bearer ' + token,
         },
       })
-      .then((_) => {
+      .then(() => {
         notifySuccess('Comentário adicionado com sucesso!');
         setLoading(false);
         reset();
@@ -129,7 +129,7 @@ export const VehicleDetail = () => {
       <div className='mainContainer'>
         <StyledSection>
           <StyledBox className='mainImage'>
-            <img src={vehicleData?.coverImg} alt='x' />
+            <img src={vehicleData?.coverImg} alt='Vehicle' />
           </StyledBox>
           <StyledBox>
             <StyledDivGap>
@@ -214,7 +214,7 @@ export const VehicleDetail = () => {
                   <StyledButton
                     type='submit'
                     className='commentButton'
-                    buttonStyle={token ? 'brand' : 'disabled'}
+                    buttonStyle={errors?.message ? 'alert' : token ? 'brand' : 'disabled'}
                     buttonSize='medium'
                   >
                     {loading ? <BiLoaderCircle size={'2em'} className='loading' /> : 'Comentar'}
