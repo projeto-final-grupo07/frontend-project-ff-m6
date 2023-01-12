@@ -5,6 +5,7 @@ import { FaEdit, FaTrash } from 'react-icons/fa';
 import { StyledDiv } from './style';
 import { CommentContext } from '../../contexts/CommentContext/CommentContext';
 import { useContext } from 'react';
+import { UserContext } from '../../contexts/UserContext/UserContext';
 
 interface ICommentCard {
   name: string;
@@ -15,19 +16,20 @@ interface ICommentCard {
 }
 
 const CommentCard = ({ name, comment, daysOfComment, commentId, userId }: ICommentCard) => {
-  const {
-    commentIdClicked,
-    editComment,
-    setCommentIdClicked,
-    setCommentTextClicked,
-    commentTextClicked,
-    setOpen,
-  } = useContext(CommentContext);
+  const { setCommentIdClicked, setCommentTextClicked, setOpen, setOpenModalDelete } =
+    useContext(CommentContext);
+
+  const { userData } = useContext(UserContext);
 
   const editFunction = () => {
     setCommentTextClicked(comment);
     setCommentIdClicked(commentId);
     setOpen(true);
+  };
+
+  const deleteFunction = () => {
+    setCommentIdClicked(commentId);
+    setOpenModalDelete(true);
   };
 
   return (
@@ -42,12 +44,18 @@ const CommentCard = ({ name, comment, daysOfComment, commentId, userId }: IComme
         <StyledTitle tag='p' fontSize='body-2-400' fontColor='var(--grey2)'>
           {comment}
         </StyledTitle>
-        <div>
-          <button type='submit' onClick={editFunction}>
-            <FaEdit />
-          </button>
-          <FaTrash />
-        </div>
+        {userData?.id === userId ? (
+          <div>
+            <button type='submit' onClick={editFunction}>
+              <FaEdit />
+            </button>
+            <button onClick={deleteFunction}>
+              <FaTrash />
+            </button>
+          </div>
+        ) : (
+          <></>
+        )}
       </StyledDiv>
     </StyledBox>
   );
