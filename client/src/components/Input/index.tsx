@@ -9,9 +9,20 @@ interface IInputProps {
   register: UseFormRegister<FieldValues>;
   registerName: string;
   text?: boolean;
+  value?: any;
+  defaultValue?: any;
 }
 
-function Input({ type, label, placeholder, register, registerName, text }: IInputProps) {
+function Input({
+  type,
+  label,
+  placeholder,
+  register,
+  registerName,
+  text,
+  value,
+  defaultValue,
+}: IInputProps) {
   return (
     <InputContainer>
       <label>
@@ -20,9 +31,20 @@ function Input({ type, label, placeholder, register, registerName, text }: IInpu
         </StyledTitle>
       </label>
       {text ? (
-        <textarea placeholder={placeholder} {...register(registerName)}></textarea>
+        <textarea
+          defaultValue={defaultValue}
+          value={value}
+          placeholder={placeholder}
+          {...register(registerName)}
+        ></textarea>
       ) : (
-        <input type={type} placeholder={placeholder} {...register(registerName)} />
+        <input
+          defaultValue={defaultValue}
+          type={type}
+          placeholder={placeholder}
+          {...register(registerName)}
+          value={value}
+        />
       )}
     </InputContainer>
   );
