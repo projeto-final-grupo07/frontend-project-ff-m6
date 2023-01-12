@@ -112,7 +112,7 @@ const NavButtons = (): JSX.Element => {
       </a>
       <a href='/#auction' className='navButtons'>
         <StyledTitle fontSize='button-big-text' tag='h3'>
-          Leião
+          Leilão
         </StyledTitle>
       </a>
       <hr />
