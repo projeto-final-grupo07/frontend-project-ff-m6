@@ -1,4 +1,4 @@
-import { ReactNode, useContext, useEffect, useState } from 'react';
+import { ReactNode, useContext, useState } from 'react';
 import React from 'react';
 import { StyledButton } from '../../styles/button';
 import StyledModal from '../StyledModal';

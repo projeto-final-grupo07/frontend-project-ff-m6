@@ -1,5 +1,5 @@
 import { CommentProviders } from './CommentContext/CommentContext';
-import { ModalOpenContext, ModalOpenProviders } from './ModalOpenContext/ModalOpenContext';
+import { ModalOpenProviders } from './ModalOpenContext/ModalOpenContext';
 import { UserProviders } from './UserContext/UserContext';
 
 interface IDefaultProps {

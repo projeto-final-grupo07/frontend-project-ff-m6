@@ -4,7 +4,6 @@ import Modal from '@mui/material/Modal';
 
 import { AiOutlineClose } from 'react-icons/ai';
 import { StyledTitle } from '../../../styles/typography';
-import { height } from '@mui/system';
 
 const style = {
   position: 'absolute',
