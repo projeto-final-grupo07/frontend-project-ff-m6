@@ -11,9 +11,10 @@ interface ICommentCard {
   comment: string;
   daysOfComment: number;
   commentId: string;
+  userId: string;
 }
 
-const CommentCard = ({ name, comment, daysOfComment, commentId }: ICommentCard) => {
+const CommentCard = ({ name, comment, daysOfComment, commentId, userId }: ICommentCard) => {
   const {
     commentIdClicked,
     editComment,
@@ -32,7 +33,7 @@ const CommentCard = ({ name, comment, daysOfComment, commentId }: ICommentCard) 
   return (
     <StyledBox paddingC='0'>
       <StyledDivGap row center marginC='0'>
-        <CardProfile name={name} />
+        <CardProfile name={name} userId={userId} />
         <StyledTitle tag='p' fontSize='body-2-400' fontColor='var(--grey3)'>
           {`há ${daysOfComment} dias`}
         </StyledTitle>
