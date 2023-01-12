@@ -141,7 +141,7 @@ const EditAdress = () => {
             disabled={loading}
           >
             {success ? (
-              'Salvado com sucesso!'
+              'Salvo com sucesso!'
             ) : loading ? (
               <BiLoaderCircle size={'2em'} className='loading' />
             ) : error ? (
