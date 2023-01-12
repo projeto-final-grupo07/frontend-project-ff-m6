@@ -10,7 +10,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: { sm: '90%', md: '30%' },
+  maxWidth: '550px',
   bgcolor: 'background.paper',
   boxShadow: 24,
   borderRadius: '5px',
@@ -19,8 +19,7 @@ const style = {
   '& .content-box': {
     display: 'flex',
     flexDirection: 'column',
-    width: '90%',
-    maxWidth: '520px',
+    width: '100%',
     margin: '50px auto',
     background: '#ffffff',
     borderRadius: '8px',
@@ -61,12 +60,11 @@ function StyledModal({
   const [open, setOpen] = React.useState(false);
   const handleClose = () => setOpen(false);
 
-  if (closeModal) {
-    // console.log(closeModal);
+  React.useEffect(() => {
     if (open) {
-      setOpen(false);
+      setOpen(!open);
     }
-  }
+  }, [closeModal]);
 
   return (
     <div>
@@ -74,6 +72,7 @@ function StyledModal({
         buttonStyle={propsButton.buttonStyle}
         buttonSize={propsButton.buttonSize}
         color={propsButton.color}
+        type='button'
         onClick={() => setOpen(!open)}
       >
         {nameButtonOpen}
