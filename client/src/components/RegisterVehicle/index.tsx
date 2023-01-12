@@ -9,6 +9,7 @@ import { formSchema } from './schema';
 import api from '../../services';
 import { UserContext } from '../../contexts/UserContext/UserContext';
 import ImageGallery from '../ImageGallery';
+import { ModalOpenContext } from '../../contexts/ModalOpenContext/ModalOpenContext';
 interface IVehicle {
   id: string;
   typeOffer: boolean;
@@ -53,6 +54,7 @@ const RegisterVehicle = ({ setData, userId }: IPropsVehicle) => {
   const [typeVehicles, setTypeVehicles] = useState(false);
   const [typeOffer, setTypeOffer] = useState(true);
   const [closeModal, setCloseModal] = useState(false);
+  const { setOpenModalAnnouncementSuccess } = useContext(ModalOpenContext);
 
   const eventClick = () => {
     const newElem = GalleryImg.length + 1;
@@ -120,6 +122,7 @@ const RegisterVehicle = ({ setData, userId }: IPropsVehicle) => {
         console.log(error);
       } finally {
         setCloseModal(false);
+        setOpenModalAnnouncementSuccess(true);
       }
     }
   };

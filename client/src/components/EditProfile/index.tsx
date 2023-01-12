@@ -152,7 +152,7 @@ const EditProfile = () => {
           {error && <p className='error'>{error}</p>}
           <StyledButton type='submit' buttonStyle={success ? 'sucess' : error ? 'alert' : 'brand'}>
             {success ? (
-              'Salvado com sucesso!'
+              'Salvo com sucesso!'
             ) : loading ? (
               <BiLoaderCircle size={'2em'} className='loading' />
             ) : error ? (

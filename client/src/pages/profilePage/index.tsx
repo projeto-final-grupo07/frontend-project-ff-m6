@@ -10,6 +10,7 @@ import { useParams } from 'react-router-dom';
 import RegisterVehicle from '../../components/RegisterVehicle';
 import jwt_decode from 'jwt-decode';
 import { UserContext } from '../../contexts/UserContext/UserContext';
+import ModalAnnouncementSuccess from '../../components/StyledModal/ModalAnnouncementSuccess';
 
 interface IVehicle {
   id: string;
@@ -94,6 +95,7 @@ export const Profile = () => {
   return (
     <>
       <Navbar />
+      <ModalAnnouncementSuccess />
       <ProfileTop>
         <div className='containerProfileTop'>
           <section>
