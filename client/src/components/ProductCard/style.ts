@@ -58,6 +58,7 @@ export const ThemeProductCard = styled.div`
 
   .description {
     line-height: 24px;
+    height: 45px;
   }
 
   .active {

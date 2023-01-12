@@ -134,40 +134,46 @@ export const Profile = () => {
               Carros
             </StyledTitle>
             <section className='vehicleCards'>
-              {data?.Vehicle.map((vehicle) => {
-                if (vehicle.typeVehicles == false)
-                  return (
-                    <div className='cardContainer'>
-                      <ProductCard
-                        appearActive
-                        userId={data.id}
-                        vehicleId={vehicle.id}
-                        key={vehicle.id}
-                        title={vehicle.title}
-                        describe={vehicle.describe}
-                        coverImg={vehicle.coverImg}
-                        name={data.name}
-                        mileage={vehicle.mileage}
-                        year={vehicle.year}
-                        price={+vehicle.price}
-                        active={vehicle.isActive}
-                      />
+              {data?.Vehicle.filter((vehicle) => (owner ? true : vehicle.isActive)).map(
+                (vehicle) => {
+                  if (vehicle.typeVehicles == false)
+                    return (
+                      <div className='cardContainer'>
+                        <ProductCard
+                          appearActive={owner ? true : false}
+                          userId={data.id}
+                          vehicleId={vehicle.id}
+                          key={vehicle.id}
+                          title={vehicle.title}
+                          describe={vehicle.describe}
+                          coverImg={vehicle.coverImg}
+                          name={data.name}
+                          mileage={vehicle.mileage}
+                          year={vehicle.year}
+                          price={+vehicle.price}
+                          active={vehicle.isActive}
+                        />
 
-                      {owner ? (
-                        <div>
-                          <EditVehicle setData={setData} userId={userId} vehicle={vehicle} />
-                          <Link to={`/vehicle/${vehicle.id}`}>
-                            <StyledButton type='button' buttonStyle='outlined' buttonSize='medium'>
-                              Ver como
-                            </StyledButton>
-                          </Link>
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                    </div>
-                  );
-              })}
+                        {owner ? (
+                          <div>
+                            <EditVehicle setData={setData} userId={userId} vehicle={vehicle} />
+                            <Link to={`/vehicle/${vehicle.id}`}>
+                              <StyledButton
+                                type='button'
+                                buttonStyle='outlined'
+                                buttonSize='medium'
+                              >
+                                Ver como
+                              </StyledButton>
+                            </Link>
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+                    );
+                },
+              )}
             </section>
           </>
         ) : (
@@ -182,40 +188,46 @@ export const Profile = () => {
               Motos
             </StyledTitle>
             <section className='vehicleCards'>
-              {data?.Vehicle.map((vehicle) => {
-                if (vehicle.typeVehicles == true)
-                  return (
-                    <div className='cardContainer'>
-                      <ProductCard
-                        appearActive
-                        userId={data.id}
-                        vehicleId={vehicle.id}
-                        key={vehicle.id}
-                        title={vehicle.title}
-                        describe={vehicle.describe}
-                        coverImg={vehicle.coverImg}
-                        name={data.name}
-                        mileage={vehicle.mileage}
-                        year={vehicle.year}
-                        price={+vehicle.price}
-                        active={vehicle.isActive}
-                      />
+              {data?.Vehicle.filter((vehicle) => (owner ? true : vehicle.isActive)).map(
+                (vehicle) => {
+                  if (vehicle.typeVehicles == true)
+                    return (
+                      <div className='cardContainer'>
+                        <ProductCard
+                          appearActive={owner ? true : false}
+                          userId={data.id}
+                          vehicleId={vehicle.id}
+                          key={vehicle.id}
+                          title={vehicle.title}
+                          describe={vehicle.describe}
+                          coverImg={vehicle.coverImg}
+                          name={data.name}
+                          mileage={vehicle.mileage}
+                          year={vehicle.year}
+                          price={+vehicle.price}
+                          active={vehicle.isActive}
+                        />
 
-                      {owner ? (
-                        <div>
-                          <EditVehicle setData={setData} userId={userId} vehicle={vehicle} />
-                          <Link to={`/vehicle/${vehicle.id}`}>
-                            <StyledButton type='button' buttonStyle='outlined' buttonSize='medium'>
-                              Ver como
-                            </StyledButton>
-                          </Link>
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                    </div>
-                  );
-              })}
+                        {owner ? (
+                          <div>
+                            <EditVehicle setData={setData} userId={userId} vehicle={vehicle} />
+                            <Link to={`/vehicle/${vehicle.id}`}>
+                              <StyledButton
+                                type='button'
+                                buttonStyle='outlined'
+                                buttonSize='medium'
+                              >
+                                Ver como
+                              </StyledButton>
+                            </Link>
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+                    );
+                },
+              )}
             </section>
           </>
         ) : (
