@@ -57,24 +57,26 @@ const VehicleList = ({ typeVehicle }: IVehicleListProps) => {
   return (
     <ThemeCarList>
       <div className='divCars'>
-        {vehicles?.map((vehicle) => {
-          if (vehicle.typeVehicles == typeVehicle)
-            return (
-              <ProductCard
-                userId={vehicle.user.id}
-                vehicleId={vehicle.id}
-                key={vehicle.id}
-                title={vehicle.title}
-                describe={vehicle.describe}
-                coverImg={vehicle.coverImg}
-                name={vehicle.user.name}
-                mileage={vehicle.mileage}
-                year={vehicle.year}
-                price={+vehicle.price}
-                active={vehicle.isActive}
-              ></ProductCard>
-            );
-        })}
+        {vehicles
+          ?.filter((vehicle) => vehicle.isActive)
+          .map((vehicle) => {
+            if (vehicle.typeVehicles == typeVehicle)
+              return (
+                <ProductCard
+                  userId={vehicle.user.id}
+                  vehicleId={vehicle.id}
+                  key={vehicle.id}
+                  title={vehicle.title}
+                  describe={vehicle.describe}
+                  coverImg={vehicle.coverImg}
+                  name={vehicle.user.name}
+                  mileage={vehicle.mileage}
+                  year={vehicle.year}
+                  price={+vehicle.price}
+                  active={vehicle.isActive}
+                ></ProductCard>
+              );
+          })}
       </div>
     </ThemeCarList>
   );
