@@ -56,8 +56,21 @@ export const VehiclesSection = styled.section`
   display: flex;
   flex-direction: column;
   overflow-x: scroll;
-  padding: 10px 30px;
+  padding: 10px 60px;
   margin: 0px 0 100px;
+
+  .cardContainer {
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+
+    button {
+      margin-right: 20px;
+    }
+    div {
+      display: flex;
+    }
+  }
 
   h5 {
     padding: 30px 10px;

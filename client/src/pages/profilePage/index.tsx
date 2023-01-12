@@ -6,10 +6,12 @@ import { StyledTitle } from '../../styles/typography';
 import { ProfileTop, VehiclesSection } from './style';
 import { useContext, useEffect, useState } from 'react';
 import api from '../../services';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import RegisterVehicle from '../../components/RegisterVehicle';
 import jwt_decode from 'jwt-decode';
 import { UserContext } from '../../contexts/UserContext/UserContext';
+import { StyledButton } from '../../styles/button';
+import EditVehicle from '../../components/EditVehicle';
 
 interface IVehicle {
   id: string;
@@ -69,7 +71,6 @@ export const Profile = () => {
         setData(resp.data);
         if (resp.data.Vehicle) {
           for (let i = 0; i < resp.data.Vehicle.length; i++) {
-            console.log(i);
             if (resp.data.Vehicle[i].typeVehicles == false) {
               setFlagCar(true);
             }
@@ -109,11 +110,22 @@ export const Profile = () => {
           <StyledTitle fontSize='body-1-400' tag='p'>
             {data?.describe}
           </StyledTitle>
-          {owner ? <RegisterVehicle setData={setData} userId={userId} /> : <></>}
+          {owner && data?.typeAccount == true ? (
+            <RegisterVehicle setData={setData} userId={userId} />
+          ) : (
+            <></>
+          )}
         </div>
       </ProfileTop>
 
       <VehiclesSection>
+        {flagCar || flagMoto ? (
+          <></>
+        ) : (
+          <StyledTitle fontSize='Heading-4-500' tag='h3' fontColor='var(--grey3)'>
+            Você ainda não possui nenhum anuncio...
+          </StyledTitle>
+        )}
         {flagCar ? (
           <>
             <StyledTitle fontSize='Heading-5-600' tag='h5'>
@@ -123,20 +135,35 @@ export const Profile = () => {
               {data?.Vehicle.map((vehicle) => {
                 if (vehicle.typeVehicles == false)
                   return (
-                    <ProductCard
-                      appearActive
-                      userId={data.id}
-                      vehicleId={vehicle.id}
-                      key={vehicle.id}
-                      title={vehicle.title}
-                      describe={vehicle.describe}
-                      coverImg={vehicle.coverImg}
-                      name={data.name}
-                      mileage={vehicle.mileage}
-                      year={vehicle.year}
-                      price={+vehicle.price}
-                      active={vehicle.isActive}
-                    />
+                    <div className='cardContainer'>
+                      <ProductCard
+                        appearActive
+                        userId={data.id}
+                        vehicleId={vehicle.id}
+                        key={vehicle.id}
+                        title={vehicle.title}
+                        describe={vehicle.describe}
+                        coverImg={vehicle.coverImg}
+                        name={data.name}
+                        mileage={vehicle.mileage}
+                        year={vehicle.year}
+                        price={+vehicle.price}
+                        active={vehicle.isActive}
+                      />
+
+                      {owner ? (
+                        <div>
+                          <EditVehicle setData={setData} userId={userId} vehicle={vehicle} />
+                          <Link to={`/vehicle/${vehicle.id}`}>
+                            <StyledButton type='button' buttonStyle='outlined' buttonSize='medium'>
+                              Ver como
+                            </StyledButton>
+                          </Link>
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+                    </div>
                   );
               })}
             </section>
@@ -156,20 +183,35 @@ export const Profile = () => {
               {data?.Vehicle.map((vehicle) => {
                 if (vehicle.typeVehicles == true)
                   return (
-                    <ProductCard
-                      appearActive
-                      userId={data.id}
-                      vehicleId={vehicle.id}
-                      key={vehicle.id}
-                      title={vehicle.title}
-                      describe={vehicle.describe}
-                      coverImg={vehicle.coverImg}
-                      name={data.name}
-                      mileage={vehicle.mileage}
-                      year={vehicle.year}
-                      price={+vehicle.price}
-                      active={vehicle.isActive}
-                    />
+                    <div className='cardContainer'>
+                      <ProductCard
+                        appearActive
+                        userId={data.id}
+                        vehicleId={vehicle.id}
+                        key={vehicle.id}
+                        title={vehicle.title}
+                        describe={vehicle.describe}
+                        coverImg={vehicle.coverImg}
+                        name={data.name}
+                        mileage={vehicle.mileage}
+                        year={vehicle.year}
+                        price={+vehicle.price}
+                        active={vehicle.isActive}
+                      />
+
+                      {owner ? (
+                        <div>
+                          <EditVehicle setData={setData} userId={userId} vehicle={vehicle} />
+                          <Link to={`/vehicle/${vehicle.id}`}>
+                            <StyledButton type='button' buttonStyle='outlined' buttonSize='medium'>
+                              Ver como
+                            </StyledButton>
+                          </Link>
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+                    </div>
                   );
               })}
             </section>
