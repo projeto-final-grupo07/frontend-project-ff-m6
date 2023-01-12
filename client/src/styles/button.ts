@@ -4,6 +4,7 @@ export interface iStyledButtonProps {
   buttonSize?: 'big' | 'medium';
   buttonStyle:
     | 'grey1'
+    | 'grey6'
     | 'outlined'
     | 'outlined2'
     | 'outlinedBrand1'
@@ -59,6 +60,16 @@ export const StyledButton = styled.button<iStyledButtonProps>`
           &:hover {
             background: var(--grey1);
             border-color: var(--grey1);
+          }
+        `;
+      case 'grey6':
+        return css`
+          background: var(--grey6);
+          border-color: var(--grey6);
+          color: var(--grey2);
+          &:hover {
+            background: var(--grey4);
+            border-color: var(--grey4);
           }
         `;
       case 'negative':
