@@ -10,6 +10,7 @@ import { Link, useParams } from 'react-router-dom';
 import RegisterVehicle from '../../components/RegisterVehicle';
 import jwt_decode from 'jwt-decode';
 import { UserContext } from '../../contexts/UserContext/UserContext';
+import ModalAnnouncementSuccess from '../../components/StyledModal/ModalAnnouncementSuccess';
 import { StyledButton } from '../../styles/button';
 import EditVehicle from '../../components/EditVehicle';
 
@@ -96,6 +97,7 @@ export const Profile = () => {
   return (
     <>
       <Navbar />
+      <ModalAnnouncementSuccess />
       <ProfileTop>
         <div className='containerProfileTop'>
           <section>

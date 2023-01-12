@@ -6,10 +6,12 @@ import Navbar from '../../components/Navbar';
 import { StyledTitle } from '../../styles/typography';
 import { StyledButton } from '../../styles/button';
 import { RegisterContainer } from './style';
-import { ReactNode, useState, useEffect } from 'react';
+import { ReactNode, useState, useEffect, useContext } from 'react';
 import api from '../../services';
 import { BiLoaderCircle } from 'react-icons/bi';
 import formSchema from './schema';
+import ModalAccountSuccess from '../../components/StyledModal/ModalAccountSuccess';
+import { ModalOpenContext } from '../../contexts/ModalOpenContext/ModalOpenContext';
 
 export const Register = () => {
   useEffect(() => {
@@ -27,7 +29,7 @@ export const Register = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
-
+  const { setOpenModalAccountSuccess } = useContext(ModalOpenContext);
   const onSubmit = (data: any) => {
     setLoading(true);
     if (data.userType == 0) {
@@ -61,6 +63,7 @@ export const Register = () => {
     api
       .post('/user', request)
       .then(() => {
+        setOpenModalAccountSuccess(true);
         setSuccess(true);
         setLoading(false);
         setError('');
@@ -85,7 +88,7 @@ export const Register = () => {
   return (
     <>
       <Navbar />
-
+      <ModalAccountSuccess />
       <RegisterContainer onSubmit={handleSubmit(onSubmit)}>
         <StyledTitle fontSize='Heading-5-500' tag='h2'>
           Cadastro

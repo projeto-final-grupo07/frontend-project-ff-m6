@@ -1,4 +1,5 @@
 import { CommentProviders } from './CommentContext/CommentContext';
+import { ModalOpenContext, ModalOpenProviders } from './ModalOpenContext/ModalOpenContext';
 import { UserProviders } from './UserContext/UserContext';
 
 interface IDefaultProps {
@@ -8,7 +9,9 @@ interface IDefaultProps {
 const Providers = ({ children }: IDefaultProps) => {
   return (
     <UserProviders>
-      <CommentProviders>{children}</CommentProviders>
+      <ModalOpenProviders>
+        <CommentProviders>{children}</CommentProviders>
+      </ModalOpenProviders>
     </UserProviders>
   );
 };
