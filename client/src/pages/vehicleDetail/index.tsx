@@ -12,6 +12,7 @@ import {
   SytledDivInfoVehicle,
   StyledRegisterComment,
   StyledForm,
+  StyledLink,
 } from './style';
 import { StyledTitle } from '../../styles/typography';
 import CardProfile from '../../components/CardProfile';
@@ -34,6 +35,7 @@ import ImgModal from '../../components/StyledModal/ImgModal';
 import StyledModal from '../../components/StyledModal';
 import ModalDeleteComment from '../../components/StyledModal/ModalDeleteComment';
 import days from '../../helpers/getDays';
+import { FaWhatsapp } from 'react-icons/fa';
 
 export const VehicleDetail = () => {
   useEffect(() => {
@@ -131,7 +133,18 @@ export const VehicleDetail = () => {
         <div className='mainContainer'>
           <StyledSection>
             <StyledBox className='mainImage'>
-              <img src={vehicleData?.coverImg} alt='Vehicle' />
+              <ImgModal
+                src={vehicleData?.coverImg}
+                altName={'Imagem de um veículo'}
+                nameModal='Imagem do veículo'
+                className='imgGallery'
+              >
+                <img
+                  src={vehicleData?.coverImg}
+                  alt={'Imagem de um veículo'}
+                  className='imgGallery'
+                />
+              </ImgModal>
             </StyledBox>
             <StyledBox>
               <StyledDivGap>
@@ -160,10 +173,17 @@ export const VehicleDetail = () => {
                   buttonStyle: 'brand',
                   buttonSize: 'medium',
                 }}
-                nameModal='Comprar'
                 nameButtonOpen='Comprar'
               >
-                Chama no zap
+                <StyledLink
+                  href={`https://api.whatsapp.com/send?phone=+55+${vehicleData?.user.phone}&text=Teste%20teste%20teste`}
+                  className='whats'
+                >
+                  <FaWhatsapp></FaWhatsapp>
+                  <StyledTitle fontSize='Heading-7-600' tag='p'>
+                    Entre em contato
+                  </StyledTitle>
+                </StyledLink>
               </StyledModal>
             </StyledBox>
             <StyledBox>

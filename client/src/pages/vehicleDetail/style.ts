@@ -54,6 +54,9 @@ export const StyledSection = styled.div`
       object-fit: contain;
       max-height: 355px;
       max-width: 700px;
+      cursor: pointer;
+    }
+    img {
     }
   }
 `;
@@ -108,6 +111,10 @@ export const StyledDivGap = styled.div<any>`
         position: static;
         margin-top: 0.7rem;
       }
+    }
+    .whats {
+      display: flex;
+      justify-content: space-evenly;
     }
   }
 
@@ -179,6 +186,7 @@ export const StyledPhotoDetail = styled.div`
     @media (width < 400px) {
       max-height: 75px;
     }
+    cursor: pointer;
   }
   .noImage {
     display: flex;
@@ -232,4 +240,14 @@ export const StyledRegisterComment = styled.textarea`
 
 export const StyledForm = styled.form`
   width: 100%;
+`;
+
+export const StyledLink = styled.a`
+  display: flex;
+  justify-content: space-around;
+  width: 180px;
+  background-color: #128c7e;
+  padding: 0.5em;
+  color: var(--whiteFixed);
+  border-radius: 5px;
 `;

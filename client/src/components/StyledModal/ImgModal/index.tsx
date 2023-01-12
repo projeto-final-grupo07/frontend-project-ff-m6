@@ -4,6 +4,7 @@ import Modal from '@mui/material/Modal';
 
 import { AiOutlineClose } from 'react-icons/ai';
 import { StyledTitle } from '../../../styles/typography';
+import { height } from '@mui/system';
 
 const style = {
   position: 'absolute',
@@ -15,6 +16,13 @@ const style = {
   boxShadow: 24,
   p: 4,
   borderRadius: '5px',
+
+  '& .divChildren': {
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
 
   '& .content-box': {
     display: 'flex',
@@ -45,8 +53,8 @@ export interface ICreateModalProps {
   nameModal?: string;
   children: React.ReactNode;
   altName?: string;
-  src: string;
-  className: string;
+  src: string | undefined;
+  className?: string;
 }
 function ImgModal({ children, nameModal, altName, src, className }: ICreateModalProps) {
   const [open, setOpen] = React.useState(false);
@@ -72,7 +80,7 @@ function ImgModal({ children, nameModal, altName, src, className }: ICreateModal
               <AiOutlineClose />
             </button>
           </div>
-          {children}
+          <div className='divChildren'>{children}</div>
         </Box>
       </Modal>
     </>

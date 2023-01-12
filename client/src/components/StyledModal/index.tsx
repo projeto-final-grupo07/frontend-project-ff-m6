@@ -43,7 +43,7 @@ const style = {
 export interface ICreateModalProps {
   className?: string;
   children: React.ReactNode;
-  nameModal: string;
+  nameModal?: string;
   nameButtonOpen: string;
   propsButton: iStyledButtonProps;
   closeButton?: iStyledButtonProps;
@@ -85,12 +85,17 @@ function StyledModal({
         disableScrollLock={true}
       >
         <Box sx={style}>
-          <div className='moda-header'>
-            <p>{nameModal}</p>
-            <button onClick={() => setOpen(!open)}>
-              <AiOutlineClose />
-            </button>
-          </div>
+          {nameModal ? (
+            <div className='moda-header'>
+              <p>{nameModal}</p>
+              <button onClick={() => setOpen(!open)}>
+                <AiOutlineClose />
+              </button>
+            </div>
+          ) : (
+            <></>
+          )}
+
           {children}
           {closeButton && (
             <StyledButton

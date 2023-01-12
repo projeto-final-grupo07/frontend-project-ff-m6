@@ -33,6 +33,7 @@ export interface IMessage {
 export interface IUser {
   name: string;
   describe: string;
+  phone: string;
 }
 
 export interface IUserData {
