@@ -1,15 +1,14 @@
-import { ReactNode, useContext, useEffect, useState } from 'react';
+import { ReactNode, useState } from 'react';
 import React from 'react';
 import { StyledButton } from '../../styles/button';
 import StyledModal from '../StyledModal';
-import { StyledForm } from './style';
+import { ConfModalExclude, StyledForm } from './style';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { formSchema } from './schema';
 import api from '../../services';
-import { UserContext } from '../../contexts/UserContext/UserContext';
 import ImageGallery from '../ImageGallery';
-import { ModalOpenContext } from '../../contexts/ModalOpenContext/ModalOpenContext';
+import { StyledTitle } from '../../styles/typography';
 interface IVehicle {
   id: string;
   typeOffer: boolean;
@@ -46,15 +45,16 @@ interface IGalleryImg {
 interface IPropsVehicle {
   setData: (value: React.SetStateAction<IUser | undefined>) => void;
   userId: string | undefined;
+  vehicle: IVehicle;
 }
-const RegisterVehicle = ({ setData, userId }: IPropsVehicle) => {
-  const { loadUser } = useContext(UserContext);
+const EditVehicle = ({ setData, userId, vehicle }: IPropsVehicle) => {
   const [GalleryImg, setImageGallery] = useState(['1']);
 
-  const [typeVehicles, setTypeVehicles] = useState(false);
-  const [typeOffer, setTypeOffer] = useState(true);
+  const [typeVehicles, setTypeVehicles] = useState(vehicle.typeVehicles);
+  const [typeOffer, setTypeOffer] = useState(vehicle.typeOffer);
+  const [isActive, setIsActive] = useState(vehicle.isActive);
   const [closeModal, setCloseModal] = useState(false);
-  const { setOpenModalAnnouncementSuccess } = useContext(ModalOpenContext);
+  const [closeModalExclude, setCloseModalExclude] = useState(false);
 
   const eventClick = () => {
     const newElem = GalleryImg.length + 1;
@@ -81,19 +81,12 @@ const RegisterVehicle = ({ setData, userId }: IPropsVehicle) => {
     resolver: yupResolver(formSchema),
   });
 
-  const changeTypeVehiclesFalse = () => {
-    setTypeVehicles(false);
-  };
-
-  const changeTypeVehiclesTrue = () => {
-    setTypeVehicles(true);
-  };
+  const token = localStorage.getItem('token');
 
   const onSubmitFunction = async (data: any) => {
-    const token = localStorage.getItem('token');
-
     data['typeOffer'] = typeOffer;
     data['typeVehicles'] = typeVehicles;
+    data['isActive'] = isActive;
 
     data['GalleryImg'] = [{ url: data.img1 }];
     delete data.img1;
@@ -111,18 +104,37 @@ const RegisterVehicle = ({ setData, userId }: IPropsVehicle) => {
       delete data.img4;
     }
 
+    if (!data.GalleryImg[0].url) {
+      delete data.GalleryImg;
+    }
+
     if (token) {
       try {
         setCloseModal(true);
         api.defaults.headers.authorization = `Bearer ${token}`;
-        await api.post('/vehicle/', data);
+        await api.patch(`/vehicle/${vehicle.id}`, data);
         findUser();
         reset();
       } catch (error) {
         console.log(error);
       } finally {
         setCloseModal(false);
-        setOpenModalAnnouncementSuccess(true);
+      }
+    }
+  };
+
+  const excludeFunction = async () => {
+    if (token) {
+      try {
+        setCloseModal(true);
+        api.defaults.headers.authorization = `Bearer ${token}`;
+        await api.delete(`/vehicle/${vehicle.id}`);
+        findUser();
+        reset();
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setCloseModal(false);
       }
     }
   };
@@ -130,12 +142,11 @@ const RegisterVehicle = ({ setData, userId }: IPropsVehicle) => {
   return (
     <>
       <StyledModal
-        nameButtonOpen='Criar anuncio'
-        nameModal='Criar Anuncio'
+        nameButtonOpen='Editar'
+        nameModal='Editar Anúncio'
         propsButton={{
-          buttonStyle: 'outlinedBrand1',
-          buttonSize: 'big',
-          color: '#FDFDFD',
+          buttonStyle: 'outlined',
+          buttonSize: 'medium',
         }}
         closeModal={closeModal}
       >
@@ -155,7 +166,11 @@ const RegisterVehicle = ({ setData, userId }: IPropsVehicle) => {
             <p>Informações do veículo</p>
             <div className='Title'>
               <label>Título</label>
-              <input placeholder='Digitar título' {...register('title')} />
+              <input
+                defaultValue={vehicle.title}
+                placeholder='Digitar título'
+                {...register('title')}
+              />
               {errors.title?.message && (
                 <p className='errorValue'>{errors.title.message as ReactNode}</p>
               )}
@@ -164,14 +179,18 @@ const RegisterVehicle = ({ setData, userId }: IPropsVehicle) => {
               <div className='AgeAndPrice'>
                 <div>
                   <label>Ano</label>
-                  <input placeholder='Digitar Ano' {...register('year')} />
+                  <input
+                    defaultValue={vehicle.year}
+                    placeholder='Digitar Ano'
+                    {...register('year')}
+                  />
                   {errors.year?.message && (
                     <p className='errorValue'>{errors.year.message as ReactNode}</p>
                   )}
                 </div>
                 <div>
                   <label>Quilometragem</label>
-                  <input placeholder='0' {...register('mileage')} />
+                  <input defaultValue={vehicle.mileage} placeholder='0' {...register('mileage')} />
                   {errors.mileage?.message && (
                     <p className='errorValue'>{errors.mileage.message as ReactNode}</p>
                   )}
@@ -179,7 +198,11 @@ const RegisterVehicle = ({ setData, userId }: IPropsVehicle) => {
               </div>
               <div>
                 <label>Preço</label>
-                <input placeholder='Digitar Preço' {...register('price')} />
+                <input
+                  defaultValue={vehicle.price}
+                  placeholder='Digitar Preço'
+                  {...register('price')}
+                />
                 {errors.price?.message && (
                   <p className='errorValue'>{errors.price.message as ReactNode}</p>
                 )}
@@ -187,7 +210,11 @@ const RegisterVehicle = ({ setData, userId }: IPropsVehicle) => {
             </div>
             <div className='Describe'>
               <label>Descrição</label>
-              <textarea placeholder='Digitar descrição' {...register('describe')}></textarea>
+              <textarea
+                defaultValue={vehicle.describe}
+                placeholder='Digitar descrição'
+                {...register('describe')}
+              ></textarea>
               {errors.describe?.message && (
                 <p className='errorValue'>{errors.describe.message as ReactNode}</p>
               )}
@@ -196,11 +223,11 @@ const RegisterVehicle = ({ setData, userId }: IPropsVehicle) => {
           <div className='TypeAnnounce'>
             <p>Tipo de veículo</p>
             <div>
-              {typeVehicles == false ? (
+              {!typeVehicles ? (
                 <StyledButton
                   type='button'
                   buttonStyle='brand'
-                  onClick={() => changeTypeVehiclesFalse()}
+                  onClick={() => setTypeVehicles(false)}
                 >
                   Carro
                 </StyledButton>
@@ -208,16 +235,16 @@ const RegisterVehicle = ({ setData, userId }: IPropsVehicle) => {
                 <StyledButton
                   type='button'
                   buttonStyle='outlined2'
-                  onClick={() => changeTypeVehiclesFalse()}
+                  onClick={() => setTypeVehicles(false)}
                 >
                   Carro
                 </StyledButton>
               )}
-              {typeVehicles == true ? (
+              {typeVehicles ? (
                 <StyledButton
                   type='button'
                   buttonStyle='brand'
-                  onClick={() => changeTypeVehiclesTrue()}
+                  onClick={() => setTypeVehicles(true)}
                 >
                   Moto
                 </StyledButton>
@@ -225,16 +252,51 @@ const RegisterVehicle = ({ setData, userId }: IPropsVehicle) => {
                 <StyledButton
                   type='button'
                   buttonStyle='outlined2'
-                  onClick={() => changeTypeVehiclesTrue()}
+                  onClick={() => setTypeVehicles(true)}
                 >
                   Moto
                 </StyledButton>
               )}
             </div>
           </div>
+          <div className='isActive'>
+            <p>Publicado</p>
+            <div>
+              {isActive ? (
+                <StyledButton type='button' buttonStyle='brand' onClick={() => setIsActive(true)}>
+                  Sim
+                </StyledButton>
+              ) : (
+                <StyledButton
+                  type='button'
+                  buttonStyle='outlined2'
+                  onClick={() => setIsActive(true)}
+                >
+                  Sim
+                </StyledButton>
+              )}
+              {!isActive ? (
+                <StyledButton type='button' buttonStyle='brand' onClick={() => setIsActive(false)}>
+                  Não
+                </StyledButton>
+              ) : (
+                <StyledButton
+                  type='button'
+                  buttonStyle='outlined2'
+                  onClick={() => setIsActive(false)}
+                >
+                  Não
+                </StyledButton>
+              )}
+            </div>
+          </div>
           <div className='Pictures'>
             <label>Imagem de capa</label>
-            <input placeholder='Inserir URL da imagem' {...register('coverImg')} />
+            <input
+              defaultValue={vehicle.coverImg}
+              placeholder='Inserir URL da imagem'
+              {...register('coverImg')}
+            />
             {errors.coverImg?.message && (
               <p className='errorValue'>{errors.coverImg.message as ReactNode}</p>
             )}
@@ -250,19 +312,51 @@ const RegisterVehicle = ({ setData, userId }: IPropsVehicle) => {
             <button type='button' className='BtnAddImg' onClick={eventClick}>
               Adicionar campo para imagem da galeria
             </button>
-            <div className='BtnSubmityAndClose'>
-              <StyledButton
-                buttonSize='big'
-                type='button'
-                buttonStyle='grey6'
-                onClick={() => setCloseModal(!closeModal)}
-              >
-                Cancelar
-              </StyledButton>
-              <StyledButton buttonSize='big' type='submit' buttonStyle='disabled'>
-                Criar anúncio
-              </StyledButton>
-            </div>
+          </div>
+          <div className='BtnSubmityAndClose'>
+            <StyledModal
+              nameButtonOpen='Excluir anúncio'
+              nameModal='Excluir anúncio'
+              propsButton={{
+                buttonStyle: 'grey6',
+                buttonSize: 'big',
+              }}
+              closeModal={closeModalExclude}
+            >
+              <ConfModalExclude>
+                <StyledTitle fontSize='Heading-7-500' tag='h5'>
+                  Tem certeza que deseja remover este anúncio?
+                </StyledTitle>
+                <StyledTitle fontSize='body-1-400' tag='p'>
+                  Essa ação não pode ser desfeita. Isso excluirá permanentemente sua conta e
+                  removerá seus dados de nossos servidores.
+                </StyledTitle>
+
+                <div>
+                  <StyledButton
+                    buttonSize='big'
+                    type='button'
+                    buttonStyle='grey6'
+                    onClick={() => setCloseModalExclude(!closeModalExclude)}
+                  >
+                    Cancelar
+                  </StyledButton>
+
+                  <StyledButton
+                    buttonSize='big'
+                    type='button'
+                    className='exclude'
+                    buttonStyle='alert'
+                    onClick={() => excludeFunction()}
+                  >
+                    Sim, excluir anúncio
+                  </StyledButton>
+                </div>
+              </ConfModalExclude>
+            </StyledModal>
+            <StyledButton buttonSize='big' type='submit' className='save' buttonStyle='disabled'>
+              Salvar alterações
+            </StyledButton>
           </div>
         </StyledForm>
       </StyledModal>
@@ -270,4 +364,4 @@ const RegisterVehicle = ({ setData, userId }: IPropsVehicle) => {
   );
 };
 
-export default RegisterVehicle;
+export default EditVehicle;
