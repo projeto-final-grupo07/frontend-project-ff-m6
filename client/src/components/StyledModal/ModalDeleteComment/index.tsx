@@ -19,6 +19,7 @@ const style = {
   gap: 4,
   flexDirection: 'column',
   textAlign: 'center',
+  borderRadius: '5px',
 };
 
 const ModalDeleteComment = () => {

@@ -1,7 +1,8 @@
-import { createContext, ReactNode, useState } from 'react';
+import { createContext, ReactNode, useContext, useState } from 'react';
 import { notifyError, notifySuccess } from '../../helpers/toasts';
 import { IMessage, IVehicle } from '../../pages/vehicleDetail/interface';
 import api from '../../services';
+import { UserContext } from '../UserContext/UserContext';
 
 interface ICommentContext {
   editComment(data: any): void;
@@ -23,6 +24,8 @@ interface ICommentContext {
   openModalDelete: boolean;
   setOpenModalDelete: React.Dispatch<React.SetStateAction<boolean>>;
   deleteComment(): void;
+  flagComment: boolean;
+  setFlagComment: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface ICommentProviderProps {
@@ -40,6 +43,8 @@ export const CommentProviders = ({ children }: ICommentProviderProps) => {
   const [price, setPrice] = useState(0);
   const [vehicleData, setVehicleData] = useState<IVehicle>();
   const [openModalDelete, setOpenModalDelete] = useState(false);
+  const { loadUser } = useContext(UserContext);
+  const [flagComment, setFlagComment] = useState<boolean>(false);
 
   const token = localStorage.getItem('token') || '';
 
@@ -67,6 +72,7 @@ export const CommentProviders = ({ children }: ICommentProviderProps) => {
         },
       })
       .then((_) => {
+        setFlagComment(!flagComment);
         notifySuccess('Comentário editado com sucesso!');
         setOpen(false);
         getVehicle();
@@ -83,6 +89,7 @@ export const CommentProviders = ({ children }: ICommentProviderProps) => {
         },
       })
       .then((_) => {
+        setFlagComment(!flagComment);
         notifySuccess('Comentário excluido com sucesso!');
         setOpenModalDelete(false);
         getVehicle();
@@ -111,6 +118,8 @@ export const CommentProviders = ({ children }: ICommentProviderProps) => {
         setOpenModalDelete,
         openModalDelete,
         deleteComment,
+        flagComment,
+        setFlagComment,
       }}
     >
       {children}
