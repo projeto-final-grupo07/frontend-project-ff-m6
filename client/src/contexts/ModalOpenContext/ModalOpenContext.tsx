@@ -17,7 +17,7 @@ export const ModalOpenContext = createContext({} as IModalContext);
 
 export const ModalOpenProviders = ({ children }: IModalProviderProps) => {
   const [openModalAccountSuccess, setOpenModalAccountSuccess] = useState(false);
-  const [openModalAnnouncementSuccess, setOpenModalAnnouncementSuccess] = useState(true);
+  const [openModalAnnouncementSuccess, setOpenModalAnnouncementSuccess] = useState(false);
 
   return (
     <ModalOpenContext.Provider
