@@ -42,12 +42,19 @@ export const VehicleDetail = () => {
   const { id } = useParams();
 
   const { userData, loadUser } = useContext(UserContext);
-  const { commentData, setCommentData, setVehicleData, setPrice, vehicleData, price } =
-    useContext(CommentContext);
+  const {
+    commentData,
+    setCommentData,
+    setVehicleData,
+    setPrice,
+    vehicleData,
+    price,
+    setFlagComment,
+    flagComment,
+  } = useContext(CommentContext);
 
   const token = localStorage.getItem('token');
   const [loading, setLoading] = useState(false);
-  const [flagComment, setFlagComment] = useState<boolean>(false);
 
   if (token) {
     useEffect(() => {
