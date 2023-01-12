@@ -249,11 +249,14 @@ const RegisterVehicle = ({ setData, userId }: IPropsVehicle) => {
             </button>
             <div className='BtnSubmityAndClose'>
               <StyledButton
-                buttonSize='medium'
-                type='submit'
-                className='Submit'
-                buttonStyle='disabled'
+                buttonSize='big'
+                type='button'
+                buttonStyle='grey6'
+                onClick={() => setCloseModal(!closeModal)}
               >
+                Cancelar
+              </StyledButton>
+              <StyledButton buttonSize='big' type='submit' buttonStyle='disabled'>
                 Criar anúncio
               </StyledButton>
             </div>
