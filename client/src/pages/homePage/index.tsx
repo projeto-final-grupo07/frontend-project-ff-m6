@@ -4,8 +4,6 @@ import Navbar from '../../components/Navbar';
 import { AuctionSection, Header, HomeContainer } from './style';
 import VehicleList from '../../components/VehicleList';
 import ProductCardAuction from '../../components/ProductCardAuction';
-import { useContext } from 'react';
-import { UserContext } from '../../contexts/UserContext/UserContext';
 import { fakeUser } from '../../fakeData';
 import { StyledButton } from '../../styles/button';
 import { useEffect } from 'react';
@@ -38,17 +36,6 @@ export const Home = () => {
         </div>
       </Header>
       <HomeContainer>
-        {/* <Modal
-          propsButton={{
-            buttonStyle: 'alert',
-            buttonSize: 'medium',
-          }}
-          nameModal='Teste algo'
-          nameButtonOpen='ABRIRRRE'
-        >
-          Algo aqui
-        </Modal> */}
-
         <AuctionSection id='auction'>
           <StyledTitle fontSize='Heading-5-600' tag='h5'>
             Leilão

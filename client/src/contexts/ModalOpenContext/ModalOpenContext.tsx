@@ -1,6 +1,4 @@
-import { createContext, ReactNode, useEffect, useState } from 'react';
-import { IDecodedToken } from '../../components/Navbar';
-import api from '../../services';
+import { createContext, ReactNode, useState } from 'react';
 
 interface IModalContext {
   openModalAccountSuccess: boolean;

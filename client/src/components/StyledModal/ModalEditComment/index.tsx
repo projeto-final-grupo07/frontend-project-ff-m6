@@ -1,13 +1,10 @@
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import api from '../../../services';
 import { StyledEditComment, StyledFormEditComment, StyledTitleModal } from './style';
 import { StyledButton } from '../../../styles/button';
-import { notifyError, notifySuccess } from '../../../helpers/toasts';
 import { useContext } from 'react';
 import { CommentContext } from '../../../contexts/CommentContext/CommentContext';
 import { StyledTitle } from '../../../styles/typography';
@@ -19,7 +16,6 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 400,
   bgcolor: 'background.paper',
-  //   border: '2px solid #000',
   boxShadow: 24,
   p: 2,
   height: 230,
@@ -30,7 +26,6 @@ const style = {
 
 const ModalEditComment = () => {
   const {
-    commentIdClicked,
     editComment,
     open,
     setCommentIdClicked,

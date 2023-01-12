@@ -135,15 +135,14 @@ export const Profile = () => {
             </StyledTitle>
             <section className='vehicleCards'>
               {data?.Vehicle.filter((vehicle) => (owner ? true : vehicle.isActive)).map(
-                (vehicle) => {
+                (vehicle, index) => {
                   if (vehicle.typeVehicles == false)
                     return (
-                      <div className='cardContainer'>
+                      <div key={index} className='cardContainer'>
                         <ProductCard
                           appearActive={owner ? true : false}
                           userId={data.id}
                           vehicleId={vehicle.id}
-                          key={vehicle.id}
                           title={vehicle.title}
                           describe={vehicle.describe}
                           coverImg={vehicle.coverImg}
@@ -189,15 +188,14 @@ export const Profile = () => {
             </StyledTitle>
             <section className='vehicleCards'>
               {data?.Vehicle.filter((vehicle) => (owner ? true : vehicle.isActive)).map(
-                (vehicle) => {
+                (vehicle, index) => {
                   if (vehicle.typeVehicles == true)
                     return (
-                      <div className='cardContainer'>
+                      <div key={index} className='cardContainer'>
                         <ProductCard
                           appearActive={owner ? true : false}
                           userId={data.id}
                           vehicleId={vehicle.id}
-                          key={vehicle.id}
                           title={vehicle.title}
                           describe={vehicle.describe}
                           coverImg={vehicle.coverImg}

@@ -56,8 +56,6 @@ export const StyledSection = styled.div`
       max-width: 700px;
       cursor: pointer;
     }
-    img {
-    }
   }
 `;
 export const StyledSectionFixed = styled.div`

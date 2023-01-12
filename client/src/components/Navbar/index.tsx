@@ -9,7 +9,6 @@ import CardProfile from '../CardProfile';
 import jwt_decode from 'jwt-decode';
 import api from '../../services';
 import { StyledButton } from '../../styles/button';
-import StyledModal from '../StyledModal';
 import { router } from '../../routes';
 import EditProfile from '../EditProfile';
 import { UserContext } from '../../contexts/UserContext/UserContext';
