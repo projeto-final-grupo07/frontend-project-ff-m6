@@ -4,13 +4,13 @@ import Modal from '@mui/material/Modal';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import api from '../../services';
+import api from '../../../services';
 import { StyledEditComment, StyledFormEditComment, StyledTitleModal } from './style';
-import { StyledButton } from '../../styles/button';
-import { notifyError, notifySuccess } from '../../helpers/toasts';
+import { StyledButton } from '../../../styles/button';
+import { notifyError, notifySuccess } from '../../../helpers/toasts';
 import { useContext } from 'react';
-import { CommentContext } from '../../contexts/CommentContext/CommentContext';
-import { StyledTitle } from '../../styles/typography';
+import { CommentContext } from '../../../contexts/CommentContext/CommentContext';
+import { StyledTitle } from '../../../styles/typography';
 
 const style = {
   position: 'absolute',
@@ -27,14 +27,6 @@ const style = {
   gap: 1,
   flexDirection: 'column',
 };
-
-interface IModalProps {
-  open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  commentId: string;
-  commentTextClicked: string;
-  setCommentTextClicked: React.Dispatch<React.SetStateAction<string>>;
-}
 
 const ModalEditComment = () => {
   const {
@@ -69,9 +61,10 @@ const ModalEditComment = () => {
         onClose={() => setOpen(false)}
         aria-labelledby='modal-modal-title'
         aria-describedby='modal-modal-description'
+        disableScrollLock={true}
       >
         <Box sx={style}>
-          <StyledTitleModal >
+          <StyledTitleModal>
             <StyledTitle fontSize='body-2-500' tag='h5'>
               EDITE SEU COMENTÁRIO
             </StyledTitle>

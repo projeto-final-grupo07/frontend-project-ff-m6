@@ -22,12 +22,18 @@ const CommentCard = ({ name, comment, daysOfComment, commentId, userId }: IComme
     setCommentTextClicked,
     commentTextClicked,
     setOpen,
+    setOpenModalDelete,
   } = useContext(CommentContext);
 
   const editFunction = () => {
     setCommentTextClicked(comment);
     setCommentIdClicked(commentId);
     setOpen(true);
+  };
+
+  const deleteFunction = () => {
+    setCommentIdClicked(commentId);
+    setOpenModalDelete(true);
   };
 
   return (
@@ -46,7 +52,9 @@ const CommentCard = ({ name, comment, daysOfComment, commentId, userId }: IComme
           <button type='submit' onClick={editFunction}>
             <FaEdit />
           </button>
-          <FaTrash />
+          <button onClick={deleteFunction}>
+            <FaTrash />
+          </button>
         </div>
       </StyledDiv>
     </StyledBox>

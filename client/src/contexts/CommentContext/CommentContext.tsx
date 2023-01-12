@@ -20,6 +20,9 @@ interface ICommentContext {
   vehicleData: IVehicle | undefined;
   setVehicleData: React.Dispatch<React.SetStateAction<IVehicle | undefined>>;
   getVehicle(): void;
+  openModalDelete: boolean;
+  setOpenModalDelete: React.Dispatch<React.SetStateAction<boolean>>;
+  deleteComment(): void;
 }
 
 interface ICommentProviderProps {
@@ -36,6 +39,7 @@ export const CommentProviders = ({ children }: ICommentProviderProps) => {
   const [id, setId] = useState('id');
   const [price, setPrice] = useState(0);
   const [vehicleData, setVehicleData] = useState<IVehicle>();
+  const [openModalDelete, setOpenModalDelete] = useState(false);
 
   const token = localStorage.getItem('token') || '';
 
@@ -70,6 +74,21 @@ export const CommentProviders = ({ children }: ICommentProviderProps) => {
       .catch((err) => notifyError(err.message));
   };
 
+  const deleteComment = () => {
+    api
+      .delete(`/comment/${commentIdClicked}`, {
+        headers: {
+          'content-type': 'application/json',
+          Authorization: 'Bearer ' + token,
+        },
+      })
+      .then((_) => {
+        notifySuccess('Comentário excluido com sucesso!');
+        setOpenModalDelete(false);
+        getVehicle();
+      });
+  };
+
   return (
     <CommentContext.Provider
       value={{
@@ -89,6 +108,9 @@ export const CommentProviders = ({ children }: ICommentProviderProps) => {
         setVehicleData,
         vehicleData,
         getVehicle,
+        setOpenModalDelete,
+        openModalDelete,
+        deleteComment,
       }}
     >
       {children}

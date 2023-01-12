@@ -27,11 +27,13 @@ import { router } from '../../routes';
 import { UserContext } from '../../contexts/UserContext/UserContext';
 import { useContext } from 'react';
 import { Grid } from '@mui/material';
-import ModalEditComment from '../../components/ModalEditComment';
+import ModalEditComment from '../../components/StyledModal/ModalEditComment';
 import { notifyError, notifySuccess } from '../../helpers/toasts';
 import { CommentContext } from '../../contexts/CommentContext/CommentContext';
 import ImgModal from '../../components/StyledModal/ImgModal';
 import StyledModal from '../../components/StyledModal';
+import ModalDeleteComment from '../../components/StyledModal/ModalDeleteComment';
+import days from '../../helpers/getDays';
 
 export const VehicleDetail = () => {
   useEffect(() => {
@@ -112,17 +114,10 @@ export const VehicleDetail = () => {
       });
   };
 
-  function days(commentDate: Date) {
-    const date1: any = new Date();
-    const date2: any = new Date(commentDate);
-
-    const daysComment = (date1 - date2) / 86400000;
-    return Math.trunc(daysComment);
-  }
-
   return (
     <>
       <ModalEditComment />
+      <ModalDeleteComment />
       <StyledVehicleDetail>
         <Navbar />
         <div className='divRoxinha'></div>

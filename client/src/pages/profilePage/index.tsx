@@ -69,7 +69,6 @@ export const Profile = () => {
         setData(resp.data);
         if (resp.data.Vehicle) {
           for (let i = 0; i < resp.data.Vehicle.length; i++) {
-            console.log(i);
             if (resp.data.Vehicle[i].typeVehicles == false) {
               setFlagCar(true);
             }
