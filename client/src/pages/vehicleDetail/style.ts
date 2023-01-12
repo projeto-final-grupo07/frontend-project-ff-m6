@@ -168,7 +168,17 @@ export const StyledPhotoDetail = styled.div`
   .imgGallery {
     width: 100%;
     height: 100%;
+    max-height: 80px;
     object-fit: cover;
+    @media (600px < width < 900px) {
+      max-height: 150px;
+    }
+    @media (400px < width < 600px) {
+      max-height: 100px;
+    }
+    @media (width < 400px) {
+      max-height: 75px;
+    }
   }
   .noImage {
     display: flex;
