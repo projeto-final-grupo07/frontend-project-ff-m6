@@ -113,6 +113,7 @@ const EditAdress = () => {
             placeholder='1029'
             registerName='number'
             register={register}
+            defaultValue={userData?.Address.number}
           />
           {errors.birthdate?.message && (
             <p className='error'>{errors.birthdate.message as ReactNode}</p>

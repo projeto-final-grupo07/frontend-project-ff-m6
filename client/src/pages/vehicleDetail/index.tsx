@@ -176,6 +176,7 @@ export const VehicleDetail = () => {
                 nameButtonOpen='Comprar'
               >
                 <StyledLink
+                  target='_blank'
                   href={`https://api.whatsapp.com/send?phone=+55+${vehicleData?.user.phone}&text=Fiquei+interessado+no+seu+an%C3%BAncio+do+veiculo+${vehicleData?.title}%2C+podemos+negociar%3F`}
                   className='whats'
                 >
